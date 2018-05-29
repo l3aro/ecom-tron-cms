@@ -90,23 +90,28 @@ Route::group([
     'prefix' => 'admin',
     'namespace' => 'Admin'
 ], function() {
-    //Login and logout routes
-    Route::get('logout', [
-        'as' => 'admin.logout',
-        'uses' => 'LoginController@logout'
-    ]);
-    Route::get('login', [
-        'as' => 'admin.showLoginForm',
-        'uses' => 'LoginController@showLoginForm'
-    ]);
-    Route::post('login', [
-        'as' => 'admin.login',
-        'uses' => 'LoginController@login'
-    ]);
+    Route::group([
+        'middleware' => 'auth.admin.unauthenticated'
+    ], function() {
+        //Login routes
+        Route::get('login', [
+            'as' => 'admin.showLoginForm',
+            'uses' => 'LoginController@showLoginForm'
+        ]);
+        Route::post('login', [
+            'as' => 'admin.login',
+            'uses' => 'LoginController@login'
+        ]);
+    });
 
     Route::group([
-        'middleware' => 'auth.admin'
+        'middleware' => 'auth.admin.authenticated'
     ], function() {
+        Route::post('logout', [
+            'as' => 'admin.logout',
+            'uses' => 'LoginController@logout'
+        ]);
+        
         Route::get('/', [
             'as' => 'admin.dashboard',
             'uses' => 'HomeController@dashboard'

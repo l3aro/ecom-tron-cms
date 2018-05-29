@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
 use Auth;
+use Closure;
 
-class RedirectUnlessAdminAuthenticated
+class RedirectIfAdminAuthenticated
 {
     /**
      * Handle an incoming request.
@@ -16,8 +16,8 @@ class RedirectUnlessAdminAuthenticated
      */
     public function handle($request, Closure $next)
     {
-        if (! Auth::guard()->check()) {
-            return redirect('/admin/login');
+        if (Auth::guard()->check()) {
+            return redirect('/admin');
         }
 
         return $next($request);
