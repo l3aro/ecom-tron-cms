@@ -33,7 +33,9 @@
     </head>
 
     <body>
+        <section id="container">
         @content()
+        <section></section>
 
         <script src="@asset('js/bootstrap.js')"></script>
         <script src="@asset('js/jquery.dcjqaccordion.2.7.js')"></script>
