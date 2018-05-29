@@ -10,14 +10,17 @@
 		<div class="typo-agile">
         <h2 class="w3ls_head">Article Detail</h2>
         <div class="grid_3 grid_5 w3ls">
-        <div class="alert alert-success" role="alert">
-            <strong>Success!</strong> Data has been saved to the database.
-        </div>
-
+        @if($saved == 1)
+            <div class="alert alert-success" role="alert">
+                <strong>Success!</strong> Data has been saved to the database.
+            </div>
+        @endif
+        @if($slug_exists == 1)
             <div class="alert alert-danger" role="alert">
                 <strong>Error!</strong> URL matches another post.
             </div>
-        <form method="post" action="/admin/article/detail/{{ isset($article)?$article->id:'' }}" enctype="multipart/form-data">
+        @endif
+        <form method="post" action="/admin/article/detail?id={{ isset($article)?$article->id:'' }}" enctype="multipart/form-data">
             {{ csrf_field() }}
                 <div class="save-group-buttons">
                     <button name="submit" class="btn btn-md btn-success" data-toggle="tooltip" title="Save">
@@ -80,8 +83,8 @@
                         <div class="form-group text-center">
                             <input type="hidden" name="current_image" value="<?=$article->image?>">
                             <img src="{{ isset($article->image)?URL::asset('media/article/'.$article->image):'' }}" width="auto" height="300"/>
-                            <button id="btn-delete-image" class="btn btn-danger" imgdetailid="<?=$article->id?>" name="deleteimagedetail" value="<?=$article->id?>" type="submit">
-                                <span class="glyphicon glyphicon-trash"></span> Delete current avatar
+                            <button id="btn-delete-image" class="btn btn-danger" imgdetailid="<?=$article->id?>" name="deleteimagedetail" value="<?=$article->id?> data-toggle="tooltip" title="Delete current avatar"" type="submit">
+                                <i class="fa fa-trash"></i>
                             </button>
                         </div>
                         @endif
