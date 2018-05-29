@@ -111,10 +111,26 @@ Route::group([
             'as' => 'admin.logout',
             'uses' => 'LoginController@logout'
         ]);
-        
+
         Route::get('/', [
             'as' => 'admin.dashboard',
             'uses' => 'HomeController@dashboard'
         ]);
+
+        /**
+         * Article routes
+         */
+        Route::group([
+            'prefix' => 'article'
+        ], function() {
+            Route::get('/', [
+                'as' => 'admin.article.index',
+                'uses' => 'ArticleController@index'
+            ]);
+            Route::match(['get', 'post'], 'detail', [
+                'as' => 'admin.article.detail',
+                'uses' => 'ArticleController@detail'
+            ]);
+        });
     });
 });

@@ -379,11 +379,10 @@
                 </div>
 </section>
     <!-- footer -->
-    @partial('header')
+    @partial('footer')
     <!-- / footer -->
 </section>
 <!--main content end-->
-</section>
 <script>
 $(document).ready(function() {
     //BOX BUTTON SHOW AND CLOSE

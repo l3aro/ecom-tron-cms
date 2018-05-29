@@ -1,4 +1,3 @@
-<!--sidebar start-->
 <aside>
 <div id="sidebar" class="nav-collapse">
     <!-- sidebar menu start-->
@@ -17,7 +16,7 @@
                     <span>Article</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="typography.html">Article Management</a></li>
+                    <li><a href="{{route('admin.article.index')}}">Article Management</a></li>
                     <li><a href="glyphicon.html">Article Category Management</a></li>
                 </ul>
             </li>
@@ -71,4 +70,3 @@
     <!-- sidebar menu end-->
 </div>
 </aside>
-<!--sidebar end-->
