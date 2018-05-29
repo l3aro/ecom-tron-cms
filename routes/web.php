@@ -83,3 +83,33 @@ Route::group([
     });
 });
 
+/**
+ * Admin Zone
+ */
+Route::group([
+    'prefix' => 'admin',
+    'namespace' => 'Admin'
+], function() {
+    //Login and logout routes
+    Route::get('logout', [
+        'as' => 'admin.logout',
+        'uses' => 'LoginController@logout'
+    ]);
+    Route::get('login', [
+        'as' => 'admin.showLoginForm',
+        'uses' => 'LoginController@showLoginForm'
+    ]);
+    Route::post('login', [
+        'as' => 'admin.login',
+        'uses' => 'LoginController@login'
+    ]);
+
+    Route::group([
+        'middleware' => 'auth.admin'
+    ], function() {
+        Route::get('/', [
+            'as' => 'admin.dashboard',
+            'uses' => 'HomeController@dashboard'
+        ]);
+    });
+});
