@@ -131,6 +131,14 @@ Route::group([
                 'as' => 'admin.article.detail',
                 'uses' => 'ArticleController@detail'
             ]);
+            Route::get('changefield', [
+                'as' => 'admin.article.changefield',
+                'uses' => 'ArticleController@changefield'
+            ]);
+            Route::get('delete', [
+                'as' => 'admin.article.delete',
+                'uses' => 'ArticleController@delete'
+            ]);
         });
     });
 });

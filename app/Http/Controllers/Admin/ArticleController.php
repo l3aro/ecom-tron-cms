@@ -12,8 +12,26 @@ use App\Libraries\UploadFile;
 
 class ArticleController extends Controller
 {
+    /**
+     * Show list of articles
+     * 
+     * @param \Request  $request
+     * @return \Response
+     */
     public function index(Request $request) {
-        return Theme::uses('visitors')->scope('article.index')->render();
+        $dataView = [];
+        $articles = null;
+        $condition = [];
+
+        $condition[] = ['name', 'like', '%'.$request->f_name.'%'];
+
+        $articles = Article::where($condition)->orderBy('created_at','desc')->paginate(8);
+        $dataView['articles'] = $articles;
+
+        if ($request->ajax()) {
+            return Theme::uses('visitors')->scope('article.list',$dataView)->content();
+        }
+        return Theme::uses('visitors')->scope('article.index',$dataView)->render();
     }
 
     /**
@@ -29,15 +47,15 @@ class ArticleController extends Controller
         $article = null;
         $list_cat = null;
 
-        if ($request->id !== null) {
-            $article = Article::where('id', $request->id)->first();
-        }
-        else if ($request->act == 'copy') {
+        if ($request->act == 'copy') {
             $article = Article::where('id', $request->id)->first();
             $article->id = null;
             $article->public = 0;
             $article->highlight = 0;
             $article->new = 0;
+        }
+        else if ($request->id !== null) {
+            $article = Article::where('id', $request->id)->first();
         }
         else {
             $article = new Article();
@@ -107,5 +125,47 @@ class ArticleController extends Controller
         $dataView['article'] = $article;
         $dataView['list_cat'] = $list_cat;
         return Theme::uses('visitors')->scope('article.detail', $dataView)->render();
+    }
+
+    /**
+     * Change an attribute of [public, highlight, new] to true or false
+     * 
+     * @param \Request
+     */
+    public function changefield(Request $request) {
+        $field = $request->field;
+        $article = Article::find($request->id);
+        $article->$field = $request->p?'0':'1';
+        $article->save();
+        die($request->p);
+    }
+
+    /**
+     * Delete an article or multi articles
+     * 
+     * @param $id the id number of article(s)
+     */
+    public function delete(Request $request) {
+        $article = Article::find(explode(',', $request->id));
+        foreach($article as $key=>$value) {
+            if ($value->image)
+                $this->delete_image($value->id);
+            $value->delete();
+        }
+    }
+
+    /**
+     * Delete article's image
+     * 
+     * @param $id article-id
+     * @return mixed
+     */
+    public function delete_image($id){
+        $article = Article::find($id);
+        $folder = $_SERVER['DOCUMENT_ROOT'] . '/media/article/';
+        if (file_exists($folder . $article->image))	unlink($folder . $article->image);
+        if (file_exists($folder . 'tb/' . $article->image))	unlink($folder . 'tb/' . $article->image);
+        $article->image = '';
+        $article->save();
     }
 }
