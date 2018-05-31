@@ -140,5 +140,25 @@ Route::group([
                 'uses' => 'ArticleController@delete'
             ]);
         });
+
+        /**
+         * Article routes
+         */
+        Route::group([
+            'prefix' => 'article-cat'
+        ], function() {
+            Route::get('/', [
+                'as' => 'admin.article-cat.index',
+                'uses' => 'ArticleCatController@index'
+            ]);
+            Route::match(['get', 'post'], 'detail', [
+                'as' => 'admin.article-cat.detail',
+                'uses' => 'ArticleCatController@detail'
+            ]);
+            Route::get('delete', [
+                'as' => 'admin.article-cat.delete',
+                'uses' => 'ArticleCatController@delete'
+            ]);
+        });
     });
 });

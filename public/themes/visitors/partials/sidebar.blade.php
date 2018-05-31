@@ -17,7 +17,7 @@
                 </a>
                 <ul class="sub">
                     <li><a href="{{route('admin.article.index')}}">Article Management</a></li>
-                    <li><a href="glyphicon.html">Article Category Management</a></li>
+                    <li><a href="{{route('admin.article-cat.index')}}">Article Category Management</a></li>
                 </ul>
             </li>
 
