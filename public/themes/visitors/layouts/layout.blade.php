@@ -26,7 +26,8 @@
         <link rel="stylesheet" href="@asset('css/monthly.cs')s">
         <!-- //calendar -->
         <!-- //font-awesome icons -->
-        <script src="@asset('js/jquery2.0.3.min.js')"></script>
+        <script src="@asset('js/jquery-3.2.1.min.js')"></script>
+        <script src="@asset('js/jquery-ui.min.js')"></script>
         <script src="@asset('js/raphael-min.js')"></script>
         <script src="@asset('js/morris.js')"></script>
         

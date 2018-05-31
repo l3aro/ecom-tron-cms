@@ -38,7 +38,7 @@
                     <span>Product</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="typography.html">Product Management</a></li>
+                    <li><a href="{{route('admin.product.index')}}">Product Management</a></li>
                     <li><a href="glyphicon.html">Product Category Management</a></li>
                 </ul>
             </li>    

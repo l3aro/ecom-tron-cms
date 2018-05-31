@@ -2685,7 +2685,8 @@ ul.inbox-pagination li {
 
 .fileinput-button {
     border: 1px solid #e6e6e6;
-    background: #eeeeee;
+    background-color: #5bc0de;
+    border-color: #46b8da;
 }
 
 .inbox-body .modal .modal-body input,

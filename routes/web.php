@@ -160,5 +160,41 @@ Route::group([
                 'uses' => 'ArticleCatController@delete'
             ]);
         });
+
+        /**
+         * Product routes
+         */
+        Route::group([
+            'prefix' => 'product'
+        ], function() {
+            Route::get('/', [
+                'as' => 'admin.product.index',
+                'uses' => 'ProductController@index'
+            ]);
+            Route::match(['get', 'post'], 'detail', [
+                'as' => 'admin.product.detail',
+                'uses' => 'ProductController@detail'
+            ]);
+            Route::get('changefield', [
+                'as' => 'admin.product.changefield',
+                'uses' => 'ProductController@changefield'
+            ]);
+            Route::get('delete', [
+                'as' => 'admin.product.delete',
+                'uses' => 'ProductController@delete'
+            ]);
+            Route::get('deleteavatar',[
+                'as' => 'admin.product.deleteavatar',
+                'uses' => 'ProductController@deleteavatar',
+            ]);
+            Route::get('deleteproductimage',[
+                'as' => 'admin.product.deleteproductimage',
+                'uses' => 'ProductController@deleteproductimage',
+            ]);
+            Route::post('uploadimage',[
+                'as' => 'admin.product.uploadimage',
+                'uses' => 'ProductController@uploadimage',
+            ]);
+        });      
     });
 });
