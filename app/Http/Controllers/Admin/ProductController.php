@@ -77,11 +77,10 @@ class ProductController extends Controller
                 }
             }
             $product->name = $request->name;
-            $product->price = (float)$request->price;
+            $product->price = floatval($request->price);
+            $product->discount = $product->discount?$product->discount:'0';
             $product->cat = (int)$request->cat;
             $product->image = $image?$image:'';
-            $product->product_code = $request->product_code;
-            $product->unit = $request->unit;
             $product->des = $request->des?$request->des:'';
             $product->detail = $request->detail?$request->detail:'';
             $product->page_title = $request->page_title?$request->page_title:'';

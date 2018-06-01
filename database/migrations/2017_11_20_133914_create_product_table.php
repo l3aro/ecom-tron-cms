@@ -19,6 +19,7 @@ class CreateProductTable extends Migration
             $table->string('name')->nullable();
             $table->integer('cat')->nullable();
             $table->decimal('price', 10, 2)->nullable();
+            $table->smallInteger('discount');
             $table->string('image')->nullable();
             $table->string('unit')->nullable();
             $table->string('product_code')->nullable();
@@ -30,7 +31,6 @@ class CreateProductTable extends Migration
             $table->boolean('new')->nullable();
             $table->boolean('highlight')->nullable();
             $table->string('slug')->nullable();
-            $table->boolean('sale')->nullable();
             $table->integer('view_count')->nullable();
             $table->integer('updated_by')->nullable();
 
