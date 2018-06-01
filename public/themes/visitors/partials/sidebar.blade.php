@@ -39,7 +39,7 @@
                 </a>
                 <ul class="sub">
                     <li><a href="{{route('admin.product.index')}}">Product Management</a></li>
-                    <li><a href="glyphicon.html">Product Category Management</a></li>
+                    <li><a href="{{route('admin.product-cat.index')}}">Product Category Management</a></li>
                 </ul>
             </li>    
 

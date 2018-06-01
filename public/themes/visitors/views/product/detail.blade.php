@@ -8,7 +8,7 @@
 <section id="main-content">
 	<section class="wrapper">
 		<div class="typo-agile">
-            <h2 class="w3ls_head">Article Detail</h2>
+            <h2 class="w3ls_head">Product Detail</h2>
             <div class="grid_3 grid_5 w3ls">
             @if($saved == 1)
                 <div class="alert alert-success" role="alert">
@@ -42,7 +42,17 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="focusedInput">Title</label>
-                                <input class="form-control" name="name" type="text" required value="{{ isset($product)?$product->name:'' }}" placeholder="Article title">
+                                <input class="form-control" name="name" type="text" required value="{{ isset($product)?$product->name:'' }}">
+                                <small class="form-text text-muted">Name of the product</small>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="focusedInput">Price</label>
+                                <input class="form-control" name="price" type="number" min="0" required value="{{ isset($product)?$product->price:'' }}">
+                                <small class="form-text text-muted">Price of the product</small>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="focusedInput">Discount</label>
+                                <input class="form-control" name="discount" type="number" min="0" step="1" value="{{ isset($product)?$product->discount:'' }}">
                                 <small class="form-text text-muted">Name of the product</small>
                             </div>
                             <div class="form-group">

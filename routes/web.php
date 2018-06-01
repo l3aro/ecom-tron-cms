@@ -195,6 +195,26 @@ Route::group([
                 'as' => 'admin.product.uploadimage',
                 'uses' => 'ProductController@uploadimage',
             ]);
-        });      
+        });
+        
+        /**
+         * Product routes
+         */
+        Route::group([
+            'prefix' => 'product-cat'
+        ], function() {
+            Route::get('/', [
+                'as' => 'admin.product-cat.index',
+                'uses' => 'ProductCatController@index'
+            ]);
+            Route::match(['get', 'post'], 'detail', [
+                'as' => 'admin.product-cat.detail',
+                'uses' => 'ProductCatController@detail'
+            ]);
+            Route::get('delete', [
+                'as' => 'admin.product-cat.delete',
+                'uses' => 'ProductCatController@delete'
+            ]);
+        });
     });
 });

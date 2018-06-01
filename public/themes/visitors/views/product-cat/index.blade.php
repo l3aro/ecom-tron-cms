@@ -17,7 +17,7 @@
                         <button id="btn-del-all" class="btn btn-md btn-danger" data-toggle="tooltip" title="Delete selected">
                             <i class="fa fa-trash"></i>
                         </button>
-                        <button class="btn btn-md btn-primary float-right" data-toggle="tooltip" title="Add new category" onclick="event.preventDefault();window.location.href='{{route('admin.article-cat.detail')}}';">
+                        <button class="btn btn-md btn-primary float-right" data-toggle="tooltip" title="Add new category" onclick="event.preventDefault();window.location.href='{{route('admin.product-cat.detail')}}';">
                             <i class="fa fa-plus"></i>
                         </button>
                     </div>
@@ -30,7 +30,7 @@
                 </div>
                 <div class="table-responsive">
                     {{ csrf_field() }}
-                    {!! Theme::scope('article-cat.list', ['categories' => $categories])->content() !!}
+                    {!! Theme::scope('product-cat.list', ['categories' => $categories])->content() !!}
                 </div>
             </div>
         </div>
@@ -76,11 +76,11 @@
 			if (confirm('Are you sure?')){
                 var delete_id = $(this).attr('delete-id');
 				$.ajax({
-					url: '/admin/article-cat/delete?id=' + delete_id,
+					url: '/admin/product-cat/delete?id=' + delete_id,
 					async: true,
 					method: 'GET',
 					success: function(data){
-						// window.location.reload();
+						window.location.reload();
 					}
 				});
 			}
@@ -95,7 +95,7 @@
 					});
 					token = $('#delform input[name="_token"').val();
 					$.ajax({
-						url: '/admin/article-cat/delete?id=' + delstr,
+						url: '/admin/product-cat/delete?id=' + delstr,
 						async: false,
 						method: "GET",
 						data: {_token:token},
@@ -105,7 +105,7 @@
 							}
 						}
 					});
-					// window.location.reload();
+					window.location.reload();
 				}
 			} else {
 				return false;
@@ -126,7 +126,7 @@
 			var id = $(this).attr('item-id');
 			var field = $(this).attr('field');
 			$.ajax({
-				  url: '/admin/article-cat/changefield?id=' + id + '&p=' + currentvalue + '&field=' + field,
+				  url: '/admin/product-cat/changefield?id=' + id + '&p=' + currentvalue + '&field=' + field,
                   method: "GET",
 				  success: function(data) {
 				  	if (currentvalue==0) { 
@@ -152,7 +152,7 @@
     //     $("[data-toggle=tooltip]").tooltip('hide');
     //     var keyword = $('#keyword').val();
     //     $.ajax({
-    //         url: '/admin/article?f_name=' + keyword + '&page=' + page,
+    //         url: '/admin/product?f_name=' + keyword + '&page=' + page,
     //         type: 'GET',
     //         success: function(data) {
     //             $('#data_table').html(data);
