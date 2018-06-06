@@ -24,7 +24,8 @@ class CreateUsersTable extends Migration
             $table->date('birthday')->nullable();
             $table->string('position')->nullable();
             $table->string('image')->nullable();
-            $table->integer('admin')->nullable();
+            $table->integer('admin')->default(0);
+            $table->integer('active')->default(1);
 
             $table->ipAddress('lastLoginIP')->nullable();
             $table->timestamp('lastLoginTime')->nullable();

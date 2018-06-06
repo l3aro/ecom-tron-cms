@@ -232,5 +232,29 @@ Route::group([
                 'uses' => 'UserController@changePassword'
             ]);
         });
+
+        /**
+         * User routes
+         */
+        Route::group([
+            'prefix' => 'user',
+        ], function() {
+            Route::get('list-admin', [
+                'as' => 'admin.user.list-admin',
+                'uses' => 'UserController@listAdmin'
+            ]);
+            Route::get('list-customer', [
+                'as' => 'admin.user.list-customer',
+                'uses' => 'UserController@listCustomer'
+            ]);
+            Route::match(['get', 'post'], 'detail', [
+                'as' => 'admin.user.detail',
+                'uses' => 'UserController@detail'
+            ]);
+            Route::get('changefield', [
+                'as' => 'admin.user.changefield',
+                'uses' => 'UserController@changefield'
+            ]);
+        });
     });
 });

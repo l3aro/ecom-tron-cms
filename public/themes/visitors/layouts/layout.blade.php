@@ -39,9 +39,9 @@
         <section id="container">
         @content()
         </section>
-        <script src="@asset('js/bootstrap.min.js')"></script>
-        <script src="@asset('js/bootstrap.bundle.min.js')"></script>
-        <script src="@asset('js/popper.min.js')"></script> 
+        <script src="@asset('js/bootstrap.js')"></script>
+        {{-- <script src="@asset('js/bootstrap.bundle.min.js')"></script> --}}
+        {{-- <script src="@asset('js/popper.min.js')"></script>  --}}
         <script src="@asset('js/jquery.dcjqaccordion.2.7.js')"></script>
         <script src="@asset('js/scripts.js')"></script>
         <script src="@asset('js/jquery.slimscroll.js')"></script>

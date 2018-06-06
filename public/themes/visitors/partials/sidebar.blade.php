@@ -61,6 +61,16 @@
             </li>
             <li class="sub-menu">
                 <a href="javascript:;">
+                    <i class="fa fa-user"></i>
+                    <span>User </span>
+                </a>
+                <ul class="sub">
+                    <li><a href="{{route('admin.user.list-admin')}}">Admin Management</a></li>
+                    <li><a href="{{route('admin.user.list-customer')}}">Customer Management</a></li>
+                </ul>
+            </li>
+            <li class="sub-menu">
+                <a href="javascript:;">
                     <i class=" fa fa-th-list"></i>
                     <span>Menu</span>
                 </a>

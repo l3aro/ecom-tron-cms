@@ -18,11 +18,16 @@ class LoginController extends Controller
     //Where to redirect after login
     protected $redirectTo = '/admin';
 
-    //Shows seller login form
+    //Shows login form
     public function showLoginForm()
     {
         $theme = Theme::uses('visitors');
         return Theme::scope('auth.login')->render();
+    }
+
+    protected function credentials(Request $request)
+    {
+        return array_merge($request->only($this->username(), 'password'), ['active' => 1]);
     }
 
     public function logout() {
