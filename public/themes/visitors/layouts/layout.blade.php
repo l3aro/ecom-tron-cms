@@ -6,6 +6,7 @@
         <meta name="keywords" content="@get('keywords')">
         <meta name="description" content="@get('description')">
         <meta name="author" content="@get('author')">
+        <link rel="icon" href="@asset('images/fav-icon.png')" type="image/x-icon" />
     
         <title>@get('title')</title>
 
