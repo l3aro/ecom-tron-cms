@@ -69,12 +69,12 @@
                     <li><a href="{{route('admin.user.list-customer')}}">Customer Management</a></li>
                 </ul>
             </li>
-            <li class="sub-menu">
+            {{-- <li class="sub-menu">
                 <a href="javascript:;">
                     <i class=" fa fa-th-list"></i>
                     <span>Menu</span>
                 </a>
-            </li>
+            </li> --}}
         </ul>            
     </div>
     <!-- sidebar menu end-->
