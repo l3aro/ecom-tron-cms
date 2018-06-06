@@ -196,8 +196,11 @@
         <!-- user login dropdown start-->
         <li class="dropdown">
             <a data-toggle="collapse" class="dropdown-toggle" href="#profile-menu" role="button" aria-controls="profile-menu">
-                <img alt="" src="@asset('images/2.png')">
-                <span class="username">John Doe</span>
+                <div class="small-avatar" style="background-image: url('{{ URL::asset('media/user/'.auth()->user()->image) }}');">
+                </div>
+                <div style="float:left">
+                    <span class="username">&nbsp;&nbsp;{!!auth()->user()->name!!}</span>
+                </div>
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout" id="profile-menu">

@@ -647,6 +647,7 @@ ul.top-menu>li>a:focus {
     margin-right: 0;
     border: 1px solid #8b5c7e;
     background: #8b5c7e;
+    height: 33px;
 }
 
 .top-nav ul.top-menu>li.language>a {
@@ -3983,17 +3984,18 @@ div#graph11 {
 }
 
 .avatar {
-    width: 150px;
-    height: 150px;
-    margin: 25px auto;
-    overflow: hidden;
+    width: 240px;
+    height: 240px;
+    background-size: cover;
+    background-position: top center;
     border-radius: 50%;
-    position: relative;
 }
 
-.avatar img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%)
+.small-avatar {
+    width: 33px;
+    height: 33px;
+    background-size: cover;
+    background-position: top center;
+    border-radius: 50%;
+    float: left;
 }

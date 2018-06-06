@@ -75,9 +75,9 @@
                         @if(!empty($info->image))
                         <div class="form-group text-center">
                             <input type="hidden" name="current_image" value="<?=$info->image?>">
-                            <div class="avatar">
-                                <img src="{{ isset($info->image)?URL::asset('media/user/'.$info->image):'' }}" width="240" height="auto" alt="" />
-                              </div>
+                            <div class="avatar" style="background-image: url('{{ isset($info->image)?URL::asset('media/user/'.$info->image):'' }}')">
+                                {{-- <img src="" width="240" height="auto" alt="" /> --}}
+                            </div>
                             <button {!!auth()->user()->id!==$info->id&&$info->id?'hidden':''!!} id="btn-delete-image" class="btn btn-danger" imgdetailid="<?=$info->id?>" name="deleteimagedetail" value="<?=$info->id?> data-toggle="tooltip" title="Delete current avatar"" type="submit">
                                 <i class="fa fa-trash"></i>
                             </button>
