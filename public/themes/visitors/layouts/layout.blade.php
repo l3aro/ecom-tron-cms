@@ -12,6 +12,8 @@
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
         <!-- bootstrap-css -->
         <link rel="stylesheet" href="@asset('css/bootstrap.min.css')" >
+        <link rel="stylesheet" href="@asset('css/bootstrap-grid.min.css')" >
+        <link rel="stylesheet" href="@asset('css/bootstrap-reboot.min.css')" >
         <!-- //bootstrap-css -->
         <!-- Custom CSS -->
         <link href="@asset('css/style.css')" rel='stylesheet' type='text/css' />
@@ -37,8 +39,9 @@
         <section id="container">
         @content()
         </section>
-
-        <script src="@asset('js/bootstrap.js')"></script>
+        <script src="@asset('js/bootstrap.min.js')"></script>
+        <script src="@asset('js/bootstrap.bundle.min.js')"></script>
+        <script src="@asset('js/popper.min.js')"></script> 
         <script src="@asset('js/jquery.dcjqaccordion.2.7.js')"></script>
         <script src="@asset('js/scripts.js')"></script>
         <script src="@asset('js/jquery.slimscroll.js')"></script>

@@ -1,7 +1,7 @@
 <header class="header fixed-top clearfix">
 <!--logo start-->
 <div class="brand">
-    <a href="index.html" class="logo">
+    <a href="{{route('admin.dashboard')}}" class="logo">
         VISITORS
     </a>
     <div class="sidebar-toggle-box">
@@ -9,7 +9,7 @@
     </div>
 </div>
 <!--logo end-->
-<div class="nav notify-row" id="top_menu">
+{{-- <div class="nav notify-row" id="top_menu">
     <!--  notification start -->
     <ul class="nav top-menu">
         <!-- settings start -->
@@ -186,24 +186,25 @@
         <!-- notification dropdown end -->
     </ul>
     <!--  notification end -->
-</div>
+</div> --}}
 <div class="top-nav clearfix">
     <!--search & user info start-->
     <ul class="nav pull-right top-menu">
-        <li>
+        {{-- <li>
             <input type="text" class="form-control search" placeholder=" Search">
-        </li>
+        </li> --}}
         <!-- user login dropdown start-->
         <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            <a data-toggle="collapse" class="dropdown-toggle" href="#profile-menu" role="button" aria-controls="profile-menu">
                 <img alt="" src="@asset('images/2.png')">
                 <span class="username">John Doe</span>
                 <b class="caret"></b>
             </a>
-            <ul class="dropdown-menu extended logout">
-                <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-                <li><a href="login.html"><i class="fa fa-key"></i> Log Out</a></li>
+            <ul class="dropdown-menu extended logout" id="profile-menu">
+                <li><a href="{{ route('admin.profile.info') }}"><i class=" fa fa-suitcase"></i> Profile</a></li>
+                <li><a href="{{ route('admin.profile.password') }}"><i class="fa fa-key"></i> Change Password</a></li>
+                <li><a href="{{ route('admin.logout') }}" onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i> Log Out</a></li>
             </ul>
         </li>
         <!-- user login dropdown end -->
@@ -212,3 +213,6 @@
     <!--search & user info end-->
 </div>
 </header>
+<form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+    {{ csrf_field() }}
+</form>

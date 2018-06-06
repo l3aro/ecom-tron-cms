@@ -216,5 +216,21 @@ Route::group([
                 'uses' => 'ProductCatController@delete'
             ]);
         });
+
+        /**
+         * Profile routes
+         */
+        Route::group([
+            'prefix' => 'profile',
+        ], function() {
+            Route::match(['get', 'post'], 'info', [
+                'as' => 'admin.profile.info',
+                'uses' => 'UserController@info'
+            ]);
+            Route::match(['get', 'post'], 'password', [
+                'as' => 'admin.profile.password',
+                'uses' => 'UserController@changePassword'
+            ]);
+        });
     });
 });
