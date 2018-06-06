@@ -21,7 +21,7 @@
                 </ul>
             </li>
 
-            <li class="sub-menu">
+            {{-- <li class="sub-menu">
                 <a href="javascript:;">
                     <i class="fa fa-camera-retro"></i>
                     <span>Image</span>
@@ -30,7 +30,7 @@
                     <li><a href="typography.html">Image Management</a></li>
                     <li><a href="glyphicon.html">Image Category Management</a></li>
                 </ul>
-            </li>   
+            </li>    --}}
             
             <li class="sub-menu">
                 <a href="javascript:;">
