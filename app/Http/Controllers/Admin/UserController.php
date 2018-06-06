@@ -135,6 +135,7 @@ class UserController extends Controller
         }
         else {
             $user = new User;
+            $user->image = 'img-avt.png';
         }
         if (url()->previous() == route('admin.user.list-admin')) {
             $user->admin = 1;
@@ -148,7 +149,7 @@ class UserController extends Controller
             } else {
                 $image = $user->image;
             }
-            $user->image = $image?$image:'';
+            $user->image = $image?$image:'img-avt.png';
             if ($request->name) {
                 $user->name = $request->name;
             }
