@@ -70,7 +70,7 @@
                 </ul>
             </li>
             <li class="sub-menu">
-                <a href="javascript:;">
+                <a href="{{route('admin.menu-cat.index')}}">
                     <i class=" fa fa-th-list"></i>
                     <span>Menu</span>
                 </a>

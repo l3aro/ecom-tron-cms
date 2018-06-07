@@ -142,7 +142,7 @@ Route::group([
         });
 
         /**
-         * Article routes
+         * Article Category routes
          */
         Route::group([
             'prefix' => 'article-cat'
@@ -198,7 +198,7 @@ Route::group([
         });
         
         /**
-         * Product routes
+         * Product Category routes
          */
         Route::group([
             'prefix' => 'product-cat'
@@ -254,6 +254,66 @@ Route::group([
             Route::get('changefield', [
                 'as' => 'admin.user.changefield',
                 'uses' => 'UserController@changefield'
+            ]);
+        });
+
+        /**
+         * Menu Category routes
+         */
+        Route::group([
+            'prefix' => 'menu-cat'
+        ], function() {
+            Route::get('/', [
+                'as' => 'admin.menu-cat.index',
+                'uses' => 'MenuCatController@index'
+            ]);
+            Route::match(['get', 'post'], 'detail', [
+                'as' => 'admin.menu-cat.detail',
+                'uses' => 'MenuCatController@detail'
+            ]);
+            Route::get('delete', [
+                'as' => 'admin.menu-cat.delete',
+                'uses' => 'MenuCatController@delete'
+            ]);
+        });
+
+        /**
+         * Menu routes
+         */
+        Route::group([
+            'prefix' => 'menu'
+        ], function() {
+            Route::get('/',[
+                'as' => 'admin.menu.index',
+                'uses' => 'MenuController@index',
+            ]);
+            Route::match(['get','post'],'detail',[
+                'as' => 'admin.menu.detail',
+                'uses' => 'MenuController@detail',
+            ]);
+            Route::get('delete/{id}',[
+                'as' => 'admin.menu.delete',
+                'uses' => 'MenuController@delete',
+            ]);
+            Route::get('list_products',[
+                'as' => 'admin.menu.list_products',
+                'uses' => 'MenuController@list_products',
+            ]);
+            Route::get('list_articles',[
+                'as' => 'admin.menu.list_articles',
+                'uses' => 'MenuController@list_articles',
+            ]);
+            Route::get('get_product',[
+                'as' => 'admin.menu.get_product',
+                'uses' => 'MenuController@get_product',
+            ]);
+            Route::get('get_article',[
+                'as' => 'admin.menu.get_article',
+                'uses' => 'MenuController@get_article',
+            ]);
+            Route::post('sortcat',[
+                'as' => 'admin.menu.sortcat',
+                'uses' => 'MenuController@sortcat',
             ]);
         });
     });

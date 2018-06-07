@@ -14,7 +14,7 @@
         <!-- bootstrap-css -->
         <link rel="stylesheet" href="@asset('css/bootstrap.min.css')" >
         <link rel="stylesheet" href="@asset('css/bootstrap-grid.min.css')" >
-        <link rel="stylesheet" href="@asset('css/bootstrap-reboot.min.css')" >
+        {{-- <link rel="stylesheet" href="@asset('css/bootstrap-reboot.min.css')" > --}}
         <!-- //bootstrap-css -->
         <!-- Custom CSS -->
         <link href="@asset('css/style.css')" rel='stylesheet' type='text/css' />
