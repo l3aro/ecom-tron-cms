@@ -61,8 +61,7 @@ class ArticleController extends Controller
             $article = new Article();
         }
 
-        // $list_cat = new ArticleCat();
-        // $list_cat = $list_cat->GetOptions($article->cat);
+        $list_cat = $this->getSubCategories(0);
 
         if ($request->isMethod('post')) {
             if($request->file('image') && $request->file('image')->isValid()){
@@ -113,9 +112,6 @@ class ArticleController extends Controller
             }
             $article->slug = $slug;
             $article->save();
-
-            // $list_cat = new ArticleCat();
-            // $list_cat = $list_cat->GetOptions($article->cat);
             
             $saved = 1;
         }
@@ -125,6 +121,30 @@ class ArticleController extends Controller
         $dataView['article'] = $article;
         $dataView['list_cat'] = $list_cat;
         return Theme::uses('visitors')->scope('article.detail', $dataView)->render();
+    }
+    /**
+     * Get article category
+     * 
+     * @param int parent cat id
+     * @return Collection
+     * @return null
+     */
+    private function getSubCategories($parent_id, $process_id=null) {
+        $condition = [];
+        $condition[] = ['parent', $parent_id];
+        if ($process_id !== null) {
+            $condition[] = ['id', '<>', $process_id];
+        }
+        $cat = ArticleCat::where($condition)->get();
+        if ($cat->count() > 0) {
+            $cat->map(function($q) use($process_id) {
+                $sub = $this->getSubCategories($q->id, $process_id);
+                $q->sub = $sub;
+                return $q;
+            });
+            return $cat;
+        }
+        return null;
     }
 
     /**

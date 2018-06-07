@@ -49,14 +49,16 @@
                             <label class="control-label">Category</label>
                             <select class="form-control" name="parent">
                                 <option value="0"></option>
-                                @foreach ($list_cat as $cat)
-                                    <option value="{!! $cat->id !!}" {{ $category->parent==$cat->id?'selected':'' }}>{!! $cat->name !!}</option>
-                                    @php
-                                        if ($cat->sub !== null) {
-                                            printSub($cat->sub, $category->parent);
-                                        }
-                                    @endphp
-                                @endforeach
+                                @if ($list_cat)
+                                    @foreach ($list_cat as $cat)
+                                        <option value="{!! $cat->id !!}" {{ $category->parent==$cat->id?'selected':'' }}>{!! $cat->name !!}</option>
+                                        @php
+                                            if ($cat->sub !== null) {
+                                                printSub($cat->sub, $category->parent);
+                                            }
+                                        @endphp
+                                    @endforeach
+                                @endif
                             </select>
                             <small class="form-text text-muted">Select the parent of this category</small>
                         </div>

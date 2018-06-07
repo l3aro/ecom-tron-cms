@@ -48,7 +48,17 @@
                         <div class="form-group">
                             <label class="control-label">Category</label>
                             <select class="form-control" name="cat">
-                                
+                                <option value="0" {{ $article->cat===0?'selected':'' }}>
+                                @if ($list_cat)
+                                    @foreach ($list_cat as $cat)
+                                        <option value="{!! $cat->id !!}" {{ $article->cat==$cat->id?'selected':'' }}>{!! $cat->name !!}</option>
+                                        @php
+                                            if ($cat->sub !== null) {
+                                                printSub($cat->sub, $article->cat);
+                                            }
+                                        @endphp
+                                    @endforeach
+                                @endif
                             </select>
                             <small class="form-text text-muted">Select the category of this article</small>
                         </div>
@@ -122,3 +132,23 @@
         CKEDITOR.replace( 'textAreaDetail' );
     });
 </script>
+<?php
+function printSub($sub, $parent_process_id, $nth=1) {
+    foreach ($sub as $key=>$value) {
+?>
+        <option value="{!! $value->id !!}" {{ $parent_process_id==$value->id?'selected':'' }}>
+<?php
+            for ($i = 0; $i < $nth; $i++) {
+                echo ' - ';
+            }
+?>
+            {!! $value->name !!}
+        </option>
+<?php
+        if ($value->sub !== null) {
+            printSub($value->sub, $parent_process_id, $nth+1);
+        }
+    }
+    return;
+}
+?>
