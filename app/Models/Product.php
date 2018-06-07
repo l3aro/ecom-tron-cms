@@ -12,9 +12,9 @@ class Product extends Model
         'created_at', 'updated_at'
     ];
     public function product_cat() {
-        return $this->belongsTo('App\Models\Productcat', 'cat');
+        return $this->belongsTo('App\Models\ProductCat', 'cat');
     }
-    public function productUpdateBy() {
+    public function user() {
         return $this->belongsTo('App\Models\User', 'updated_by');
 	}
 }

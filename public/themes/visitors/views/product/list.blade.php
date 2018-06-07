@@ -30,7 +30,9 @@
                         {!! $product->name !!}
                     </a>
                 </td>
-                <td></td>
+                <td>
+                    {!!$product->product_cat->name or ''!!}
+                </td>
                 <td>
                     <button type="button" class="btn btn-sm p-1 <?=$product->public==1?'btn-success':''?> editmenu" data-toggle="tooltip" title="<?=$product->public==1?'Click to turn off':'Click to turn on'?>"
                         field="public" item-id="<?=$product->id?>" currentvalue="<?=$product->public?>" cms-change-field="changfield"><i class="fa fa-{{$product->public==1?'check':'times'}}"></i>

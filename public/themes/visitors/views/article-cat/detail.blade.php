@@ -48,7 +48,7 @@
                         <div class="form-group">
                             <label class="control-label">Category</label>
                             <select class="form-control" name="parent">
-                                <option value="0"></option>
+                                <option value="0" {{ $category->parent===0?'selected':'' }}>
                                 @if ($list_cat)
                                     @foreach ($list_cat as $cat)
                                         <option value="{!! $cat->id !!}" {{ $category->parent==$cat->id?'selected':'' }}>{!! $cat->name !!}</option>

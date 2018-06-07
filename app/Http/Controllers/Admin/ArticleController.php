@@ -122,6 +122,7 @@ class ArticleController extends Controller
         $dataView['list_cat'] = $list_cat;
         return Theme::uses('visitors')->scope('article.detail', $dataView)->render();
     }
+    
     /**
      * Get article category
      * 
