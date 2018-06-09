@@ -50,3 +50,8 @@
 @partial('footer')
   <!-- / footer -->
 </section>
+<script>
+    $(document).ready(function(){
+        $('#menu-menu').addClass('active');
+    });
+</script>

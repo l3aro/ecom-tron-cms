@@ -139,7 +139,7 @@
 </section>
 <script>
     $(document).ready(function(){
-        $('#menu-menu').parent('li').addClass('active');
+        $('#menu-menu').addClass('active');
         $('#list-option').change(function () {
             $('#list-data-table').html('');
             var selectedIndex = $("#list-option").find("option:selected").val();

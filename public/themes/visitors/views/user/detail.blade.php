@@ -92,3 +92,8 @@
 @partial('footer')
   <!-- / footer -->
 </section>
+<script>
+    $(document).ready(function(){
+        $('#menu-user').addClass('active');
+    });
+</script>

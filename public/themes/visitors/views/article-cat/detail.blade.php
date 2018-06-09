@@ -110,6 +110,7 @@
 <script src="@asset('js/ckeditor/ckeditor.js')"></script>
 <script>
     $(document).ready(function(){
+        $('#menu-article').addClass('active');
         CKEDITOR.replace( 'textAreaDes' );
     });
 </script>

@@ -38,6 +38,7 @@
 </section>
 <script>
     $(document).ready(function(){
+        $('#menu-menu').addClass('active');
 		$('.delete-button').click(function(e){
 			e.preventDefault();
 			if (confirm('Are you sure?')){

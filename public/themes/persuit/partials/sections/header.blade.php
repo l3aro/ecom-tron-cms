@@ -23,32 +23,24 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    @if (Theme::bind('menu'))
+                    @foreach (Theme::bind('menu') as $option)
+                    @if (!$option->sub)
+                        <li class="nav-item"><a class="nav-link" href="/">{{$option->name}}</a></li>
+                    @else
                         <li class="nav-item dropdown submenu active">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Pages <i class="fa fa-angle-down" aria-hidden="true"></i>
+                            {{$option->name}} <i class="fa fa-angle-down" aria-hidden="true"></i>
                             </a>
                             <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link" href="#">Compare</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">Checkout Method</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">Checkout Register</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">Track</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">404</a></li>
+                            @foreach($option->sub as $sub_option)
+                                <li class="nav-item"><a class="nav-link" href="#">{{$sub_option->name}}</a></li>
+                            @endforeach
                             </ul>
                         </li>
-                        <li class="nav-item dropdown submenu">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Shop <i class="fa fa-angle-down" aria-hidden="true"></i>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link" href="{{ route('frontend.productcat.show') }}">Product Category</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ route('frontend.product.show') }}">Product</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">lookbook</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('frontend.contact.show') }}">Contact</a></li>
+                    @endif
+                    @endforeach
+                    @endif
                     </ul>
                     <ul class="navbar-nav justify-content-end">
                         <li class="search_icon"><a href="#"><i class="icon-magnifier icons"></i></a></li>

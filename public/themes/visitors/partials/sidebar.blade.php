@@ -4,14 +4,14 @@
     <div class="leftside-navigation">
         <ul class="sidebar-menu" id="nav-accordion">
             <li>
-                <a class="active" href="{{route('admin.dashboard')}}">
+                <a href="{{route('admin.dashboard')}}" id="menu-dashboard">
                     <i class="fa fa-dashboard"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
             
             <li class="sub-menu">
-                <a href="javascript:;">
+                <a href="javascript:;" id="menu-article">
                     <i class="fa fa-rss"></i>
                     <span>Article</span>
                 </a>
@@ -22,7 +22,7 @@
             </li>
 
             {{-- <li class="sub-menu">
-                <a href="javascript:;">
+                <a href="javascript:;" id="menu-image">
                     <i class="fa fa-camera-retro"></i>
                     <span>Image</span>
                 </a>
@@ -33,7 +33,7 @@
             </li>    --}}
             
             <li class="sub-menu">
-                <a href="javascript:;">
+                <a href="javascript:;" id="menu-product">
                     <i class="fa fa-gift"></i>
                     <span>Product</span>
                 </a>
@@ -44,13 +44,13 @@
             </li>    
 
             <li>
-                <a href="fontawesome.html">
+                <a href="#" id="menu-order">
                     <i class="fa fa-shopping-cart"></i>
                     <span>Order</span>
                 </a>
             </li>
             <li class="sub-menu">
-                <a href="javascript:;">
+                <a href="javascript:;" id="menu-mail">
                     <i class="fa fa-envelope"></i>
                     <span>Mail </span>
                 </a>
@@ -60,7 +60,7 @@
                 </ul>
             </li>
             <li class="sub-menu">
-                <a href="javascript:;">
+                <a href="javascript:;" id="menu-user">
                     <i class="fa fa-user"></i>
                     <span>User </span>
                 </a>
@@ -70,9 +70,15 @@
                 </ul>
             </li>
             <li class="sub-menu">
-                <a href="{{route('admin.menu-cat.index')}}">
+                <a href="{{route('admin.menu-cat.index')}}" id="menu-menu">
                     <i class=" fa fa-th-list"></i>
                     <span>Menu</span>
+                </a>
+            </li>
+            <li>
+                <a href="/" target="_blank">
+                    <i class="fa fa-eye"></i>
+                    <span>Main Site</span>
                 </a>
             </li>
         </ul>            

@@ -41,6 +41,7 @@
 </section>
 <script>
     $(document).ready(function(){
+		$('#menu-menu').addClass('active');
         init_action();
     });
 	function init_action() {

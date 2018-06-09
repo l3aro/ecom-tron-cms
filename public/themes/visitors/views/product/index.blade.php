@@ -41,6 +41,7 @@
 </section>
 <script>
     $(document).ready(function(){
+		$('#menu-product').addClass('active');
         $('#keyword').keyup(function(){
             delay(function(){
                 run_search();

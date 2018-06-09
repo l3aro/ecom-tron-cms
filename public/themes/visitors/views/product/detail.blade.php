@@ -202,6 +202,7 @@
 <script src="@asset('js/ckeditor/ckeditor.js')"></script>
 <script>
     $(document).ready(function(){
+        $('#menu-product').addClass('active');
         CKEDITOR.replace( 'textAreaDes' );
         CKEDITOR.replace( 'textAreaDetail' );
     });

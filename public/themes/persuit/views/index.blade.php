@@ -11,29 +11,22 @@
             </div>
             <div class="offcanvas_menu">
                 <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                @if (Theme::bind('menu'))
+                @foreach (Theme::bind('menu') as $option)
+                @if (!$option->sub)
+                    <li class="nav-item"><a class="nav-link" href="#">{{$option->name}}</a></li>
+                @else
                     <li class="dropdown side_menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages <i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                        <ul class="dropdown-menu">
-                            <li class="nav-item"><a class="nav-link" href="#">Compare</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Checkout Method</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Checkout Register</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Track</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">404</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown side_menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop <i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                        <ul class="dropdown-menu">
-                            <li class="nav-item"><a class="nav-link" href="{{ route('frontend.productcat.show') }}">Product Category</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ route('frontend.product.show') }}">Product</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="#">shortcode</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">features</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">blog</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('frontend.contact.show') }}">Contact</a></li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{$option->name}} <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                            <ul class="dropdown-menu">
+                            @foreach($option->sub as $sub_option)
+                                <li class="nav-item"><a class="nav-link" href="#">{{$sub_option->name}}</a></li>
+                            @endforeach
+                            </ul>
+                        </li>
+                @endif
+                @endforeach
+                @endif
                 </ul>
             </div>
             <div class="cart_list">
