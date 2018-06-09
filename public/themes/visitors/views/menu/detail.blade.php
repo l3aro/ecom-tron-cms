@@ -66,6 +66,8 @@
                                 <option value="6" {!! $menu->type==6?'selected':'' !!}>[Product] Synchronized with the entire subdivision of an category</option>
                                 <option value="7" {!! $menu->type==7?'selected':'' !!}>[Product] Synchronized product category</option>
                                 <option value="8" {!! $menu->type==8?'selected':'' !!}>[Product] Link into a certain product</option>
+                                <option value="9" {!! $menu->type==9?'selected':'' !!}>[Product] Link into list new featured product</option>
+                                <option value="10" {!! $menu->type==10?'selected':'' !!}>[Product] Link into list promotion product</option>
                             </select>
                         </div>
                         <div class="form-group {!!$menu->type==0?'d-block':'d-none'!!}" id="form-link"  >
@@ -119,6 +121,8 @@
                                 <li style="margin-bottom:0.5rem;"><b>[Product] Synchronized with the entire subdivision of an category</b> The system generates sub-menus that are sub-items of the selected item and each submenu will link to the product list page under the selected item.</li>
                                 <li style="margin-bottom:0.5rem;"><b>[Product] Synchronized product category</b> The system generates all product items in the database in accordance with the structure of the intended parent</li>
                                 <li style="margin-bottom:0.5rem;"><b>[Product] Link into a certain product</b> Clicking this menu will redirect to the detail page of the selected product</li>
+                                <li style="margin-bottom:0.5rem;"><b>[Product] Link into list new featured product</b> Clicking on this menu will redirect directly to the latest and have "new" option product list page</li>
+                                <li style="margin-bottom:0.5rem;"><b>[Product] Link into list promotion product</b> Clicking on this menu will redirect directly to the promotion product list page under the selected item</li>
                             </ul>
                         </div>
                     </div>
