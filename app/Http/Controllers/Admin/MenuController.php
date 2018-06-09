@@ -27,7 +27,12 @@ class MenuController extends Controller
         $conditions = [];
         $conditions[] = ['cat', $request->cat];
         $conditions[] = ['parent', 0];
-        $categories = Menu::where($conditions)->orderBy('order', 'asc')->get();
+        $categories = Menu::where($conditions)->orderBy('order', 'asc')->get()
+        ->map(function($q) {
+            $sub = $this->getSubMenuCategories($q->id);
+            $q->sub = $sub;
+            return $q;
+        });
         $dataView['categories'] = $categories;
         $dataView['cat'] = $request->cat;
         return Theme::uses('visitors')->scope('menu.index', $dataView)->setTitle('List URLs')->render();
@@ -47,8 +52,8 @@ class MenuController extends Controller
         $menucat = MenuCat::orderBy('id','desc')->get();
         $dataView = [];
         $dataView['saved'] = 0;
-        $parent = $request->parent;
-        if (!$parent) $parent = $menu->parent;
+        $menu->parent = $request->parent;
+        if (!$menu->parent) $menu->parent = $menu->parent;
         $cat = $request->cat;
         if (!$cat) {
             $cat = $menu->cat;
@@ -73,7 +78,7 @@ class MenuController extends Controller
         $dataView['menu'] = $menu;
         $dataView['cat'] = $cat;
         $menuModel = new Menu();
-        $dataView['menu_options'] = $this->getSubMenuCategories($parent, $request->id);
+        $dataView['menu_options'] = $this->getSubMenuCategories(0);
         $dataView['article_cat_options'] = $this->getSubArticleCategories(0);
         $dataView['product_cat_options'] = $this->getSubProductCategories(0);
     	return Theme::uses('visitors')->scope('menu.detail', $dataView)->setTitle('List URLs')->render();
@@ -93,7 +98,7 @@ class MenuController extends Controller
         if ($process_id !== null) {
             $condition[] = ['id', '<>', $process_id];
         }
-        $cat = Menu::where($condition)->get();
+        $cat = Menu::where($condition)->orderBy('order','asc')->get();
         if ($cat->count() > 0) {
             $cat->map(function($q) use($process_id) {
                 $sub = $this->getSubMenuCategories($q->id, $process_id);

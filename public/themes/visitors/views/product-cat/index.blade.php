@@ -100,7 +100,7 @@
 						method: "GET",
 						data: {_token:token},
 						success: function(data) {
-							if (data != 0) {
+							if (data != 1) {
 								alert(data);
 							}
 						}

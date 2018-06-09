@@ -30,7 +30,7 @@
                 </div>
                 <div class="table-responsive">
                     {{ csrf_field() }}
-                    {!! Theme::scope('menu.list', ['categories' => $categories])->content() !!}
+                    {!! Theme::scope('menu.list', ['categories' => $categories, 'cat' => $cat])->content() !!}
                 </div>
             </div>
         </div>
