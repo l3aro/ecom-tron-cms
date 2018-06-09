@@ -1,6 +1,6 @@
 @sections('header')
         
-@sections('categories-banner', ['banner'=>$banner ?? 'default'])
+@sections('categories-banner', ['banner'=>$banner??'default', 'title'=>$title??''])
         
         <!--================Categories Product Area =================-->
         <section class="categories_product_main p_80">
@@ -8,41 +8,33 @@
                 <div class="categories_main_inner">
                     <div class="row row_disable">
                         <div class="col-lg-9 float-md-right">
+                        @if ($products->count()>0)
                             <div class="showing_fillter">
                                 <div class="row m0">
                                     <div class="first_fillter">
-                                        <h4>Showing 1 to 12 of 30 total</h4>
+                                        <h4>Showing {{$products->firstItem()}} to {{$products->lastItem()}} of {{$products->total()}} total</h4>
                                     </div>
                                     <div class="secand_fillter">
                                         <h4>SORT BY :</h4>
                                         <select class="selectpicker">
                                             <option>Name</option>
-                                            <option>Name 2</option>
-                                            <option>Name 3</option>
+                                            <option>Latest</option>
+                                            <option>Oldest</option>
                                         </select>
-                                    </div>
-                                    <div class="third_fillter">
-                                        <h4>Show : </h4>
-                                        <select class="selectpicker">
-                                            <option>09</option>
-                                            <option>10</option>
-                                            <option>10</option>
-                                        </select>
-                                    </div>
-                                    <div class="four_fillter">
-                                        <h4>View</h4>
-                                        <a class="active" href="#"><i class="icon_grid-2x2"></i></a>
-                                        <a href="#"><i class="icon_grid-3x3"></i></a>
                                     </div>
                                 </div>
                             </div>
                             <div class="categories_product_area">
                                 <div class="row">
+                                
+                                @foreach ($products as $product)
                                     <div class="col-lg-4 col-sm-6">
                                         <div class="l_product_item">
                                             <div class="l_p_img">
-                                                <img src="@asset('img/product/c-product-3.jpg')" alt="">
+                                                <img src="{{ asset('media/product/'.$product->image) }}" alt="">
+                                                @if ($product->new == 1)
                                                 <h5 class="new">New</h5>
+                                                @endif
                                             </div>
                                             <div class="l_p_text">
                                                <ul>
@@ -50,115 +42,23 @@
                                                     <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
                                                     <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
                                                 </ul>
-                                                <h4>Nike Shoes</h4>
-                                                <h5><del>$130</del> $110</h5>
+                                                <h4>{{$product->name}}</h4>
+                                                <h5>
+                                                @if ($product->discount>0)
+                                                <del>${{$product->price}}</del>&nbsp;
+                                                ${{$product->price-($product->price*$product->discount/100)}}
+                                                @else
+                                                ${{$product->price}}
+                                                @endif
+                                                </h5>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-sm-6">
-                                        <div class="l_product_item">
-                                            <div class="l_p_img">
-                                                <img src="@asset('img/product/c-product-4.jpg')" alt="">
-                                                <h5 class="new">New</h5>
-                                            </div>
-                                            <div class="l_p_text">
-                                               <ul>
-                                                    <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                                                    <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
-                                                    <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
-                                                </ul>
-                                                <h4>High Heel</h4>
-                                                <h5><del>$130.50</del>  $110</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-sm-6">
-                                        <div class="l_product_item">
-                                            <div class="l_p_img">
-                                                <img src="@asset('img/product/c-product-5.jpg')" alt="">
-                                            </div>
-                                            <div class="l_p_text">
-                                               <ul>
-                                                    <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                                                    <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
-                                                    <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
-                                                </ul>
-                                                <h4>Fossil Watch</h4>
-                                                <h5>$250.50</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-sm-6">
-                                        <div class="l_product_item">
-                                            <div class="l_p_img">
-                                                <img src="@asset('img/product/c-product-6.jpg')" alt="">
-                                                <h5 class="new">New</h5>
-                                            </div>
-                                            <div class="l_p_text">
-                                               <ul>
-                                                    <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                                                    <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
-                                                    <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
-                                                </ul>
-                                                <h4>Ricky Shirt</h4>
-                                                <h5>$45.05</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-sm-6">
-                                        <div class="l_product_item">
-                                            <div class="l_p_img">
-                                                <img src="@asset('img/product/c-product-7.jpg')" alt="">
-                                                <h5 class="new">New</h5>
-                                            </div>
-                                            <div class="l_p_text">
-                                               <ul>
-                                                    <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                                                    <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
-                                                    <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
-                                                </ul>
-                                                <h4>Nike Max Air Vapor Power</h4>
-                                                <h5>$45.05</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-sm-6">
-                                        <div class="l_product_item">
-                                            <div class="l_p_img">
-                                                <img src="@asset('img/product/c-product-8.jpg')" alt="">
-                                            </div>
-                                            <div class="l_p_text">
-                                               <ul>
-                                                    <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                                                    <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
-                                                    <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
-                                                </ul>
-                                                <h4>Nike Shoes</h4>
-                                                <h5>$45.05</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-sm-6">
-                                        <div class="l_product_item">
-                                            <div class="l_p_img">
-                                                <img src="@asset('img/product/c-product-9.jpg')" alt="">
-                                                <h5 class="sale">Sale</h5>
-                                            </div>
-                                            <div class="l_p_text">
-                                               <ul>
-                                                    <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                                                    <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
-                                                    <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
-                                                </ul>
-                                                
-                                                <h4>Summer Dress</h4>
-                                                <h5>$110</h5>
-                                            </div>
-                                        </div>
-                                    </div>
+                                @endforeach
+
                                 </div>
-                                <nav aria-label="Page navigation example" class="pagination_area">
-                                  <ul class="pagination">
+                                <nav aria-label="Page navigation example" class="">
+                                  <!-- <ul class="pagination">
                                     <li class="page-item"><a class="page-link" href="#">1</a></li>
                                     <li class="page-item"><a class="page-link" href="#">2</a></li>
                                     <li class="page-item"><a class="page-link" href="#">3</a></li>
@@ -166,9 +66,15 @@
                                     <li class="page-item"><a class="page-link" href="#">5</a></li>
                                     <li class="page-item"><a class="page-link" href="#">6</a></li>
                                     <li class="page-item next"><a class="page-link" href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                                  </ul>
+                                  </ul> -->
+                                  {{$products->links()}}
                                 </nav>
                             </div>
+                        @else
+                            <div class="categories_product_area">
+                                <h4>No items found</h4>
+                            </div>
+                        @endif
                         </div>
                         <div class="col-lg-3 float-md-right">
                             <div class="categories_sidebar">
@@ -177,60 +83,29 @@
                                         <h3>Categories</h3>
                                     </div>
                                     <ul class="navbar-nav">
+                                    @if ($left_menu)
+                                    @foreach ($left_menu as $option)
+                                        @if (!$option->sub)
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#">Men’s Fashion
-                                                <i class="icon_plus" aria-hidden="true"></i>
-                                            <i class="icon_minus-06" aria-hidden="true"></i>
+                                            <a class="nav-link" href="{{$option->link}}">{{$option->name}}
                                             </a>
                                         </li>
+                                        @else
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Women’s Fashion
+                                            {{$option->name}}
                                             <i class="icon_plus" aria-hidden="true"></i>
                                             <i class="icon_minus-06" aria-hidden="true"></i>
                                             </a>
                                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                <li class="nav-item"><a class="nav-link" href="#">Hoodies & Sweatshirts</a></li>
-                                                <li class="nav-item"><a class="nav-link" href="#">Jackets & Coats</a></li>
-                                                <li class="nav-item"><a class="nav-link" href="#">Blouses & Shirts</a></li>
+                                            @foreach ($option->sub as $sub_option)
+                                                <li class="nav-item"><a class="nav-link" href="{{$sub_option->link}}">{{$sub_option->name}}</a></li>
+                                            @endforeach
                                             </ul>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#">Phone & Accessories 
-                                                <i class="icon_plus" aria-hidden="true"></i>
-                                            <i class="icon_minus-06" aria-hidden="true"></i>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#">Electronic Appliance
-                                                <i class="icon_plus" aria-hidden="true"></i>
-                                            <i class="icon_minus-06" aria-hidden="true"></i>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link disabled" href="#">Computer & Networking
-                                                <i class="icon_plus" aria-hidden="true"></i>
-                                                <i class="icon_minus-06" aria-hidden="true"></i>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link disabled" href="#">TV, Audiio & Gaming
-                                                <i class="icon_plus" aria-hidden="true"></i>
-                                                <i class="icon_minus-06" aria-hidden="true"></i>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link disabled" href="#">Office Supplies
-                                                <i class="icon_plus" aria-hidden="true"></i>
-                                                <i class="icon_minus-06" aria-hidden="true"></i>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link disabled" href="#">All Categories
-                                                <i class="icon_plus" aria-hidden="true"></i>
-                                                <i class="icon_minus-06" aria-hidden="true"></i>
-                                            </a>
-                                        </li>
+                                        @endif
+                                    @endforeach
+                                    @endif
                                     </ul>
                                 </aside>
                                 <aside class="l_widgest l_fillter_widget">
@@ -272,41 +147,30 @@
                                         <li><a href="#"></a></li>
                                     </ul>
                                 </aside>
-                                <aside class="l_widgest l_menufacture_widget">
-                                    <div class="l_w_title">
-                                        <h3>Manufacturer</h3>
-                                    </div>
-                                    <ul>
-                                        <li><a href="#">Nigel Cabourn.</a></li>
-                                        <li><a href="#">Cacharel.</a></li>
-                                        <li><a href="#">Calibre (Menswear)</a></li>
-                                        <li><a href="#">Calvin Klein.</a></li>
-                                        <li><a href="#">Camilla and Marc</a></li>
-                                    </ul>
-                                </aside>
+                                @if ($featured_product->count()>0)
                                 <aside class="l_widgest l_feature_widget">
                                     <div class="l_w_title">
                                         <h3>Featured Products</h3>
                                     </div>
+                                    @foreach ($featured_product as $product)
                                     <div class="media">
                                         <div class="d-flex">
-                                            <img src="@asset('img/product/featured-product/f-p-5.jpg')" alt="">
+                                            <img src="{{ asset('media/product/'.$product->image) }}" width="80" height="100" alt="">
                                         </div>
                                         <div class="media-body">
-                                            <h4>Jeans with <br /> Frayed Hems</h4>
-                                            <h5>$45.05</h5>
+                                            <h4>{{$product->name}}</h4>
+                                            <h5>
+                                            @if ($product->discount>0)
+                                            ${{$product->price-($product->price*$product->discount/100)}}
+                                            @else
+                                            ${{$product->price}}
+                                            @endif
+                                            </h5>
                                         </div>
                                     </div>
-                                    <div class="media">
-                                        <div class="d-flex">
-                                            <img src="@asset('img/product/featured-product/f-p-6.jpg')" alt="">
-                                        </div>
-                                        <div class="media-body">
-                                            <h4>Crysp Denim<br />Montana</h4>
-                                            <h5>$45.05</h5>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </aside>
+                                @endif
                             </div>
                         </div>
                     </div>

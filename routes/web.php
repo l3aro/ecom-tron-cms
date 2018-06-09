@@ -71,6 +71,18 @@ Route::group([
                 'uses' => 'ProductCatController@show'
             ]);
         }
+        else if ($segment == 'articles') {
+            Route::get('/', [
+                'as' => 'frontend.articlecat.show',
+                'uses' => 'ArticleCatController@show'
+            ]);
+        }
+        else if ($segment == 'products') {
+            Route::get('/', [
+                'as' => 'frontend.productcat.show',
+                'uses' => 'ProductCatController@show'
+            ]);
+        }
         else {
             $type = App\Models\Category::where('slug',$segment)->first();
             if ($type) {
