@@ -79,7 +79,7 @@ class ProductController extends Controller
             }
             $product->name = $request->name;
             $product->price = floatval($request->price);
-            $product->discount = $product->discount?$product->discount:'0';
+            $product->discount = $request->discount?$request->discount:'0';
             $product->cat = (int)$request->cat;
             $product->image = $image?$image:'';
             $product->des = $request->des?$request->des:'';
@@ -200,5 +200,44 @@ class ProductController extends Controller
         $product->$field = $request->p?'0':'1';
         $product->save();
         die($request->p);
+    }
+
+    /**
+     * Upload addition product images
+     * 
+     * @param Request
+     */
+    public function uploadImage(Request $request) {
+        if ($request->ajax() && $request->has('pid')) {
+            $pid = 1*$request->pid;
+            if( $pid == 0 ) {
+                $pid = 1*Product::max('id') + 1;
+            }
+            $folder = 'media/product/' . $pid . '/';
+            $upload_url = url('media/product/' .  $pid ) . '/';
+
+            $thumb_folder = $folder . '/tb/';
+            $thumb_upload_url = $upload_url . '/tb/';
+            $option = array(
+                'script_url' => url('/admin/product/deleteimg/'),
+                'upload_dir' => $folder,
+                'upload_url' => $upload_url,
+                'image_versions' => array(
+                    'thumbnail' => array(
+                        'upload_dir' => $thumb_folder,
+                        'upload_url' => $thumb_upload_url,
+                        'crop' => false,
+                        'max_width' => 300,
+                        'max_height' => 3000
+                    ),
+                ),
+            );
+            $upload_handler = new UploadHandler($option);
+            $productimage = new ProductImage;
+            $productimage->product_id = (int)$pid;
+            $productimage->updated_by =  Auth::id();
+            $productimage->image = $upload_handler->imageName;
+            $productimage->save();
+        }
     }
 }

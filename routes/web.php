@@ -241,7 +241,7 @@ Route::group([
             ]);
             Route::post('uploadimage',[
                 'as' => 'admin.product.uploadimage',
-                'uses' => 'ProductController@uploadimage',
+                'uses' => 'ProductController@uploadImage',
             ]);
         });
         

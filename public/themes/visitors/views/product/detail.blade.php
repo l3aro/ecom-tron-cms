@@ -47,13 +47,13 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="focusedInput">Price</label>
-                                <input class="form-control" name="price" type="number" min="0" required value="{{ isset($product)?$product->price:'' }}">
+                                <input class="form-control" name="price" type="number" min="0" step=".01" required value="{{ isset($product)?$product->price:'' }}">
                                 <small class="form-text text-muted">Price of the product</small>
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="focusedInput">Discount</label>
                                 <input class="form-control" name="discount" type="number" min="0" step="1" value="{{ isset($product)?$product->discount:'' }}">
-                                <small class="form-text text-muted">Name of the product</small>
+                                <small class="form-text text-muted">Percent price discount</small>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Category</label>
@@ -252,8 +252,8 @@
         <a class="d-block mh-100 mw-100" style="height: 250px; overflow: hidden" href="{%=file.url%}" title="{%=file.name%}" target="_blank">
             <img src="{%=file.thumbnailUrl%}" style="max-height: 100%">
         </a>
-        <a class="btn btn-success btn-sm" href="#">
-                                         <i class="material-icons">check_circle</i> Upload thành công
+        <a class="btn btn-success btn-sm">
+                                        Upload successfully
                                     </a>
                     {% } %}
                 {% if (file.error) { %}
