@@ -59,28 +59,76 @@ Route::group([
     });
 
     /**
-     * Product Category routes
+     * Category routes
      */
     Route::group([
-        'prefix' => 'product-cat'
-    ], function() {
-        Route::get('/', [
-            'as' => 'frontend.productcat.show',
-            'uses' => 'ProductCatController@show'
-        ]);
+        'prefix' => '{category}'
+    ], function($category) {
+        $segment = Request::segment(1);
+        if ($segment == 'new-in'||$segment == 'promo') {
+            Route::get('/', [
+                'as' => 'frontend.productcat.show',
+                'uses' => 'ProductCatController@show'
+            ]);
+        }
+        else {
+            $type = App\Models\Category::where('slug',$segment)->first();
+            if ($type) {
+                if ($type->type==0) {
+                    Route::get('/', [
+                        'as' => 'frontend.articlecat.show',
+                        'uses' => 'ArticleCatController@show'
+                    ]);
+                }
+                else if ($type->type==1) {
+                    Route::get('/', [
+                        'as' => 'frontend.productcat.show',
+                        'uses' => 'ProductCatController@show'
+                    ]);
+                }
+            }
+        }
     });
 
-    /**
-     * Product routes
-     */
-    Route::group([
-        'prefix' => 'product'
-    ], function() {
-        Route::get('/', [
-            'as' => 'frontend.product.show',
-            'uses' => 'ProductController@show'
-        ]);
-    });
+    
+    
+    // if ( $type == 'user' ) {
+    //     Route::get('/{username}', 'UserController@view');
+    // } else {
+    //     Route::get('/{slug}', 'PageController@view');
+    // }
+    // Route::get('{category}', function($category) {
+    //     if ($category == '1') {
+    //         return redirect()->action('Frontend\ProductCatController@show');
+    //     }
+    //     else {
+    //         return redirect()->action('Frontend\ProductController@show');
+    //     }
+    // });
+
+    // /**
+    //  * Product Category routes
+    //  */
+    // Route::group([
+        
+    // ], function() {
+    //     Route::get('/', [
+    //         'as' => 'frontend.productcat.show',
+    //         'uses' => 'ProductCatController@show'
+    //     ]);
+    // });
+
+    // /**
+    //  * Product routes
+    //  */
+    // Route::group([
+    //     'prefix' => 'product'
+    // ], function() {
+    //     Route::get('/', [
+    //         'as' => 'frontend.product.show',
+    //         'uses' => 'ProductController@show'
+    //     ]);
+    // });
 });
 
 /**

@@ -1623,7 +1623,9 @@ i:before {
 ============================================================================================ */
 
 .categories_banner_area {
-    background: url(../img/banner/categories-banner.jpg) no-repeat scroll center center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center;
     background-size: cover;
     position: relative;
     z-index: 3;

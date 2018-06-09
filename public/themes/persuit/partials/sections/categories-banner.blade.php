@@ -1,5 +1,13 @@
 <!--================Categories Banner Area =================-->
-<section class="categories_banner_area">
+<?php
+    if($banner === 'default') {
+        $location = Theme::asset()->absUrl('img/banner/categories-banner.jpg');
+    }
+    else {
+        $location = '/media/product-cat/'.$banner;
+    }
+?>
+<section class="categories_banner_area" style="background-image: url({{$location}});">
     <div class="container">
         <div class="c_banner_inner">
             <h3>shop grid with left sidebar</h3>

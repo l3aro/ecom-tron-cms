@@ -1,6 +1,6 @@
 @sections('header')
         
-@sections('categories-banner')
+@sections('categories-banner', ['banner'=>$banner ?? 'default'])
         
         <!--================Categories Product Area =================-->
         <section class="categories_product_main p_80">
@@ -38,39 +38,6 @@
                             </div>
                             <div class="categories_product_area">
                                 <div class="row">
-                                    <div class="col-lg-4 col-sm-6">
-                                        <div class="l_product_item">
-                                            <div class="l_p_img">
-                                                <img src="@asset('img/product/c-product-1.jpg')" alt="">
-                                                <h5 class="new">New</h5>
-                                            </div>
-                                            <div class="l_p_text">
-                                               <ul>
-                                                    <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                                                    <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
-                                                    <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
-                                                </ul>
-                                                <h4>Travel Bags</h4>
-                                                <h5><del>$45.50</del>  $40</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-sm-6">
-                                        <div class="l_product_item">
-                                            <div class="l_p_img">
-                                                <img src="@asset('img/product/c-product-2.jpg')" alt="">
-                                            </div>
-                                            <div class="l_p_text">
-                                               <ul>
-                                                    <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                                                    <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
-                                                    <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
-                                                </ul>
-                                                <h4>Summer Dress</h4>
-                                                <h5>$45.50</h5>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="col-lg-4 col-sm-6">
                                         <div class="l_product_item">
                                             <div class="l_p_img">
