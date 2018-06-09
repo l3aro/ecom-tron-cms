@@ -13,7 +13,7 @@ class Article extends Model
     ];
 
     public function article_cat() {
-        return $this->belongsTo('App\Models\ArticleCat', 'cat');
+        return $this->belongsTo('App\Models\Category', 'cat');
     }
 
     public function user() {
