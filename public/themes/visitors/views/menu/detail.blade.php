@@ -44,11 +44,6 @@
                                 @if ($menu_options)
                                     @foreach ($menu_options as $option)
                                         <option value="{!! $option->id !!}" {{ $menu->parent==$option->id?'selected':'' }}>{!! $option->name !!}</option>
-                                        @php
-                                            if ($option->sub !== null) {
-                                                printSub($option->sub, $menu->parent);
-                                            }
-                                        @endphp
                                     @endforeach
                                 @endif
                             </select>

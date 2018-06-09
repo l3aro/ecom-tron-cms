@@ -52,8 +52,10 @@ class MenuController extends Controller
         $menucat = MenuCat::orderBy('id','desc')->get();
         $dataView = [];
         $dataView['saved'] = 0;
-        $menu->parent = $request->parent;
-        if (!$menu->parent) $menu->parent = $menu->parent;
+        $parent = $request->parent;
+        if ($parent) {
+            $menu->parent = $parent;
+        }
         $cat = $request->cat;
         if (!$cat) {
             $cat = $menu->cat;

@@ -96,9 +96,6 @@
                             {!! $value->updated_at !!}
                         </td>
                         <td style="width:30px;">
-                            <a href="/admin/menu/detail?parent={{$value->id}}&&cat={{$cat}}" class="active" ui-toggle-class="" data-toggle="tooltip" data-placement="top" title="Add sub category">
-                                <i class="fa fa-indent text-primary text-active"></i>
-                            </a>
                             <a href="#" class="active delete-button" ui-toggle-class="" data-toggle="tooltip" data-placement="top" title="Delete" delete-id="{{$value->id}}">
                                 <i class="fa fa-trash text-danger text"></i>
                             </a>
