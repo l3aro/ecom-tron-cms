@@ -26,7 +26,7 @@
                     @if (Theme::bind('menu'))
                     @foreach (Theme::bind('menu') as $option)
                     @if (!$option->sub)
-                        <li class="nav-item"><a class="nav-link" href="/">{{$option->name}}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{$option->link}}">{{$option->name}}</a></li>
                     @else
                         <li class="nav-item dropdown submenu active">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -34,7 +34,7 @@
                             </a>
                             <ul class="dropdown-menu">
                             @foreach($option->sub as $sub_option)
-                                <li class="nav-item"><a class="nav-link" href="#">{{$sub_option->name}}</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{$sub_option->link}}">{{$sub_option->name}}</a></li>
                             @endforeach
                             </ul>
                         </li>

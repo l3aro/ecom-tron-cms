@@ -69,7 +69,7 @@ class MenuController extends Controller
             $menu->article_cat = (int)$request->article_cat;
             $menu->product_id = (int)$request->product_id;
             $menu->product_cat = (int)$request->product_cat;
-            $menu->link = $request->link;
+            $menu->link = $this->generateLink($request);
             $menu->des = $request->des?$request->des:'';
             $menu->order = $menu->order?$menu->order:(Menu::max('order') ? (Menu::max('order') + 1) : 1);
             $menu->updated_by = Auth::id();
@@ -82,6 +82,43 @@ class MenuController extends Controller
         $dataView['article_cat_options'] = $this->getSubArticleCategories(0);
         $dataView['product_cat_options'] = $this->getSubProductCategories(0);
     	return Theme::uses('visitors')->scope('menu.detail', $dataView)->setTitle('List URLs')->render();
+    }
+
+    /**
+     * Generate menu link
+     * 
+     * @param Request
+     * @return string
+     */
+    private function generateLink(Request $request) {
+        switch ($request->type) {
+            case '1':
+                $id = (int)$request->article_cat;
+                $slug = Category::find($id)->slug;
+                return '/'.$slug;
+            case '2':
+                return '/articles';
+            case '3':
+                $id = (int)$request->article_id;
+                $slug = Article::find($id)->slug;
+                return '/article//'.$slug;
+            case '4':
+                $id = (int)$request->product_cat;
+                $slug = Category::find($id)->slug;
+                return '/'.$slug;
+            case '5':
+                return '/products';
+            case '6':
+                $id = (int)$request->product_id;
+                $slug = Article::find($id)->slug;
+                return '/product//'.$slug;
+            case '7':
+                return '/new-in';
+            case '8':
+                return '/promo';      
+            default:
+                return $request->link;  
+        }
     }
 
     /**

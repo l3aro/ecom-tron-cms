@@ -53,25 +53,22 @@
                             <label class="control-label">Menu type</label>
                             <select class="form-control" name="type" id="list-option">
                                 <option value="0" {!! $menu->type==0?'selected':'' !!}>Custom link</option>
-                                <option value="1" {!! $menu->type==1?'selected':'' !!}>[Article] Link into an article catgory</option>
-                                <option value="2" {!! $menu->type==2?'selected':'' !!}>[Article] Synchronized with the entire subdivision of an category</option>
-                                <option value="3" {!! $menu->type==3?'selected':'' !!}>[Article] Synchronized article category</option>
-                                <option value="4" {!! $menu->type==4?'selected':'' !!}>[Article] Link into a certain article</option>
-                                <option value="5" {!! $menu->type==5?'selected':'' !!}>[Product] Link into a product catgory</option>
-                                <option value="6" {!! $menu->type==6?'selected':'' !!}>[Product] Synchronized with the entire subdivision of an category</option>
-                                <option value="7" {!! $menu->type==7?'selected':'' !!}>[Product] Synchronized product category</option>
-                                <option value="8" {!! $menu->type==8?'selected':'' !!}>[Product] Link into a certain product</option>
-                                <option value="9" {!! $menu->type==9?'selected':'' !!}>[Product] Link into list new featured product</option>
-                                <option value="10" {!! $menu->type==10?'selected':'' !!}>[Product] Link into list promotion product</option>
+                                <option value="1" {!! $menu->type==1?'selected':'' !!}>[Article] List articles in certain category</option>
+                                <option value="2" {!! $menu->type==2?'selected':'' !!}>[Article] List all articles</option>
+                                <option value="3" {!! $menu->type==3?'selected':'' !!}>[Article] Link into a certain article</option>
+                                <option value="4" {!! $menu->type==4?'selected':'' !!}>[Product] List products in certain category</option>
+                                <option value="5" {!! $menu->type==5?'selected':'' !!}>[Product] List all product</option>
+                                <option value="6" {!! $menu->type==6?'selected':'' !!}>[Product] Link into a certain product</option>
+                                <option value="7" {!! $menu->type==7?'selected':'' !!}>[Product] Link into list new featured product</option>
+                                <option value="8" {!! $menu->type==8?'selected':'' !!}>[Product] Link into list promotion product</option>
                             </select>
                         </div>
-                        <div class="form-group {!!$menu->type==0?'d-block':'d-none'!!}" id="form-link"  >
+                        <div class="form-group">
                             <label class="control-label">URL</label>
-                            <input class="form-control" name="link" type="text" value="{!!$menu->link!!}"
-                                placeholder="URL (Link)">
-                            <small>Custom link</small>
+                            <input class="form-control" id="form-link" name="link" type="text" value="{!!$menu->link!!}" {!!$menu->type==0?'':'readonly'!!}>
+                            <small>URL</small>
                         </div>
-                        <div class="form-group {!!$menu->type==1||$menu->type==2?'d-block':'d-none'!!}" id="form-article-cat">
+                        <div class="form-group {!!$menu->type==1?'d-block':'d-none'!!}" id="form-article-cat">
                             <label class="control-label">Category</label>
                             <select class="form-control" name="article_cat">
                                 @if($article_cat_options)
@@ -86,7 +83,7 @@
                                 @endif
                             </select>
                         </div>
-                        <div class="form-group {!!$menu->type==5||$menu->type==6?'d-block':'d-none'!!}" id="form-product-cat">
+                        <div class="form-group {!!$menu->type==4?'d-block':'d-none'!!}" id="form-product-cat">
                             <label class="control-label">Chọn mục</label>
                             <select class="form-control" name="product_cat">
                                 @if($product_cat_options)
@@ -108,13 +105,11 @@
                         <div class="well">
                             <ul>
                                 <li style="margin-bottom:0.5rem;"><b>Custom link</b> When clicked on this menu will redirect to the specified URL</li>
-                                <li style="margin-bottom:0.5rem;"><b>[Article] Link into an article catgory</b> Clicking on this menu will redirect directly to the article list page under the selected category</li>
-                                <li style="margin-bottom:0.5rem;"><b>[Article] Synchronized with the entire subdivision of an category</b> The system will generate sub-menus that are sub-items of the selected item and each submenu will link to the article list page according to the selected item.</li>
-                                <li style="margin-bottom:0.5rem;"><b>[Article] Synchronized article category</b> The system generates all the items in the database in accordance with the structure of the intended parent</li>
+                                <li style="margin-bottom:0.5rem;"><b>[Article] List articles in certain category</b> Clicking on this menu will redirect directly to the article list page under the selected category</li>                        
+                                <li style="margin-bottom:0.5rem;"><b>[Article] List all articles</b> When clicked on this menu will redirect to the list of all articles</li>
                                 <li style="margin-bottom:0.5rem;"><b>[Article] Link into a certain article</b> Clicking on this menu will redirect to the detail page of the selected article</li>
-                                <li style="margin-bottom:0.5rem;"><b>[Product] Link into a product catgory</b> Clicking on this menu will redirect directly to the product list page under the selected item</li>
-                                <li style="margin-bottom:0.5rem;"><b>[Product] Synchronized with the entire subdivision of an category</b> The system generates sub-menus that are sub-items of the selected item and each submenu will link to the product list page under the selected item.</li>
-                                <li style="margin-bottom:0.5rem;"><b>[Product] Synchronized product category</b> The system generates all product items in the database in accordance with the structure of the intended parent</li>
+                                <li style="margin-bottom:0.5rem;"><b>[Product] List products in certain category</b> Clicking on this menu will redirect directly to the product list page under the selected item</li>
+                                <li style="margin-bottom:0.5rem;"><b>[Product] List all products</b> When clicked on this menu will redirect to the list of all products</li>
                                 <li style="margin-bottom:0.5rem;"><b>[Product] Link into a certain product</b> Clicking this menu will redirect to the detail page of the selected product</li>
                                 <li style="margin-bottom:0.5rem;"><b>[Product] Link into list new featured product</b> Clicking on this menu will redirect directly to the latest and have "new" option product list page</li>
                                 <li style="margin-bottom:0.5rem;"><b>[Product] Link into list promotion product</b> Clicking on this menu will redirect directly to the promotion product list page under the selected item</li>
@@ -145,35 +140,35 @@
             var selectedIndex = $("#list-option").find("option:selected").val();
             //Option selected: Link
             if (selectedIndex === "0") {
-                $("#form-link").removeClass('d-none').addClass('d-block');
+                $("#form-link").prop('readonly', false);
             } else {
-                $("#form-link").removeClass('d-block').addClass('d-none');
+                $("#form-link").prop('readonly', true);;
             }
-            //Option selected: Syn with Article Categories
-            if (selectedIndex === "1" || selectedIndex === "2") {
+            //Option selected: Link into Article Category
+            if (selectedIndex === "1") {
                 $("#form-article-cat").removeClass('d-none').addClass('d-block');
             } else {
                 $("#form-article-cat").removeClass('d-block').addClass('d-none');
             }
-            //Option selected: Syn with Product Categories
-            if (selectedIndex === "5" || selectedIndex === "6") {
+            //Option selected: Link into Product Category
+            if (selectedIndex === "4") {
                 $("#form-product-cat").removeClass('d-none').addClass('d-block');
             } else {
                 $("#form-product-cat").removeClass('d-block').addClass('d-none');
             }
-            if (selectedIndex === "4") {
+            if (selectedIndex === "3") {
                 run_search_article();
             }
-            if (selectedIndex === "8") {
+            if (selectedIndex === "6") {
                 run_search_product();
             }
         });
         var selectedIndex = $("#list-option").find("option:selected").val();
         
-        if (selectedIndex === "4") {
+        if (selectedIndex === "3") {
             display_article(<?=$menu->article_id?>);
         }
-        if (selectedIndex === "8") {
+        if (selectedIndex === "6") {
             display_product(<?=$menu->product_id?>);
         }
     });
@@ -181,20 +176,20 @@
         $('#keyword').keyup(function(){
             delay(function(){
                 var selectedIndex = $("#list-option").find("option:selected").val();
-                if (selectedIndex === "4") {
+                if (selectedIndex === "3") {
                     run_search_article();
                 }
-                if (selectedIndex === "8") {
+                if (selectedIndex === "6") {
                     run_search_product();
                 }
             }, 200 );
         });
         $('.search-change').change(function(){
             var selectedIndex = $("#list-option").find("option:selected").val();
-            if (selectedIndex === "4") {
+            if (selectedIndex === "3") {
                 run_search_article();
             }
-            if (selectedIndex === "8") {
+            if (selectedIndex === "6") {
                 run_search_product();
             }
         });
@@ -204,10 +199,10 @@
         $('.pagination li a').click(function(e){
             e.preventDefault();
             var selectedIndex = $("#list-option").find("option:selected").val();
-            if (selectedIndex === "4") {
+            if (selectedIndex === "3") {
                 run_search_article($(this).attr('href').split('page=')[1]);
             }
-            if (selectedIndex === "8") {
+            if (selectedIndex === "6") {
                 run_search_product($(this).attr('href').split('page=')[1]);
             }
         });
@@ -216,11 +211,11 @@
         $('.choose-record').click(function(){
             var recordId = $(this).attr('record-id');
             var selectedIndex = $("#list-option").find("option:selected").val();
-            if (selectedIndex === "4") {
+            if (selectedIndex === "3") {
                 $('#article_id').val(recordId);
                 display_article(recordId);
             }
-            if (selectedIndex === "8") {
+            if (selectedIndex === "6") {
                 $('#product_id').val(recordId);
                 display_product(recordId);
             }
