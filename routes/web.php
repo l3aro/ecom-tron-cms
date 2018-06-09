@@ -315,6 +315,10 @@ Route::group([
                 'as' => 'admin.menu.sortcat',
                 'uses' => 'MenuController@sortcat',
             ]);
+            Route::get('delete', [
+                'as' => 'admin.menu.delete',
+                'uses' => 'MenuController@delete'
+            ]);
         });
     });
 });

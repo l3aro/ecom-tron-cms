@@ -225,12 +225,12 @@ class MenuController extends Controller
     /**
      * Delete multi categories
      * 
-     * @param $id array of article id
+     * @param Request
      * @return mixed
      */
-    public function delete($id) {
+    public function delete(Request $request) {
         $not_delete = '';
-        foreach (explode(',', $id) as $key=>$value) {
+        foreach (explode(',', $request->id) as $key=>$value) {
             if ($this->validate_delete_child_cat(Menu::find($value)) != 0) {
                 $this->delete_child_cat($value);
             }
@@ -250,9 +250,6 @@ class MenuController extends Controller
      * @return bool
      */
     private function validate_delete_child_cat(Menu $cat) {
-        if ($cat->menu()->count() > 0) {
-            return 0;
-        }
         if ($cat->where('parent', $cat->id)->count() > 0) {
             foreach ($cat->where('parent', $cat->id)->get() as $key=>$value) {
                 if ($this->validate_delete_child_cat($value) == 0) {
