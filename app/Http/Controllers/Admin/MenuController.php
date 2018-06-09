@@ -7,9 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Menu;
 use App\Models\Product;
-use App\Models\ArticleCat;
 use App\Models\MenuCat;
-use App\Models\ProductCat;
+use App\Models\Category;
 use Auth;
 use Theme;
 use Response;
@@ -122,10 +121,11 @@ class MenuController extends Controller
     private function getSubArticleCategories($parent_id, $process_id=null) {
         $condition = [];
         $condition[] = ['parent', $parent_id];
+        $condition[] = ['type', 0];
         if ($process_id !== null) {
             $condition[] = ['id', '<>', $process_id];
         }
-        $cat = ArticleCat::where($condition)->get();
+        $cat = Category::where($condition)->get();
         if ($cat->count() > 0) {
             $cat->map(function($q) use($process_id) {
                 $sub = $this->getSubArticleCategories($q->id, $process_id);
@@ -148,10 +148,11 @@ class MenuController extends Controller
     private function getSubProductCategories($parent_id, $process_id=null) {
         $condition = [];
         $condition[] = ['parent', $parent_id];
+        $condition[] = ['type', 1];
         if ($process_id !== null) {
             $condition[] = ['id', '<>', $process_id];
         }
-        $cat = ProductCat::where($condition)->get();
+        $cat = Category::where($condition)->get();
         if ($cat->count() > 0) {
             $cat->map(function($q) use($process_id) {
                 $sub = $this->getSubProductCategories($q->id, $process_id);

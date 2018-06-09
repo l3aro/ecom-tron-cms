@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Libraries\UploadHandler;
 use App\Libraries\UploadFile;
 use App\Models\ProductImage;
-use App\Models\Productcat;
+use App\Models\Category;
 use App\Models\Product;
 use Auth;
 use Theme;
@@ -98,8 +98,6 @@ class ProductController extends Controller
                     $slug_exists = 1;
                     $dataView['slug_exists'] = $slug_exists;
                     $dataView['product'] = $product;
-                    $productcat = new Productcat();
-                    $dataView['category_options'] = $productcat->GetOptions($product->cat);
                     $dataView['productImages'] = ProductImage::where('product_id', $request->id)->latest()->get();
                     return Theme::uses('visitors')->scope('product.detail', $dataView)->render();
                 }
@@ -129,10 +127,11 @@ class ProductController extends Controller
     private function getSubCategories($parent_id, $process_id=null) {
         $condition = [];
         $condition[] = ['parent', $parent_id];
+        $condition[] = ['type', 1];
         if ($process_id !== null) {
             $condition[] = ['id', '<>', $process_id];
         }
-        $cat = ProductCat::where($condition)->get();
+        $cat = Category::where($condition)->get();
         if ($cat->count() > 0) {
             $cat->map(function($q) use($process_id) {
                 $sub = $this->getSubCategories($q->id, $process_id);

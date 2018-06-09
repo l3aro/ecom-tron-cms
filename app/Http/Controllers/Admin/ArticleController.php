@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Theme;
 use Auth;
 use App\Models\Article;
-use App\Models\ArticleCat;
+use App\Models\Category;
 use App\Libraries\UploadFile;
 
 class ArticleController extends Controller
@@ -133,10 +133,11 @@ class ArticleController extends Controller
     private function getSubCategories($parent_id, $process_id=null) {
         $condition = [];
         $condition[] = ['parent', $parent_id];
+        $condition[] = ['type', 0];
         if ($process_id !== null) {
             $condition[] = ['id', '<>', $process_id];
         }
-        $cat = ArticleCat::where($condition)->get();
+        $cat = Category::where($condition)->get();
         if ($cat->count() > 0) {
             $cat->map(function($q) use($process_id) {
                 $sub = $this->getSubCategories($q->id, $process_id);

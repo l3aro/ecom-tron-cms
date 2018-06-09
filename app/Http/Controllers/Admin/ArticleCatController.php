@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Theme;
 use Auth;
 use App\Libraries\UploadFile;
-use App\Models\ArticleCat;
+use App\Models\Category;
 use Illuminate\Support\Collection;
 
 class ArticleCatController extends Controller
@@ -19,7 +19,7 @@ class ArticleCatController extends Controller
      * @return Response
      */
     public function index() {
-        $categories = ArticleCat::where('parent', '0')->latest()->get()
+        $categories = Category::where('parent', 0)->where('type',0)->latest()->get()
         ->map(function($q) {
             $sub = $this->getSubCategories($q->id);
             $q->sub = $sub;
@@ -32,10 +32,11 @@ class ArticleCatController extends Controller
     private function getSubCategories($parent_id, $process_id=null) {
         $condition = [];
         $condition[] = ['parent', $parent_id];
+        $condition[] = ['type', 0];
         if ($process_id !== null) {
             $condition[] = ['id', '<>', $process_id];
         }
-        $cat = ArticleCat::where($condition)->get();
+        $cat = Category::where($condition)->get();
         if ($cat->count() > 0) {
             $cat->map(function($q) use($process_id) {
                 $sub = $this->getSubCategories($q->id, $process_id);
@@ -61,17 +62,18 @@ class ArticleCatController extends Controller
         $category = null;
 
         if ($request->id !== null) {
-            $category = ArticleCat::where('id', $request->id)->first();
+            $category = Category::where('id', $request->id)->where('type', 0)->first();
         }
         else if ($request->parent != null) {
-            $category = new ArticleCat();
+            $category = new Category();
             $category->parent = $request->parent;
         }
         else {
-            $category = new ArticleCat();
+            $category = new Category();
         }
+        $category->type = 0;
         $process_id = $request->id;
-        $list_cat = ArticleCat::where('parent', '0')->latest()->get()
+        $list_cat = Category::where('parent', 0)->where('type', 0)->latest()->get()
         ->map(function($q) use($process_id) {
             $sub = $this->getSubCategories($q->id, $process_id);
             $q->sub = $sub;
@@ -95,7 +97,7 @@ class ArticleCatController extends Controller
 
             if ($request->slug) {
                 $slug = $request->slug;
-                if (ArticleCat::where([['slug',$slug],['id','<>',$category->id]])->first()) {
+                if (Category::where([['slug',$slug],['id','<>',$category->id]])->first()) {
                     $category->slug = $slug;
                     $slug_exists = 1;
                     $dataView['saved'] = $saved;
@@ -106,18 +108,20 @@ class ArticleCatController extends Controller
                 }
             }
             else {
-                $category->save();
                 $slug = str_slug($request->name, '-');
+                if (Category::where([['slug',$slug],['id','<>',$category->id]])->first()) {
+                    $category->slug = $slug;
+                    $slug_exists = 2;
+                    $dataView['saved'] = $saved;
+                    $dataView['category'] = $category;
+                    $dataView['list_cat'] = $list_cat;
+                    $dataView['slug_exists'] = $slug_exists;
+                    return Theme::uses('visitors')->scope('article-cat.detail',$dataView)->render();
+                }
             }
             $category->slug = $slug;
             $category->save();
-            $process_id = $category->id;
-            $list_cat = ArticleCat::where('parent', '0')->latest()->get()
-            ->map(function($q) use($process_id) {
-                $sub = $this->getSubCategories($q->id, $process_id);
-                $q->sub = $sub;
-                return $q;
-            });    
+            $process_id = $category->id;  
             $saved = 1;
         }
 
@@ -135,14 +139,14 @@ class ArticleCatController extends Controller
      * @return bool
      */
     private function validate_delete_child_cat($id) {
-        if (ArticleCat::find($id) == null)
+        if (Category::find($id) == null)
             return 1;
-        $cat = ArticleCat::where('id', $id)->first();
+        $cat = Category::find($id);
         if ($cat->article()->count() > 0) {
             return 0;
         }
-        if (ArticleCat::where('parent', $cat->id)->count() > 0) {
-            foreach (ArticleCat::where('parent', $cat->id)->get() as $key=>$value) {
+        if (Category::where('parent', $cat->id)->count() > 0) {
+            foreach (Category::where('parent', $cat->id)->get() as $key=>$value) {
                 if ($this->validate_delete_child_cat($value->id) == 0) {
                     return 0;
                 }
@@ -157,15 +161,15 @@ class ArticleCatController extends Controller
      * @param $id article_id
      */
     private function delete_child_cat($id) {
-        if (ArticleCat::find($id) == null)
+        if (Category::find($id) == null)
             return;
-        if (ArticleCat::where('parent', $id)->count() > 0) {
-            foreach (ArticleCat::where('parent', $id)->get() as $key=>$value) {
+        if (Category::where('parent', $id)->count() > 0) {
+            foreach (Category::where('parent', $id)->get() as $key=>$value) {
                 $this->delete_child_cat($value->id);
             }
         }
         $this->delete_image($id);
-        ArticleCat::find($id)->delete();
+        Category::find($id)->delete();
     }
 
     /**
@@ -196,7 +200,7 @@ class ArticleCatController extends Controller
      * @return mixed
      */
     public function delete_image($id){
-        $article_cat = ArticleCat::find($id);
+        $article_cat = Category::find($id);
         $folder = $_SERVER['DOCUMENT_ROOT'] . '/media/article-cat/';
         if ($article_cat->image) {
             if (file_exists($folder . $article_cat->image))	unlink($folder . $article_cat->image);

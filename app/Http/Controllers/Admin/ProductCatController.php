@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Theme;
 use Auth;
 use App\Libraries\UploadFile;
-use App\Models\ProductCat;
+use App\Models\Category;
 use Illuminate\Support\Collection;
 
 class ProductCatController extends Controller
@@ -19,7 +19,7 @@ class ProductCatController extends Controller
      * @return Response
      */
     public function index() {
-        $categories = ProductCat::where('parent', '0')->latest()->get()
+        $categories = Category::where('parent', '0')->where('type',1)->latest()->get()
         ->map(function($q) {
             $sub = $this->getSubCategories($q->id);
             $q->sub = $sub;
@@ -32,10 +32,11 @@ class ProductCatController extends Controller
     private function getSubCategories($parent_id, $process_id=null) {
         $condition = [];
         $condition[] = ['parent', $parent_id];
+        $condition[] = ['type', 1];
         if ($process_id !== null) {
             $condition[] = ['id', '<>', $process_id];
         }
-        $cat = ProductCat::where($condition)->get();
+        $cat = Category::where($condition)->get();
         if ($cat->count() > 0) {
             $cat->map(function($q) use($process_id) {
                 $sub = $this->getSubCategories($q->id, $process_id);
@@ -61,17 +62,18 @@ class ProductCatController extends Controller
         $category = null;
 
         if ($request->id !== null) {
-            $category = ProductCat::where('id', $request->id)->first();
+            $category = Category::where('id', $request->id)->first();
         }
         else if ($request->parent != null) {
-            $category = new ProductCat();
+            $category = new Category();
             $category->parent = $request->parent;
         }
         else {
-            $category = new ProductCat();
+            $category = new Category();
         }
+        $category->type = 1;
         $process_id = $request->id;
-        $list_cat = ProductCat::where('parent', '0')->where('id','<>',$process_id)->latest()->get()
+        $list_cat = Category::where('parent', '0')->where('id','<>',$process_id)->where('type',1)->latest()->get()
         ->map(function($q) use($process_id) {
             $sub = $this->getSubCategories($q->id, $process_id);
             $q->sub = $sub;
@@ -95,7 +97,7 @@ class ProductCatController extends Controller
 
             if ($request->slug) {
                 $slug = $request->slug;
-                if (ProductCat::where([['slug',$slug],['id','<>',$category->id]])->first()) {
+                if (Category::where([['slug',$slug],['id','<>',$category->id]])->first()) {
                     $category->slug = $slug;
                     $slug_exists = 1;
                     $dataView['saved'] = $saved;
@@ -108,11 +110,20 @@ class ProductCatController extends Controller
             else {
                 $category->save();
                 $slug = str_slug($request->name, '-');
+                if (Category::where([['slug',$slug],['id','<>',$category->id]])->first()) {
+                    $category->slug = $slug;
+                    $slug_exists = 2;
+                    $dataView['saved'] = $saved;
+                    $dataView['category'] = $category;
+                    $dataView['list_cat'] = $list_cat;
+                    $dataView['slug_exists'] = $slug_exists;
+                    return Theme::uses('visitors')->scope('product-cat.detail',$dataView)->render();
+                }
             }
             $category->slug = $slug;
             $category->save();
             $process_id = $category->id;
-            $list_cat = ProductCat::where('parent', '0')->latest()->get()
+            $list_cat = Category::where('parent', '0')->where('type',1)->latest()->get()
             ->map(function($q) use($process_id) {
                 $sub = $this->getSubCategories($q->id, $process_id);
                 $q->sub = $sub;
@@ -135,14 +146,14 @@ class ProductCatController extends Controller
      * @return bool
      */
     private function validate_delete_child_cat($id) {
-        if (ProductCat::find($id) == null)
+        if (Category::find($id) == null)
             return 1;
-        $cat = ProductCat::where('id', $id)->first();
+        $cat = Category::where('id', $id)->first();
         if ($cat->product()->count() > 0) {
             return 0;
         }
-        if (ProductCat::where('parent', $cat->id)->count() > 0) {
-            foreach (ProductCat::where('parent', $cat->id)->get() as $key=>$value) {
+        if (Category::where('parent', $cat->id)->count() > 0) {
+            foreach (Category::where('parent', $cat->id)->get() as $key=>$value) {
                 if ($this->validate_delete_child_cat($value->id) == 0) {
                     return 0;
                 }
@@ -157,15 +168,15 @@ class ProductCatController extends Controller
      * @param $id product_id
      */
     private function delete_child_cat($id) {
-        if (ProductCat::find($id) == null)
+        if (Category::find($id) == null)
             return;
-        if (ProductCat::where('parent', $id)->count() > 0) {
-            foreach (ProductCat::where('parent', $id)->get() as $key=>$value) {
+        if (Category::where('parent', $id)->count() > 0) {
+            foreach (Category::where('parent', $id)->get() as $key=>$value) {
                 $this->delete_child_cat($value->id);
             }
         }
         $this->delete_image($id);
-        ProductCat::find($id)->delete();
+        Category::find($id)->delete();
     }
 
     /**
@@ -196,7 +207,7 @@ class ProductCatController extends Controller
      * @return mixed
      */
     public function delete_image($id){
-        $product_cat = ProductCat::find($id);
+        $product_cat = Category::find($id);
         $folder = $_SERVER['DOCUMENT_ROOT'] . '/media/product-cat/';
         if ($product_cat->image) {
             if (file_exists($folder . $product_cat->image))	unlink($folder . $product_cat->image);

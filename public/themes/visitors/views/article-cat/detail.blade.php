@@ -20,6 +20,11 @@
                 <strong>Error!</strong> URL matches another post.
             </div>
         @endif
+        @if($slug_exists == 2)
+            <div class="alert alert-danger" role="alert">
+                <strong>Error!</strong> Auto generate URL matches another post. Please create an URL manually.
+            </div>
+        @endif
         <form method="post" action="/admin/article-cat/detail?id={{ isset($category)?$category->id:'' }}" enctype="multipart/form-data">
             {{ csrf_field() }}
                 <div class="save-group-buttons">
