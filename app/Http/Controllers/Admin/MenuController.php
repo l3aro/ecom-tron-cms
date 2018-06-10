@@ -81,7 +81,7 @@ class MenuController extends Controller
         $dataView['menu_options'] = $this->getSubMenuCategories(0);
         $dataView['article_cat_options'] = $this->getSubArticleCategories(0);
         $dataView['product_cat_options'] = $this->getSubProductCategories(0);
-    	return Theme::uses('visitors')->scope('menu.detail', $dataView)->setTitle('List URLs')->render();
+    	return Theme::uses('visitors')->scope('menu.detail', $dataView)->setTitle('Option Detail')->render();
     }
 
     /**

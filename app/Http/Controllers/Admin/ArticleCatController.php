@@ -26,7 +26,7 @@ class ArticleCatController extends Controller
             return $q;
         });
         $dataView['categories'] = $categories;  
-        return Theme::uses('visitors')->scope('article-cat.index',$dataView)->render();
+        return Theme::uses('visitors')->scope('article-cat.index',$dataView)->setTitle('Article Category')->render();
     }
 
     private function getSubCategories($parent_id, $process_id=null) {
@@ -104,7 +104,7 @@ class ArticleCatController extends Controller
                     $dataView['category'] = $category;
                     $dataView['list_cat'] = $list_cat;
                     $dataView['slug_exists'] = $slug_exists;
-                    return Theme::uses('visitors')->scope('article-cat.detail',$dataView)->render();
+                    return Theme::uses('visitors')->scope('article-cat.detail',$dataView)->setTitle('Article Category')->render();
                 }
             }
             else {
@@ -116,7 +116,7 @@ class ArticleCatController extends Controller
                     $dataView['category'] = $category;
                     $dataView['list_cat'] = $list_cat;
                     $dataView['slug_exists'] = $slug_exists;
-                    return Theme::uses('visitors')->scope('article-cat.detail',$dataView)->render();
+                    return Theme::uses('visitors')->scope('article-cat.detail',$dataView)->setTitle('Article Category')->render();
                 }
             }
             $category->slug = $slug;
@@ -129,7 +129,7 @@ class ArticleCatController extends Controller
         $dataView['slug_exists'] = $slug_exists;
         $dataView['category'] = $category;
         $dataView['list_cat'] = $list_cat;
-        return Theme::uses('visitors')->scope('article-cat.detail',$dataView)->render();
+        return Theme::uses('visitors')->scope('article-cat.detail',$dataView)->setTitle('Article Category')->render();
     }
 
     /**

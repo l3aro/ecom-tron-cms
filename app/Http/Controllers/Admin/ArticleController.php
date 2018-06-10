@@ -31,7 +31,7 @@ class ArticleController extends Controller
         if ($request->ajax()) {
             return Theme::uses('visitors')->scope('article.list',$dataView)->content();
         }
-        return Theme::uses('visitors')->scope('article.index',$dataView)->render();
+        return Theme::uses('visitors')->scope('article.index',$dataView)->setTitle('Article')->render();
     }
 
     /**
@@ -103,7 +103,7 @@ class ArticleController extends Controller
                     $dataView['saved'] = $saved;
                     $dataView['article'] = $article;
                     $dataView['list_cat'] = $list_cat;
-                    return Theme::uses('visitors')->scope('article.detail', $dataView)->render();
+                    return Theme::uses('visitors')->scope('article.detail', $dataView)->setTitle('Article')->render();
                 }
             }
             else {
@@ -120,7 +120,7 @@ class ArticleController extends Controller
         $dataView['saved'] = $saved;
         $dataView['article'] = $article;
         $dataView['list_cat'] = $list_cat;
-        return Theme::uses('visitors')->scope('article.detail', $dataView)->render();
+        return Theme::uses('visitors')->scope('article.detail', $dataView)->setTitle('Article')->render();
     }
     
     /**

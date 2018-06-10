@@ -8,7 +8,7 @@
 <section id="main-content">
 	<section class="wrapper">
 		<div class="typo-agile">
-        <h2 class="w3ls_head">Article Detail</h2>
+        <h2 class="w3ls_head">Product Category Detail</h2>
         <div class="grid_3 grid_5 w3ls">
         @if($saved == 1)
             <div class="alert alert-success" role="alert">

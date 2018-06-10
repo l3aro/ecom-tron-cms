@@ -10,7 +10,7 @@
         <div class="table-agile-info">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Responsive Table
+                    List Article
                 </div>
                 <div class="row w3-res-tb">
                     <div class="col-sm-8 m-b-xs">

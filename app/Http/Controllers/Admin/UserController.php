@@ -102,7 +102,10 @@ class UserController extends Controller
         if ($request->ajax()) {
             return Theme::uses('visitors')->scope('user.list',$dataView)->content();
         }
-        return Theme::uses('visitors')->scope('user.index',$dataView)->setTitle('List Admin')->render();
+        $title = 'List Admin';
+        $dataView['title'] = $title;
+        $dataView['users'] = $users;
+        return Theme::uses('visitors')->scope('user.index',$dataView)->setTitle($title)->render();
     }
 
     /** 
@@ -116,8 +119,10 @@ class UserController extends Controller
         $dataView['saved'] = 0;
         
         $users = User::where('admin', '0')->latest()->paginate(8);
+        $title = 'List Customer';
+        $dataView['title'] = $title;
         $dataView['users'] = $users;
-        return Theme::uses('visitors')->scope('user.index',$dataView)->setTitle('List Customer')->render();
+        return Theme::uses('visitors')->scope('user.index',$dataView)->setTitle($title)->render();
     }
 
     /**

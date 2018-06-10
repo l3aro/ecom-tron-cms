@@ -33,7 +33,7 @@ class ProductController extends Controller
         if ($request->ajax()) {
             return Theme::uses('visitors')->scope('product.list',$dataView)->content();
         }
-        return Theme::uses('visitors')->scope('product.index',$dataView)->render();
+        return Theme::uses('visitors')->scope('product.index',$dataView)->setTitle('Product')->render();
     }
 
     /**
@@ -99,7 +99,7 @@ class ProductController extends Controller
                     $dataView['slug_exists'] = $slug_exists;
                     $dataView['product'] = $product;
                     $dataView['productImages'] = ProductImage::where('product_id', $request->id)->latest()->get();
-                    return Theme::uses('visitors')->scope('product.detail', $dataView)->render();
+                    return Theme::uses('visitors')->scope('product.detail', $dataView)->setTitle('Product')->render();
                 }
             }
             else {
@@ -114,7 +114,7 @@ class ProductController extends Controller
         $dataView['product'] = $product;
         $dataView['list_cat'] = $list_cat;
         $dataView['productImages'] = ProductImage::where('product_id', $request->id)->latest()->get();
-    	return Theme::uses('visitors')->scope('product.detail', $dataView)->render();
+    	return Theme::uses('visitors')->scope('product.detail', $dataView)->setTitle('Product')->render();
     }
 
     /**

@@ -26,7 +26,7 @@ class ProductCatController extends Controller
             return $q;
         });
         $dataView['categories'] = $categories;  
-        return Theme::uses('visitors')->scope('product-cat.index',$dataView)->render();
+        return Theme::uses('visitors')->scope('product-cat.index',$dataView)->setTitle('Product Category')->render();
     }
 
     private function getSubCategories($parent_id, $process_id=null) {
@@ -104,7 +104,7 @@ class ProductCatController extends Controller
                     $dataView['category'] = $category;
                     $dataView['list_cat'] = $list_cat;
                     $dataView['slug_exists'] = $slug_exists;
-                    return Theme::uses('visitors')->scope('product-cat.detail',$dataView)->render();
+                    return Theme::uses('visitors')->scope('product-cat.detail',$dataView)->setTitle('Product Category')->render();
                 }
             }
             else {
@@ -117,7 +117,7 @@ class ProductCatController extends Controller
                     $dataView['category'] = $category;
                     $dataView['list_cat'] = $list_cat;
                     $dataView['slug_exists'] = $slug_exists;
-                    return Theme::uses('visitors')->scope('product-cat.detail',$dataView)->render();
+                    return Theme::uses('visitors')->scope('product-cat.detail',$dataView)->setTitle('Product Category')->render();
                 }
             }
             $category->slug = $slug;
@@ -136,7 +136,7 @@ class ProductCatController extends Controller
         $dataView['slug_exists'] = $slug_exists;
         $dataView['category'] = $category;
         $dataView['list_cat'] = $list_cat;
-        return Theme::uses('visitors')->scope('product-cat.detail',$dataView)->render();
+        return Theme::uses('visitors')->scope('product-cat.detail',$dataView)->setTitle('Product Category')->render();
     }
 
     /**
