@@ -84,6 +84,7 @@ class ProductController extends Controller
             $product->image = $image?$image:'';
             $product->des = $request->des?$request->des:'';
             $product->detail = $request->detail?$request->detail:'';
+            $product->size = $request->size?$request->size:'';
             $product->page_title = $request->page_title?$request->page_title:'';
             $product->public = isset($request->public)?1:0;
             $product->highlight = isset($request->highlight)?1:0;

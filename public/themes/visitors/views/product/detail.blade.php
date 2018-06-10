@@ -73,6 +73,11 @@
                                 <small class="form-text text-muted">Select the category of this product</small>
                             </div>
                             <div class="form-group">
+                                <label class="control-label" for="focusedInput">Size</label>
+                                <input id="tags_1" type="text" class="form-control tags" name="size" value="{{ $product->size ?? '' }}" />
+                                <small class="form-text text-muted">Available size of product, split by "<b style="color:black">,</b>"</small>
+                            </div>
+                            <div class="form-group">
                                     <label class="control-label" for="focusedInput">Optimize URLs</label>
                                     <input class="form-control" name="slug" type="text" value="{{ isset($product)?$product->slug:'' }}" placeholder="Tối ưu URL" pattern="[a-z0-9/-]{5,}">
                                     <small class="form-text text-muted">Optimize the URL path to the best for SEO. For example: "product-name" self-generated system is: http://domainame.com/product-name</small>
@@ -285,6 +290,9 @@
 <script src="@asset('js/js-upload/jquery.fileupload-validate.js')"></script>
 <!-- The File Upload user interface plugin -->
 <script src="@asset('js/js-upload/jquery.fileupload-ui.js')"></script>
+<!-- Tag input -->
+<link rel="stylesheet" href="@asset('css/jquery.tagsinput.css')">
+<script src="@asset('js/jquery.tagsinput.js')"></script>
 <script>
     var CSRF_TOKEN = $('[name="_token"]').val();
     $(function () {
@@ -296,7 +304,18 @@
             , limitMultiFileUploads: 10
         });
     });
+
+    //tags input
+    function init_TagsInput() {
+        if(typeof $.fn.tagsInput !== 'undefined'){	
+            $('#tags_1').tagsInput({
+                width: 'auto'
+        });  
+        }
+    }
+				
     $(document).ready(function () {
+        init_TagsInput();
         $('#btn-delete-image').click(function(e){
             e.preventDefault();
             if (confirm('Are you sure?')){

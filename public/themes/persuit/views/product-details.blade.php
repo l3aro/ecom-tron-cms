@@ -51,9 +51,14 @@
                             <div class="p_color">
                                 <h4 class="p_d_title">size <span>*</span></h4>
                                 <select class="selectpicker">
-                                    <option>Select your size</option>
-                                    <option>Select your size M</option>
-                                    <option>Select your size XL</option>
+                                @if ($product->size)
+                                    <option disabled>Select your size</option>
+                                    @foreach (explode(',',$product->size) as $option)
+                                    @if ($option !== '')
+                                    <option>Select size {{$option}}</option>
+                                    @endif
+                                    @endforeach
+                                @endif
                                 </select>
                             </div>
                             <div class="quantity">
