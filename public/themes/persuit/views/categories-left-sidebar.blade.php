@@ -38,17 +38,17 @@
                                             </div>
                                             <div class="l_p_text">
                                                <ul>
-                                                    <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
+                                                    <li class="p_icon"><a href="/product/{{$product->slug}}"><i class="icon_piechart"></i></a></li>
                                                     <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
                                                     <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
                                                 </ul>
                                                 <h4>{{$product->name}}</h4>
                                                 <h5>
                                                 @if ($product->discount>0)
-                                                <del>${{$product->price}}</del>&nbsp;
-                                                ${{$product->price-($product->price*$product->discount/100)}}
+                                                <del>${{round($product->price,2)}}</del>&nbsp;
+                                                ${{round($product->price-($product->price*$product->discount/100),2)}}
                                                 @else
-                                                ${{$product->price}}
+                                                ${{round($product->price,2)}}
                                                 @endif
                                                 </h5>
                                             </div>
@@ -116,7 +116,7 @@
                                     <label for="amount">Price:</label>
                                     <input type="text" id="amount" readonly>
                                 </aside>
-                                <aside class="l_widgest l_color_widget">
+                                <!-- <aside class="l_widgest l_color_widget">
                                     <div class="l_w_title">
                                         <h3>Color</h3>
                                     </div>
@@ -146,28 +146,30 @@
                                         <li><a href="#"></a></li>
                                         <li><a href="#"></a></li>
                                     </ul>
-                                </aside>
+                                </aside> -->
                                 @if ($featured_product->count()>0)
                                 <aside class="l_widgest l_feature_widget">
                                     <div class="l_w_title">
                                         <h3>Featured Products</h3>
                                     </div>
                                     @foreach ($featured_product as $product)
-                                    <div class="media">
-                                        <div class="d-flex">
-                                            <img src="{{ asset('media/product/'.$product->image) }}" width="80" height="100" alt="">
+                                    <a href="/product/{{$product->slug}}">
+                                        <div class="media">
+                                            <div class="d-flex">
+                                                <img src="{{ asset('media/product/'.$product->image) }}" width="80" height="100" alt="">
+                                            </div>
+                                            <div class="media-body">
+                                                <h4>{{$product->name}}</h4>
+                                                <h5>
+                                                @if ($product->discount>0)
+                                                ${{round($product->price-($product->price*$product->discount/100),2)}}
+                                                @else
+                                                ${{round($product->price,2)}}
+                                                @endif
+                                                </h5>
+                                            </div>
                                         </div>
-                                        <div class="media-body">
-                                            <h4>{{$product->name}}</h4>
-                                            <h5>
-                                            @if ($product->discount>0)
-                                            ${{$product->price-($product->price*$product->discount/100)}}
-                                            @else
-                                            ${{$product->price}}
-                                            @endif
-                                            </h5>
-                                        </div>
-                                    </div>
+                                    </a>
                                     @endforeach
                                 </aside>
                                 @endif

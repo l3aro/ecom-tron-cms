@@ -102,6 +102,18 @@ Route::group([
         }
     });
 
+    /**
+     * Product routes
+     */
+    Route::group([
+        'prefix' => 'product'
+    ], function() {
+        Route::get('{item}', [
+            'as' => 'frontend.product.show',
+            'uses' => 'ProductController@show'
+        ]);
+    });
+
     
     
     // if ( $type == 'user' ) {

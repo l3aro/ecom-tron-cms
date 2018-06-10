@@ -19,21 +19,21 @@ class ProductCatController extends Controller
         
         if ($category == 'new-in') {
             $title = 'New Products';
-            $products = Product::where('new',1)->latest()->paginate(3);
+            $products = Product::where('new',1)->latest()->paginate(9);
         }
         else if ($category == 'promo') {
             $title = 'Promotion Products';
-            $products = Product::where('discount','>',0)->latest()->paginate(3);
+            $products = Product::where('discount','>',0)->latest()->paginate(9);
         }
         else if ($category == 'products') {
             $title = "Products";
-            $products = Product::latest()->paginate(3);
+            $products = Product::latest()->paginate(9);
         }
         else {
             $cat = Category::where('slug', $category)->first();
             $dataView['banner'] = $cat->image;
             $title = $cat->name;
-            $products = Product::where('cat',$cat->id)->latest()->paginate(3);
+            $products = Product::where('cat',$cat->id)->latest()->paginate(9);
         }
 
         $left_menu_id = MenuCat::where('name', 'left-menu')->first();
