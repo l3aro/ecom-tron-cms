@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateArticleTableCat extends Migration
+class CreateCategoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class CreateArticleTableCat extends Migration
      */
     public function up()
     {
-        Schema::create('article_cat', function (Blueprint $table) {
+        Schema::create('category', function (Blueprint $table) {
             $table->increments('id');
 
             $table->string('name');
             $table->integer('parent')->nullable();
+            $table->integer('type')->nullable();
             $table->string('image')->nullable();
             $table->text('des')->nullable();            
-            $table->string('page_title')->nullable();           
+            $table->string('page_title')->nullable();      
             $table->boolean('highlight')->nullable();
             $table->string('slug')->nullable();
             $table->integer('updated_by')->nullable();
@@ -36,6 +37,6 @@ class CreateArticleTableCat extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('article_cat');
+        Schema::dropIfExists('category');
     }
 }
