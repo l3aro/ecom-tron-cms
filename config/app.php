@@ -214,6 +214,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Theme' => Facuz\Theme\Facades\Theme::class,
+        'Cart' => Darryldecode\Cart\Facades\CartFacade::class
 
     ],
 

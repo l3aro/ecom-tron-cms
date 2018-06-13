@@ -134,7 +134,9 @@
                                    <ul>
                                         <li class="p_icon"><a href="/product/{{$product->slug}}"><i class="icon_piechart"></i></a></li>
                                         <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
+                                        @if (Auth::check())
                                         <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
+                                        @endif
                                     </ul>
                                     <h4>{{$product->name}}</h4>
                                     <h5>
