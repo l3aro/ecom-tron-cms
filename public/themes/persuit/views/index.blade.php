@@ -52,188 +52,45 @@
                 <h2>Our Latest Product</h2>
             </div>
             <div class="l_product_slider owl-carousel">
+                @if ($products)
+                @foreach ($products as $product_key=>$product)
+                @if ($product_key%3===0)
                 <div class="item">
+                @endif
                     <div class="l_product_item">
                         <div class="l_p_img">
-                            <img src="@asset('img/product/l-product-9.jpg')" alt="">
-                            <h5 class="sale">Sale</h5>
-                        </div>
-                        <div class="l_p_text">
-                            <ul>
-                                <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                                <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
-                                <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
-                            </ul>
-                            <h4>Womens Libero</h4>
-                            <h5><del>$45.50</del> $40</h5>
-                        </div>
-                    </div>
-                    <div class="l_product_item">
-                        <div class="l_p_img">
-                            <img src="@asset('img/product/l-product-10.jpg')" alt="">
-                        </div>
-                        <div class="l_p_text">
-                            <ul>
-                                <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                                <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
-                                <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
-                            </ul>
-                            <h4>Oxford Shirt</h4>
-                            <h5>$85.50</h5>
-                        </div>
-                    </div>
-                    <div class="l_product_item">
-                        <div class="l_p_img">
-                            <img src="@asset('img/product/l-product-11.jpg')" alt="">
-                        </div>
-                        <div class="l_p_text">
-                            <ul>
-                                <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                                <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
-                                <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
-                            </ul>
-                            <h4>Oxford Shirt</h4>
-                            <h5>$85.50</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="l_product_item">
-                        <div class="l_p_img">
-                            <img src="@asset('img/product/l-product-12.jpg')" alt="">
+                            <img src="{{ asset('media/product/'.$product->image) }}" alt="">
+                            @if ($product->new == 1)
                             <h5 class="new">New</h5>
+                            @endif
                         </div>
                         <div class="l_p_text">
                             <ul>
-                                <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                                <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
+                                <li class="p_icon"><a href="/product/{{$product->slug}}"><i class="icon_piechart"></i></a></li>
+                                <li>
+                                    <a class="add_cart_btn" product-id="{{$product->id}}" product-name="{{$product->name}}" product-price="{{$product->price}}" href="{{ route('frontend.order.add') }}">Add To Cart</a>
+                                </li>
+                                @if (Auth::check())
                                 <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
+                                @endif
                             </ul>
-                            <h4>Travel Bags</h4>
-                            <h5><del>$45.50</del> $40</h5>
+                            <h4>{{$product->name}}</h4>
+                            <h5>
+                            @if ($product->discount>0)
+                            <del>{{number_format($product->price)}} VNĐ</del>&nbsp;
+                            {{number_format($product->price-($product->price*$product->discount/100))}} VNĐ
+                            @else
+                            {{number_format($product->price)}} VNĐ
+                            @endif
+                            </h5>
                         </div>
                     </div>
-                    <div class="l_product_item">
-                        <div class="l_p_img">
-                            <img src="@asset('img/product/l-product-13.jpg')" alt="">
-                            <h5 class="sale">Sale</h5>
-                        </div>
-                        <div class="l_p_text">
-                            <ul>
-                                <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                                <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
-                                <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
-                            </ul>
-                            <h4>High Heel</h4>
-                            <h5><del>$130.50</del> $110</h5>
-                        </div>
-                    </div>
-                    <div class="l_product_item">
-                        <div class="l_p_img">
-                            <img src="@asset('img/product/l-product-14.jpg')" alt="">
-                        </div>
-                        <div class="l_p_text">
-                            <ul>
-                                <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                                <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
-                                <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
-                            </ul>
-                            <h4>High Heel</h4>
-                            <h5><del>$130.50</del> $110</h5>
-                        </div>
-                    </div>
+                @if ($product_key%3===2)
                 </div>
-                <div class="item">
-                    <div class="l_product_item">
-                        <div class="l_p_img">
-                            <img src="@asset('img/product/l-product-15.jpg')" alt="">
-                        </div>
-                        <div class="l_p_text">
-                            <ul>
-                                <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                                <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
-                                <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
-                            </ul>
-                            <h4>Summer Dress</h4>
-                            <h5>$45.05</h5>
-                        </div>
-                    </div>
-                    <div class="l_product_item">
-                        <div class="l_p_img">
-                            <img src="@asset('img/product/l-product-16.jpg')" alt="">
-                            <h5 class="sale">Sale</h5>
-                        </div>
-                        <div class="l_p_text">
-                            <ul>
-                                <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                                <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
-                                <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
-                            </ul>
-                            <h4>Fossil Watch</h4>
-                            <h5>$250.00</h5>
-                        </div>
-                    </div>
-                    <div class="l_product_item">
-                        <div class="l_p_img">
-                            <img src="@asset('img/product/l-product-17.jpg')" alt="">
-                            <h5 class="sale">Sale</h5>
-                        </div>
-                        <div class="l_p_text">
-                            <ul>
-                                <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                                <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
-                                <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
-                            </ul>
-                            <h4>Fossil Watch</h4>
-                            <h5>$250.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="l_product_item">
-                        <div class="l_p_img">
-                            <img src="@asset('img/product/l-product-18.jpg')" alt="">
-                            <h5 class="sale">Sale</h5>
-                        </div>
-                        <div class="l_p_text">
-                            <ul>
-                                <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                                <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
-                                <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
-                            </ul>
-                            <h4>Nike Shoes</h4>
-                            <h5><del>$130</del> $110</h5>
-                        </div>
-                    </div>
-                    <div class="l_product_item">
-                        <div class="l_p_img">
-                            <img src="@asset('img/product/l-product-19.jpg')" alt="">
-                        </div>
-                        <div class="l_p_text">
-                            <ul>
-                                <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                                <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
-                                <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
-                            </ul>
-                            <h4>Ricky Shirt</h4>
-                            <h5>$45.05</h5>
-                        </div>
-                    </div>
-                    <div class="l_product_item">
-                        <div class="l_p_img">
-                            <img src="@asset('img/product/l-product-20.jpg')" alt="">
-                        </div>
-                        <div class="l_p_text">
-                            <ul>
-                                <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                                <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
-                                <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
-                            </ul>
-                            <h4>Ricky Shirt</h4>
-                            <h5>$45.05</h5>
-                        </div>
-                    </div>
-                </div>
+                @endif
+                @endforeach
+                @endif
+
             </div>
         </div>
 

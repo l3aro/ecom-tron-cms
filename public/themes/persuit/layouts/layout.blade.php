@@ -11,12 +11,13 @@
         <title>Persuit - @get('title')</title>
 
         @styles()
-        @scripts()
+        <script src="@asset('js/jquery-3.2.1.min.js')"></script>
     </head>
 
     <body>
         @content()
 
+        @scripts()
     </body>
 
 </html>
