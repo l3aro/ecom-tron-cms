@@ -56,6 +56,22 @@ Route::group([
             'as' => 'frontend.order.show',
             'uses' => 'OrderController@show'
         ]);
+        Route::post('/add', [
+            'as' => 'frontend.order.add',
+            'uses' => 'OrderController@add'
+        ]);
+        Route::get('/details', [
+            'as' => 'frontend.order.details',
+            'uses' => 'OrderController@details'
+        ]);
+        Route::delete('{id}', [
+            'as' => 'frontend.order.delete',
+            'uses' => 'OrderController@delete'
+        ]);
+        Route::post('/update', [
+            'as' => 'frontend.order.update',
+            'uses' => 'OrderController@update'
+        ]);
     });
 
     /**

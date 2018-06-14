@@ -7153,3 +7153,7 @@ i:before {
 
 
 /*# sourceMappingURL=style.css.map */
+
+.cart_totals_area .cart_t_list .media .media-body {
+    text-align: right;
+}

@@ -11,13 +11,12 @@
         <title>Persuit - @get('title')</title>
 
         @styles()
-        
+        @scripts()
     </head>
 
     <body>
         @content()
 
-        @scripts()
     </body>
 
 </html>

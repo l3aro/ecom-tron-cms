@@ -1,6 +1,8 @@
 @sections('header')
         
 @sections('categories-banner', ['banner'=>$banner??'default', 'title'=>$title??''])
+
+{{ csrf_field() }}
         
         <!--================Categories Product Area =================-->
         <section class="categories_product_main p_80">
@@ -39,7 +41,9 @@
                                             <div class="l_p_text">
                                                <ul>
                                                     <li class="p_icon"><a href="/product/{{$product->slug}}"><i class="icon_piechart"></i></a></li>
-                                                    <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
+                                                    <li>
+                                                        <a class="add_cart_btn" product-id="{{$product->id}}" product-name="{{$product->name}}" product-price="{{$product->price}}" href="{{ route('frontend.order.add') }}">Add To Cart</a>
+                                                    </li>
                                                     @if (Auth::check())
                                                     <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
                                                     @endif
@@ -47,10 +51,10 @@
                                                 <h4>{{$product->name}}</h4>
                                                 <h5>
                                                 @if ($product->discount>0)
-                                                <del>${{round($product->price,2)}}</del>&nbsp;
-                                                ${{round($product->price-($product->price*$product->discount/100),2)}}
+                                                <del>{{number_format($product->price)}} VNĐ</del>&nbsp;
+                                                {{number_format($product->price-($product->price*$product->discount/100))}} VNĐ
                                                 @else
-                                                ${{round($product->price,2)}}
+                                                {{number_format($product->price)}} VNĐ
                                                 @endif
                                                 </h5>
                                             </div>
@@ -164,9 +168,9 @@
                                                 <h4>{{$product->name}}</h4>
                                                 <h5>
                                                 @if ($product->discount>0)
-                                                ${{round($product->price-($product->price*$product->discount/100),2)}}
+                                                {{number_format($product->price-($product->price*$product->discount/100))}} VNĐ
                                                 @else
-                                                ${{round($product->price,2)}}
+                                                {{number_format($product->price)}} VNĐ
                                                 @endif
                                                 </h5>
                                             </div>
@@ -184,3 +188,26 @@
         <!--================End Categories Product Area =================-->
         
 @sections('footer')
+<script>
+$(document).ready(function(){
+    $(".add_cart_btn").click(function(e) {
+        e.preventDefault();
+        var postData = {
+            _token: $('input[name="_token"').val(),
+            id : $(this).attr('product-id'),
+            name : $(this).attr('product-name'),
+            price : $(this).attr('product-price'),
+            qty : 1,
+            size : null,
+        };
+        $.ajax({
+            url: '{{ route("frontend.order.add") }}',
+            data: postData,
+            method: "POST",
+            success: function(data) {
+                window.location.reload();
+            }
+        })
+    });
+});
+</script>

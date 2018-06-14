@@ -22,7 +22,7 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         $theme = Theme::uses('visitors');
-        return Theme::scope('auth.login')->render();
+        return Theme::scope('auth.login')->setTitle('Login')->render();
     }
 
     protected function credentials(Request $request)

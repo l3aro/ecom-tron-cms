@@ -32,7 +32,7 @@
             <div class="cart_list">
                 <ul>
                     <li class="cart_icon">
-                        <a href="#"><i class="icon-handbag icons"></i><span>{{Cart::getContent()->count()>9?'9+':Cart::getContent()->count()}}</span></a>
+                        <a href="{{ route('frontend.order.show') }}"><i class="icon-handbag icons"></i><span>{{Cart::getContent()->count()>9?'9+':Cart::getContent()->count()}}</span></a>
                     </li>
                 </ul>
             </div>

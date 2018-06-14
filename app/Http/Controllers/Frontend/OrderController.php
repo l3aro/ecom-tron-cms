@@ -5,10 +5,162 @@ namespace App\Http\Controllers\Frontend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Theme;
+use Auth;
+use Cart;
+use App\Models\Product;
 
 class OrderController extends Controller
 {
+    /**
+     * Show cart
+     * 
+     * @return Reponse
+     */
     public function show() {
-        return Theme::uses()->scope('shopping-cart')->setTitle('Cart')->render();
+        $dataView = [];
+        $title = 'Cart';
+        $userId = Auth::id();
+        $images = [];
+
+        // add single condition on a cart bases
+        $condition = new \Darryldecode\Cart\CartCondition(array(
+            'name' => 'VAT',
+            'type' => 'tax',
+            'target' => 'subtotal',
+            'value' => '12.5%',
+            'attributes' => array( // attributes field is optional
+                'description' => 'Value added tax',
+                'more_data' => 'none'
+            )
+        ));
+        
+        if ($userId) {
+            $dataView['items'] = Cart::session($userId)->getContent()->each(function($item) use(&$images) {
+                $product = Product::find($item->id);
+                $images[$item->id] = $product->image;
+            });
+            Cart::session($userId)->condition($condition); // for a speicifc user's cart
+        }
+        else {
+            $dataView['items'] = Cart::getContent()->each(function($item) use(&$images) {
+                $product = Product::find($item->id);
+                $images[$item->id] = $product->image;
+            });
+            Cart::condition($condition);
+        }
+        $dataView['title'] = $title;
+        $dataView['images'] = $images;
+        return Theme::uses()->scope('shopping-cart', $dataView)->setTitle($title)->render();
     }
+
+    /**
+     * Add new product to cart
+     * 
+     * @param Request
+     */
+    public function add(Request $request)
+    {
+        $userId = Auth::id(); // get this from session or wherever it came from
+        $id = $request->id;
+        $name = $request->name;
+        $price = $request->price;
+        $qty = $request->qty;
+        $customAttributes = [
+            'size' => $request->size
+        ];
+        if ($userId)
+            \Cart::session($userId)->add($id, $name, $price, $qty, $customAttributes);
+        else
+            \Cart::add($id, $name, $price, $qty, $customAttributes);
+    }
+
+    /**
+     * Remove a product from cart
+     * 
+     * @param int $id
+     * @return Response
+     */
+    public function delete($id)
+    {
+        $userId = Auth::id(); // get this from session or wherever it came from
+        if ($userId) {
+            \Cart::session($userId)->remove($id);
+            return response(array(
+                'success' => true,
+                'data' => $id,
+                'message' => "cart item {$id} removed."
+            ),200,[]);
+        }
+        else {
+            \Cart::remove($id);
+            return response(array(
+                'success' => true,
+                'data' => $id,
+                'message' => "cart item {$id} removed."
+            ),200,[]);
+        }
+    }
+
+    /**
+     * Get order details
+     * 
+     * @return Response
+     */
+    public function details()
+    {
+        $userId = Auth::id(); // get this from session or wherever it came from
+        if ($userId) {
+            return response(array(
+                'success' => true,
+                'data' => array(
+                    'total_quantity' => \Cart::session($userId)->getTotalQuantity(),
+                    'sub_total' => \Cart::session($userId)->getSubTotal(),
+                    'total' => \Cart::session($userId)->getTotal(),
+                ),
+                'message' => "Get cart details success."
+            ),200,[]);
+        }
+        else {
+            return response(array(
+                'success' => true,
+                'data' => array(
+                    'total_quantity' => \Cart::getTotalQuantity(),
+                    'sub_total' => \Cart::getSubTotal(),
+                    'total' => \Cart::getTotal(),
+                ),
+                'message' => "Get cart details success."
+            ),200,[]);
+        }
+    }
+
+    /**
+     * Update order
+     * 
+     * @param Request
+     */
+    public function update(Request $request) {
+        $userId = Auth::id(); // get this from session or wherever it came from
+        if ($userId) {
+            \Cart::session($userId)->update($request->id, array(
+                'quantity' => $request->qty,
+            ));
+            return response(array(
+                'success' => true,
+                'data' => $request->id,
+                'message' => "cart item {$request->id} updated."
+            ),200,[]);
+        }
+        else {
+            
+            \Cart::update($request->id, array(
+                'quantity' => $request->qty,
+            ));
+            return response(array(
+                'success' => true,
+                'data' => $request->id,
+                'message' => "cart item {$request->id} updated."
+            ),200,[]);
+        }
+    }
+
 }

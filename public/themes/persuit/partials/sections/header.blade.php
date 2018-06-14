@@ -45,7 +45,7 @@
                     <ul class="navbar-nav justify-content-end">
                         <li class="search_icon"><a href="#"><i class="icon-magnifier icons"></i></a></li>
                         <li class="user_icon"><a href="#"><i class="icon-user icons"></i></a></li>
-                        <li class="cart_cart"><a href="#"><i class="icon-handbag icons"></i><span>{{Cart::getContent()->count()>9?'9+':Cart::getContent()->count()}}</span></a></li>
+                        <li class="cart_cart"><a href="{{ route('frontend.order.show') }}"><i class="icon-handbag icons"></i><span>{{Cart::getContent()->count()>9?'9+':Cart::getContent()->count()}}</span></a></li>
                     </ul>
                 </div>
             </nav>
