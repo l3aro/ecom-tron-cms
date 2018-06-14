@@ -77,26 +77,26 @@ class OrderController extends Controller
     /**
      * Remove a product from cart
      * 
-     * @param int $id
+     * @param Request $request
      * @return Response
      */
-    public function delete($id)
+    public function delete(Request $request)
     {
         $userId = Auth::id(); // get this from session or wherever it came from
         if ($userId) {
-            \Cart::session($userId)->remove($id);
+            \Cart::session($userId)->remove($request->id);
             return response(array(
                 'success' => true,
-                'data' => $id,
-                'message' => "cart item {$id} removed."
+                'data' => $request->id,
+                'message' => "cart item {$request->id} removed."
             ),200,[]);
         }
         else {
-            \Cart::remove($id);
+            \Cart::remove($request->id);
             return response(array(
                 'success' => true,
-                'data' => $id,
-                'message' => "cart item {$id} removed."
+                'data' => $request->id,
+                'message' => "cart item {$request->id} removed."
             ),200,[]);
         }
     }

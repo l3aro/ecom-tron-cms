@@ -28,7 +28,7 @@
                                         @foreach ($items as $item)
                                         <tr>
                                             <th scope="row">
-                                                <img src="@asset('img/icon/close-icon.png')" alt="">
+                                                <img src="@asset('img/icon/close-icon.png')" alt="" class="delete_cart_btn" delete-id="{{$item->id}}">
                                             </th>
                                             <td>
                                                 <div class="media">
@@ -177,5 +177,22 @@ function cRound(value, decimals) {
   return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
 }
 
+$(document).ready(function(){
+    $(".delete_cart_btn").click(function(e) {
+        e.preventDefault();
+        var postData = {
+            _token: $('input[name="_token"').val(),
+            id : $(this).attr('delete-id'),
+        };
+        $.ajax({
+            url: '{{ route("frontend.order.delete") }}',
+            data: postData,
+            method: "POST",
+            success: function(data) {
+                window.location.reload();
+            }
+        })
+    });
+});
 
 </script>
