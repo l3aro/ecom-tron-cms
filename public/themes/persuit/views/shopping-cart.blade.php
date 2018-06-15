@@ -4,7 +4,7 @@
 
 {{ csrf_field() }}
         <!--================Shopping Cart Area =================-->
-        @if (Cart::getContent()->count() === 0)
+        @if (Auth::check()?Cart::session(Auth::id())->getContent()->count():Cart::getContent()->count() === 0)
         <section class="emty_cart_area p_100">
             <div class="container">
                 <div class="emty_cart_inner">
@@ -40,7 +40,7 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td><p class="red">{{round($item->price,0)}} VNĐ</p></td>
+                                            <td><p class="red">{{number_format($item->price,0)}} VNĐ</p></td>
                                             <td>
                                                 <div class="quantity">
                                                     <h6>Quantity</h6>
@@ -51,7 +51,7 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td><p id="total{{$item->id}}">{{ round($item->price * $item->quantity,0) }} VNĐ</p></td>
+                                            <td><p id="total{{$item->id}}">{{ number_format($item->price * $item->quantity,0) }} VNĐ</p></td>
                                         </tr>
                                         @endforeach
                                         @endif
@@ -94,7 +94,7 @@
                                             <h5>Subtotal</h5>
                                         </div>
                                         <div class="media-body">
-                                            <h6>{{Cart::getSubTotal()}} VNĐ</h6>
+                                            <h6>{{Auth::check()?Cart::session(Auth::id())->getSubTotal():Cart::getSubTotal()}} VNĐ</h6>
                                         </div>
                                     </div>
                                     <div class="media">
@@ -102,7 +102,7 @@
                                             <h5>Tax</h5>
                                         </div>
                                         <div class="media-body">
-                                            <h6>{{Cart::getCondition('VAT')->getValue()}}</h6>
+                                            <h6>{{Auth::check()?Cart::session(Auth::id())->getCondition('VAT')->getValue():Cart::getCondition('VAT')->getValue()}}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -111,7 +111,7 @@
                                         Total
                                     </div>
                                     <div class="float-right">
-                                        {{Cart::getTotal()}} VNĐ
+                                        {{Auth::check()?Cart::session(Auth::id())->getTotal():Cart::getTotal()}} VNĐ
                                     </div>
                                 </div>
                             </div>
@@ -128,13 +128,23 @@
 
 <script>
 
+Number.prototype.formatMoney = function(c, d, t){
+    var n = this, 
+    c = isNaN(c = Math.abs(c)) ? 2 : c, 
+    d = d == undefined ? "." : d, 
+    t = t == undefined ? "," : t, 
+    s = n < 0 ? "-" : "", 
+    i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))), 
+    j = (j = i.length) > 3 ? j % 3 : 0;
+   return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+ };
 
 function decQuantity(id, price) {
     var quantity = document.getElementById('sst'+id); 
     var sst = quantity.value; 
     if( !isNaN( sst ) && sst > 0 ) 
         quantity.value--;
-    $("#total"+id).text(Math.round(price*quantity.value)+' VNĐ');
+    $("#total"+id).text((price*quantity.value).formatMoney(0)+' VNĐ');
     var postData = {
             _token: $('input[name="_token"').val(),
             id : id,
@@ -156,7 +166,7 @@ function incQuantity(id, price) {
     var sst = quantity.value; 
     if( !isNaN( sst )) 
         quantity.value++;
-    $("#total"+id).text(Math.round(price*quantity.value)+' VNĐ');
+    $("#total"+id).text((price*quantity.value).formatMoney(0)+' VNĐ');
     var postData = {
             _token: $('input[name="_token"').val(),
             id : id,
@@ -171,10 +181,6 @@ function incQuantity(id, price) {
         }
     });
     return false;
-}
-
-function cRound(value, decimals) {
-  return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
 }
 
 $(document).ready(function(){

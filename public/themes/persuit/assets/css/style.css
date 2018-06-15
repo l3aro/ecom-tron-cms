@@ -2868,6 +2868,9 @@ i:before {
 
 .l_product_item .l_p_img {
     position: relative;
+    width: 362px;
+    height: 315px;
+    overflow: hidden;
 }
 
 .l_product_item .l_p_img img {

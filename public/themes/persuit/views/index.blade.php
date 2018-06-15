@@ -32,7 +32,10 @@
             <div class="cart_list">
                 <ul>
                     <li class="cart_icon">
-                        <a href="{{ route('frontend.order.show') }}"><i class="icon-handbag icons"></i><span>{{Cart::getContent()->count()>9?'9+':Cart::getContent()->count()}}</span></a>
+                        <?php
+                            $cart = Auth::check()?Cart::session(Auth::id())->getContent():Cart::getContent();
+                        ?>
+                        <a href="{{ route('frontend.order.show') }}"><i class="icon-handbag icons"></i><span>{{$cart->count()>9?'9+':$cart->count()}}</span></a>
                     </li>
                 </ul>
             </div>
