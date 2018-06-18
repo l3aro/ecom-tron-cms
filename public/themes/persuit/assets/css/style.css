@@ -7160,3 +7160,16 @@ i:before {
 .cart_totals_area .cart_t_list .media .media-body {
     text-align: right;
 }
+
+.disable-link a{
+    color: #959595 !important;
+    pointer-events: none;
+}
+
+.d-block {
+    display: block;
+}
+
+.d-none {
+    display: none;
+}

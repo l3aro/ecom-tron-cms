@@ -1,6 +1,6 @@
 @sections('header')
         
-@sections('categories-solid')
+@sections('categories-solid', ['title' => $title?$title:''])
 
 {{ csrf_field() }}
         <!--================Shopping Cart Area =================-->
@@ -10,7 +10,7 @@
                 <div class="emty_cart_inner">
                     <i class="icon-handbag icons"></i>
                     <h3>Your Cart is Empty</h3>
-                    <h4>back to <a href="#">shopping</a></h4>
+                    <h4>back to <a href="/">shopping</a></h4>
                 </div>
             </div>
         </section>
@@ -116,7 +116,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" value="submit" class="btn subs_btn form-control">Proceed to checkout</button>
+                        <button type="submit" value="submit" class="btn subs_btn form-control" id="checkout">Proceed to checkout</button>
                     </div>
                 </div>
             </div>
@@ -199,6 +199,11 @@ $(document).ready(function(){
             }
         })
     });
+
+    $("#checkout").click(function(e) {
+        e.preventDefault();
+        window.location.href = '{{ route("frontend.order.checkout") }}';
+    })
 });
 
 </script>

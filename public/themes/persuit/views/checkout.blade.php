@@ -13,63 +13,27 @@
                                 <form class="billing_inner row">
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <label for="cun">Country <span>*</span></label>
-                                            <select class="selectpicker" id="cun">
-                                                <option>United State America (USA)</option>
-                                                <option>Bangladesh (BAN)</option>
-                                                <option>United State America (USA)</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label for="name">First Name <span>*</span></label>
-                                            <input type="text" class="form-control" id="name" aria-describedby="name" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label for="last">Last Name <span>*</span></label>
-                                            <input type="text" class="form-control" id="last" aria-describedby="last">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label for="cname">Company Name <span>*</span></label>
-                                            <select class="selectpicker" id="cname">
-                                                <option>United State America (USA)</option>
-                                                <option>Bangladesh (BAN)</option>
-                                                <option>United State America (USA)</option>
-                                            </select>
+                                            <label for="name">Full Name <span>*</span></label>
+                                            <input type="text" class="form-control" id="name" aria-describedby="name" placeholder="" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label for="address">Address <span>*</span></label>
-                                            <input type="text" class="form-control" id="address" aria-describedby="address">
+                                            <input type="text" class="form-control" id="address" aria-describedby="address" required>
                                             <input type="text" class="form-control" id="address2" aria-describedby="address">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <label for="ctown">City / Town <span>*</span></label>
-                                            <select class="selectpicker" id="ctown">
-                                                <option>United State America (USA)</option>
-                                                <option>Bangladesh (BAN)</option>
-                                                <option>United State America (USA)</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
                                             <label for="email">Email <span>*</span></label>
-                                            <input type="email" class="form-control" id="email" aria-describedby="email">
+                                            <input type="email" class="form-control" id="email" aria-describedby="email" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label for="phone">Phone <span>*</span></label>
-                                            <input type="text" class="form-control" id="phone" aria-describedby="phone">
+                                            <input type="text" class="form-control" id="phone" aria-describedby="phone" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -81,38 +45,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-12 d-none" id="addition-address">
                                         <div class="form-group">
-                                            <label for="cunt">Country <span>*</span></label>
-                                            <select class="selectpicker" id="cunt">
-                                                <option>United State America (USA)</option>
-                                                <option>Bangladesh (BAN)</option>
-                                                <option>United State America (USA)</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label for="name2">First Name <span>*</span></label>
-                                            <input type="text" class="form-control" id="name2" aria-describedby="name2" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label for="last2">Last Name <span>*</span></label>
-                                            <input type="text" class="form-control" id="last2" aria-describedby="last2">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label for="company">Company Name <span>*</span></label>
-                                            <input type="text" class="form-control" id="company" aria-describedby="company">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label for="city">City / Town <span>*</span></label>
-                                            <input type="text" class="form-control" id="city" aria-describedby="city">
+                                            <label for="address">Address <span>*</span></label>
+                                            <input type="text" class="form-control" id="address" aria-describedby="address" name="addition-address" required>
+                                            <input type="text" class="form-control" id="address2" aria-describedby="address" name="addition-address2">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -129,17 +66,18 @@
                                 <h2 class="reg_title">Your Order</h2>
                                 <div class="payment_list">
                                     <div class="price_single_cost">
-                                        <h5>Mens Casual Shirt <span>$25.20</span></h5>
-                                        <h5>Mens Casual Shirt <span>$25.20</span></h5>
-                                        <h4>Cart Subtotal <span>$50.00</span></h4>
-                                        <h3><span class="normal_text">Order Totals</span> <span>$50.00</span></h3>
+                                    @foreach (Cart::getContent() as $item)
+                                        <h5>{{$item->name}} <span>{{number_format($item->price,0)}} VNĐ</span></h5>
+                                    @endforeach
+                                        <h4>Cart Subtotal <span>{{Cart::getSubTotal()}} VNĐ</span></h4>
+                                        <h3><span class="normal_text">Order Totals</span> <span>{{Cart::getTotal()}} VNĐ</span></h3>
                                     </div>
                                     <div id="accordion" role="tablist" class="price_method">
                                         <div class="card">
                                             <div class="card-header" role="tab" id="headingOne">
                                                 <h5 class="mb-0">
                                                     <a data-toggle="collapse" href="#collapseOne" role="button" aria-expanded="true" aria-controls="collapseOne">
-                                                    direct bank transfer
+                                                    cash on delivery
                                                     </a>
                                                 </h5>
                                             </div>
@@ -152,7 +90,7 @@
                                         </div>
                                         <div class="card">
                                             <div class="card-header" role="tab" id="headingTwo">
-                                                <h5 class="mb-0">
+                                                <h5 class="mb-0 disable-link">
                                                     <a class="collapsed" data-toggle="collapse" href="#collapseTwo" role="button" aria-expanded="false" aria-controls="collapseTwo">
                                                     cheque payment
                                                     </a>
@@ -166,9 +104,9 @@
                                         </div>
                                         <div class="card">
                                             <div class="card-header" role="tab" id="headingThree">
-                                                <h5 class="mb-0">
+                                                <h5 class="mb-0 disable-link">
                                                     <a class="collapsed" data-toggle="collapse" href="#collapseThree" role="button" aria-expanded="false" aria-controls="collapseThree">
-                                                    cash on delivery
+                                                    direct bank transfer
                                                     </a>
                                                 </h5>
                                             </div>
@@ -180,7 +118,7 @@
                                         </div>
                                         <div class="card">
                                             <div class="card-header" role="tab" id="headingfour">
-                                                <h5 class="mb-0">
+                                                <h5 class="mb-0 disable-link">
                                                     <a class="collapsed" data-toggle="collapse" href="#collapsefour" role="button" aria-expanded="false" aria-controls="collapsefour">
                                                     paypal
                                                     </a>
@@ -204,3 +142,17 @@
         <!--================End Register Area =================-->
         
 @sections('footer')
+
+<script>
+$(document).ready(function(){
+    $('#f-option').click(function(e){
+        if ($('#f-option').is(":checked")) {
+            $('#addition-address').removeClass('d-none').addClass('d-block');
+        }
+        else {
+            $('#addition-address').removeClass('d-block').addClass('d-none');
+        }
+        
+    });
+});
+</script>

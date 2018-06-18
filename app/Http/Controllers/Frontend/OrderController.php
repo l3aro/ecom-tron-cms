@@ -163,4 +163,18 @@ class OrderController extends Controller
         // }
     }
 
+    /**
+     * Show checkout page
+     * 
+     * @param Request
+     * @return Response
+     */
+    public function checkout(Request $request) {
+        $dataView = [];
+
+        $title = 'Checkout';
+        $dataView['title'] = $title;
+        return Theme::scope('checkout', $dataView)->setTitle($title)->render();
+    }
+
 }
