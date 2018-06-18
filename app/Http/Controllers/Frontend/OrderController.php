@@ -8,6 +8,8 @@ use Theme;
 // use Auth;
 use Cart;
 use App\Models\Product;
+use App\Models\Order;
+use App\Models\OrderDetail;
 
 class OrderController extends Controller
 {
@@ -33,6 +35,7 @@ class OrderController extends Controller
                 'more_data' => 'none'
             )
         ));
+        Cart::condition($condition);
         
         // if ($userId) {
         //     $dataView['items'] = Cart::session($userId)->getContent()->each(function($item) use(&$images) {
@@ -46,7 +49,6 @@ class OrderController extends Controller
                 $product = Product::find($item->id);
                 $images[$item->id] = $product->image;
             });
-            Cart::condition($condition);
         // }
         $dataView['title'] = $title;
         $dataView['images'] = $images;
@@ -175,6 +177,36 @@ class OrderController extends Controller
         $title = 'Checkout';
         $dataView['title'] = $title;
         return Theme::scope('checkout', $dataView)->setTitle($title)->render();
+    }
+
+    /**
+     * Store order
+     * 
+     * @param Request
+     */
+    public function store(Request $request) {
+        $order = new Order();
+        $order->name = $request->name;
+        $order->email = $request->email;
+        $order->address = $request->address;
+        $order->phone =  $request->phone;
+        $order->content = $request->note?$request->note:'';
+        $order->status = 'submit';
+        $order->save();
+
+        foreach (Cart::getContent() as $item) {
+            $detail = new OrderDetail();
+            $detail->order_id = $order->id;
+            $detail->product_id = $item->id;
+            $detail->quantity = $item->quantity;
+            $detail->price = $item->price;
+            $detail->save();
+        }
+        Cart::clear();
+        return response(array(
+            'success' => true,
+            'message' => "cart order created."
+        ),200,[]);
     }
 
 }

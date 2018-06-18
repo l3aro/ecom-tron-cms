@@ -4,7 +4,7 @@
 
 {{ csrf_field() }}
         <!--================Shopping Cart Area =================-->
-        @if (Auth::check()?Cart::session(Auth::id())->getContent()->count():Cart::getContent()->count() === 0)
+        @if (Cart::getContent()->count() === 0)
         <section class="emty_cart_area p_100">
             <div class="container">
                 <div class="emty_cart_inner">
@@ -94,7 +94,7 @@
                                             <h5>Subtotal</h5>
                                         </div>
                                         <div class="media-body">
-                                            <h6>{{Auth::check()?Cart::session(Auth::id())->getSubTotal():Cart::getSubTotal()}} VNĐ</h6>
+                                            <h6>{{Cart::getSubTotal()}} VNĐ</h6>
                                         </div>
                                     </div>
                                     <div class="media">
@@ -102,7 +102,7 @@
                                             <h5>Tax</h5>
                                         </div>
                                         <div class="media-body">
-                                            <h6>{{Auth::check()?Cart::session(Auth::id())->getCondition('VAT')->getValue():Cart::getCondition('VAT')->getValue()}}</h6>
+                                            <h6>{{Cart::getCondition('VAT')->getValue()}}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -111,7 +111,7 @@
                                         Total
                                     </div>
                                     <div class="float-right">
-                                        {{Auth::check()?Cart::session(Auth::id())->getTotal():Cart::getTotal()}} VNĐ
+                                        {{Cart::getTotal()}} VNĐ
                                     </div>
                                 </div>
                             </div>

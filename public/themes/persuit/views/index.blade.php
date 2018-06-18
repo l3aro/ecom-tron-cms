@@ -203,3 +203,27 @@
     </div>
 </div>
 <!--================End Home Left Menu Area =================-->
+{{csrf_field()}}
+<script>
+$(document).ready(function(){
+    $(".add_cart_btn").click(function(e) {
+        e.preventDefault();
+        var postData = {
+            _token: $('input[name="_token"').val(),
+            id : $(this).attr('product-id'),
+            name : $(this).attr('product-name'),
+            price : $(this).attr('product-price'),
+            qty : 1,
+            size : null,
+        };
+        $.ajax({
+            url: '{{ route("frontend.order.add") }}',
+            data: postData,
+            method: "POST",
+            success: function(data) {
+                window.location.reload();
+            }
+        })
+    });
+});
+</script>

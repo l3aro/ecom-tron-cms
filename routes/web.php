@@ -76,6 +76,10 @@ Route::group([
             'as' => 'frontend.order.checkout',
             'uses' => 'OrderController@checkout'
         ]);
+        Route::post('store', [
+            'as' => 'frontend.order.store',
+            'uses' => 'OrderController@store'
+        ]);
     });
 
     /**
