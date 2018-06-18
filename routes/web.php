@@ -416,5 +416,30 @@ Route::group([
                 'uses' => 'MenuController@delete'
             ]);
         });
+
+        /**
+         * Order routes
+         */
+        Route::group([
+            'prefix' => 'order'
+        ], function() {
+            Route::get('/', [
+                'as' => 'admin.order.index',
+                'uses' => 'OrderController@index'
+            ]);
+            Route::match(['get', 'post'], 'detail', [
+                'as' => 'admin.order.detail',
+                'uses' => 'OrderController@detail'
+            ]);
+            Route::get('changefield', [
+                'as' => 'admin.order.changefield',
+                'uses' => 'OrderController@changefield'
+            ]);
+            Route::get('delete', [
+                'as' => 'admin.order.delete',
+                'uses' => 'OrderController@delete'
+            ]);
+        });
+
     });
 });

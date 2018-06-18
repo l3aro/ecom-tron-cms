@@ -191,7 +191,7 @@ class OrderController extends Controller
         $order->address = $request->address;
         $order->phone =  $request->phone;
         $order->content = $request->note?$request->note:'';
-        $order->status = 'submit';
+        $order->status = 'unhandle';
         $order->save();
 
         foreach (Cart::getContent() as $item) {

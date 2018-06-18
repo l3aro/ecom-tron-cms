@@ -43,13 +43,19 @@
                 </ul>
             </li>    
 
-            <li>
-                <a href="#" id="menu-order">
+            <li class="sub-menu">
+                <a href="javascript:;" id="menu-order">
                     <i class="fa fa-shopping-cart"></i>
                     <span>Order</span>
                 </a>
+                <ul class="sub">
+                    <li><a href="{{route('admin.order.index')}}?status=unhandle">Unhandle Order</a></li>
+                    <li><a href="{{route('admin.order.index')}}?status=proceed">Proceeding Order</a></li>
+                    <li><a href="{{route('admin.order.index')}}?status=success">Successful Order</a></li>
+                    <li><a href="{{route('admin.order.index')}}?status=error">Error Order</a></li>
+                </ul>
             </li>
-            <li class="sub-menu">
+            <!-- <li class="sub-menu">
                 <a href="javascript:;" id="menu-mail">
                     <i class="fa fa-envelope"></i>
                     <span>Mail </span>
@@ -58,7 +64,7 @@
                     <li><a href="mail.html">Inbox</a></li>
                     <li><a href="mail_compose.html">Compose Mail</a></li>
                 </ul>
-            </li>
+            </li> -->
             <li class="sub-menu">
                 <a href="javascript:;" id="menu-user">
                     <i class="fa fa-user"></i>
