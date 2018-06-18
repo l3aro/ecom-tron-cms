@@ -33,7 +33,8 @@
                 <ul>
                     <li class="cart_icon">
                         <?php
-                            $cart = Auth::check()?Cart::session(Auth::id())->getContent():Cart::getContent();
+                            // $cart = Auth::check()?Cart::session(Auth::id())->getContent():Cart::getContent();
+                            $cart = Cart::getContent();
                         ?>
                         <a href="{{ route('frontend.order.show') }}"><i class="icon-handbag icons"></i><span>{{$cart->count()>9?'9+':$cart->count()}}</span></a>
                     </li>

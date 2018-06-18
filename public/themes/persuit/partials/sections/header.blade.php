@@ -44,9 +44,10 @@
                     </ul>
                     <ul class="navbar-nav justify-content-end">
                         <li class="search_icon"><a href="#"><i class="icon-magnifier icons"></i></a></li>
-                        <li class="user_icon"><a href="#"><i class="icon-user icons"></i></a></li>
+                        <!-- <li class="user_icon"><a href="#"><i class="icon-user icons"></i></a></li> -->
                         <?php
-                            $cart = Auth::check()?Cart::session(Auth::id())->getContent():Cart::getContent();
+                            // $cart = Auth::check()?Cart::session(Auth::id())->getContent():Cart::getContent();
+                            $cart = Cart::getContent();
                         ?>
                         <li class="cart_cart"><a href="{{ route('frontend.order.show') }}"><i class="icon-handbag icons"></i><span>{{$cart->count()>9?'9+':$cart->count()}}</span></a></li>
                     </ul>
