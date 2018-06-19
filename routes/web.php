@@ -83,6 +83,18 @@ Route::group([
     });
 
     /**
+     * Search routes
+     */
+    Route::group([
+        'prefix' => 'search'
+    ], function() {
+        Route::get('{keyword?}', [
+            'as' => 'frontend.search.show',
+            'uses' => 'SearchController@show'
+        ]);
+    });
+
+    /**
      * Category routes
      */
     Route::group([

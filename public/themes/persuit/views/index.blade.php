@@ -4,10 +4,10 @@
         <div class="offcanvas_fixed_menu">
             <a class="logo_offcanvas" href="#"><img src="@asset('img/logo-white.png')" alt=""></a>
             <div class="input-group search_form">
-                <input type="text" class="form-control" placeholder="Search" aria-label="Search">
+                <input type="text" class="form-control" placeholder="Search" aria-label="Search" name="keyword">
                 <span class="input-group-btn">
-                            <button class="btn btn-secondary" type="button"><i class="icon-magnifier icons"></i></button>
-                        </span>
+                    <button class="btn btn-secondary" type="button"><i class="icon-magnifier icons"></i></button>
+                </span>
             </div>
             <div class="offcanvas_menu">
                 <ul class="nav flex-column">
@@ -225,5 +225,16 @@ $(document).ready(function(){
             }
         })
     });
+
+    $('input[name="keyword"').keypress(function (e) {
+        var key = e.which;
+        if(key == 13)  // the enter key code
+        {
+            var keyword = $('input[name="keyword"').val();
+            if (keyword !== '') {
+                window.location.href = "{{route('frontend.search.show')}}/"+keyword;    
+            }
+        }
+    });  
 });
 </script>

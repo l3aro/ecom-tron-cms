@@ -2868,7 +2868,6 @@ i:before {
 
 .l_product_item .l_p_img {
     position: relative;
-    width: 362px;
     height: 315px;
     overflow: hidden;
 }
@@ -7172,4 +7171,14 @@ i:before {
 
 .d-none {
     display: none;
+}
+
+.search_area .search_inner i {
+    height: 44px;
+    width: 44px;
+    border-radius: 50%;
+    border: 1px solid #d0d0d0;
+    display: inline-block;
+    font-size: 24px;
+    line-height: 44px;
 }

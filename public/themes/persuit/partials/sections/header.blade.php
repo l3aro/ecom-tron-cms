@@ -15,7 +15,7 @@
     <div class="carousel_menu_inner">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href=""><img src="@asset('img/logo.png')" alt=""></a>
+                <a class="navbar-brand" href="/"><img src="@asset('img/logo.png')" alt=""></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
 
@@ -43,7 +43,7 @@
                     @endif
                     </ul>
                     <ul class="navbar-nav justify-content-end">
-                        <li class="search_icon"><a href="#"><i class="icon-magnifier icons"></i></a></li>
+                        <li class="search_icon"><a href="{{route('frontend.search.show')}}"><i class="icon-magnifier icons"></i></a></li>
                         <!-- <li class="user_icon"><a href="#"><i class="icon-user icons"></i></a></li> -->
                         <?php
                             // $cart = Auth::check()?Cart::session(Auth::id())->getContent():Cart::getContent();
