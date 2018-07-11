@@ -2078,11 +2078,15 @@ i:before {
 }
 
 .f_add_item.white_add .f_add_hover h4 {
-    color: #fff;
+    color: rgb(59, 59, 59);
+}
+
+.f_add_item.white_add .f_add_hover h6 {
+    color: rgb(59, 59, 59);
 }
 
 .f_add_item.white_add .f_add_hover .add_btn {
-    color: #fff;
+    color: rgb(59, 59, 59);
 }
 
 .feature_big_add_area {
@@ -6210,7 +6214,7 @@ i:before {
     border: none;
     display: inline-block;
     width: 100%;
-    max-width: 100px;
+    max-width: 400px;
 }
 
 .l_fillter_widget .ui_slider {
@@ -6474,7 +6478,7 @@ i:before {
 }
 
 .showing_fillter .secand_fillter .bootstrap-select {
-    width: 85px !important;
+    width: 124px !important;
     display: inline-block;
     text-transform: uppercase;
     position: relative;

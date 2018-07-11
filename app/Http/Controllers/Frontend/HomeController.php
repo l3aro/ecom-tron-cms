@@ -14,6 +14,6 @@ class HomeController extends Controller
         $products = Product::latest()->limit(12)->get();
 
         $dataView['products'] = $products;
-        return Theme::uses()->scope('index', $dataView)->setTitle('Home')->render();
+        return Theme::uses()->scope('index', $dataView)->setTitle('Trang chủ')->render();
     }
 }

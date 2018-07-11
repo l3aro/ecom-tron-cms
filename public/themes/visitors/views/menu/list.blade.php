@@ -31,7 +31,7 @@
                         </td>
                         <td style="width:30px">{!! $value->id !!}</td>
                         <td style="width:70%">
-                            <a href="/admin/menu/detail?id={{$value->id}}">
+                            <a href="/admin/menu/detail?id={{$value->id}}&&cat={{$value->cat}}">
                                 {!! $value->name !!}
                             </a>
                         </td>

@@ -9,8 +9,8 @@
             <div class="container">
                 <div class="emty_cart_inner">
                     <i class="icon-handbag icons"></i>
-                    <h3>Your Cart is Empty</h3>
-                    <h4>back to <a href="/">shopping</a></h4>
+                    <h3>Giỏ hàng trống</h3>
+                    <h4>Quay lại <a href="/">mua hàng</a></h4>
                 </div>
             </div>
         </section>
@@ -20,7 +20,7 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="cart_items">
-                            <h3>Your Cart Items</h3>
+                            <h3>Giỏ hàng</h3>
                             <div class="table-responsive-md">
                                 <table class="table">
                                     <tbody>
@@ -43,7 +43,7 @@
                                             <td><p class="red">{{number_format($item->price,0)}} VNĐ</p></td>
                                             <td>
                                                 <div class="quantity">
-                                                    <h6>Quantity</h6>
+                                                    <h6>Số lượng</h6>
                                                     <div class="custom">
                                                         <button onclick="decQuantity({{$item->id}}, {{$item->price}})" class="reduced items-count" type="button"><i class="icon_minus-06"></i></button>
                                                         <input type="text" name="qty" id="sst{{$item->id}}" maxlength="12" value="{{$item->quantity}}" title="Quantity:" class="input-text qty">
@@ -66,16 +66,16 @@
                                             <td>
                                                 <div class="media">
                                                     <div class="d-flex">
-                                                        <h5>Cupon code</h5>
+                                                        <h5>Mã giảm giá</h5>
                                                     </div>
                                                     <div class="media-body">
-                                                        <input type="text" placeholder="Apply cuopon">
+                                                        <input type="text" placeholder="">
                                                     </div>
                                                 </div>
                                             </td>
                                             <td><p class="red"></p></td>
                                             <td>
-                                                <h3>update cart</h3>
+                                                <h3>Sử dụng</h3>
                                             </td>
                                             <td></td>
                                         </tr>
@@ -87,11 +87,11 @@
                     <div class="col-lg-4">
                         <div id="cart_details_area">
                             <div class="cart_totals_area" id="cart_totals_area">
-                                <h4>Cart Totals</h4>
+                                <h4>Hóa đơn</h4>
                                 <div class="cart_t_list">
                                     <div class="media">
                                         <div class="d-flex">
-                                            <h5>Subtotal</h5>
+                                            <h5>Tạm tính</h5>
                                         </div>
                                         <div class="media-body">
                                             <h6>{{Cart::getSubTotal()}} VNĐ</h6>
@@ -99,7 +99,7 @@
                                     </div>
                                     <div class="media">
                                         <div class="d-flex">
-                                            <h5>Tax</h5>
+                                            <h5>GTGT</h5>
                                         </div>
                                         <div class="media-body">
                                             <h6>{{Cart::getCondition('VAT')->getValue()}}</h6>
@@ -108,7 +108,7 @@
                                 </div>
                                 <div class="total_amount row m0 row_disable">
                                     <div class="float-left">
-                                        Total
+                                        Tổng
                                     </div>
                                     <div class="float-right">
                                         {{Cart::getTotal()}} VNĐ
@@ -116,7 +116,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" value="submit" class="btn subs_btn form-control" id="checkout">Proceed to checkout</button>
+                        <button type="submit" value="submit" class="btn subs_btn form-control" id="checkout">Tiến hành đặt hàng</button>
                     </div>
                 </div>
             </div>

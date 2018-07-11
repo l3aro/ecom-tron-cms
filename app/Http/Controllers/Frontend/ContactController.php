@@ -9,6 +9,6 @@ use Theme;
 class ContactController extends Controller
 {
     public function show() {
-        return Theme::uses()->scope('contact')->setTitle('Contact')->render();
+        return Theme::uses()->scope('contact')->setTitle('Liên hệ')->render();
     }
 }

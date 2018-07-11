@@ -81,7 +81,12 @@
 					async: true,
 					method: 'GET',
 					success: function(data){
-						window.location.reload();
+						if (data === 'done') {
+							window.location.reload();
+						}
+						else {
+							alert('Error delete category');
+						}
 					}
 				});
 			}
@@ -101,8 +106,8 @@
 						method: "GET",
 						data: {_token:token},
 						success: function(data) {
-							if (data != 1) {
-								alert(data);
+							if (data != 'done') {
+								alert('Error delete category');
 							}
 						}
 					});

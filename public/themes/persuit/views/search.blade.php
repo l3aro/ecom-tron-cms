@@ -10,7 +10,7 @@
             <div class="container">
                 <div class="search_inner">
                     <div class="input-group search_form">
-                        <input type="text" class="form-control" placeholder="Search" aria-label="Search" name="keyword">
+                        <input type="text" class="form-control" placeholder="Tìm kiếm" aria-label="Search" name="keyword">
                         <span class="input-group-btn">
                             <button class="btn btn-secondary" type="button" id="search-button"><i class="icon-magnifier icons"></i></button>
                         </span>
@@ -27,15 +27,17 @@
                         @if ($products->count()>0)
                             <div class="showing_fillter">
                                 <div class="row m0">
-                                    <div class="first_fillter">
-                                        <h4>Showing {{$products->firstItem()}} to {{$products->lastItem()}} of {{$products->total()}} total</h4>
-                                    </div>
+                                <div class="first_fillter">
+                                        <h4>Hiển thị {{$products->firstItem()}} tới {{$products->lastItem()}} trong {{$products->total()}} sản phẩm</h4>
+                                    </div> 
                                     <div class="secand_fillter">
-                                        <h4>SORT BY :</h4>
+                                        <h4>LỌC :</h4>
                                         <select class="selectpicker">
-                                            <option>Name</option>
-                                            <option>Latest</option>
-                                            <option>Oldest</option>
+                                            <option>Tên</option>
+                                            <option>Mới nhất</option>
+                                            <option>Cũ nhất</option>
+                                            <option>Giá giảm dần</option>
+                                            <option>Giá tăng dần</option>
                                         </select>
                                     </div>
                                 </div>
@@ -56,7 +58,7 @@
                                                <ul>
                                                     <li class="p_icon"><a href="/product/{{$product->slug}}"><i class="icon_piechart"></i></a></li>
                                                     <li>
-                                                        <a class="add_cart_btn" product-id="{{$product->id}}" product-name="{{$product->name}}" product-price="{{$product->price}}" href="{{ route('frontend.order.add') }}">Add To Cart</a>
+                                                        <a class="add_cart_btn" product-id="{{$product->id}}" product-name="{{$product->name}}" product-price="{{$product->price}}" href="{{ route('frontend.order.add') }}">Thêm vào giỏ</a>
                                                     </li>
                                                     @if (Auth::check())
                                                     <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
@@ -100,7 +102,7 @@
                             <div class="categories_sidebar">
                                 <aside class="l_widgest l_p_categories_widget">
                                     <div class="l_w_title">
-                                        <h3>Categories</h3>
+                                        <h3>Mục sản phẩm</h3>
                                     </div>
                                     <ul class="navbar-nav">
                                     @if ($left_menu)
@@ -173,7 +175,7 @@
                                         <h3>Featured Products</h3>
                                     </div>
                                     @foreach ($featured_product as $product)
-                                    <a href="/product/{{$product->slug}}">
+                                    <a href="/san-pham/{{$product->slug}}">
                                         <div class="media">
                                             <div class="d-flex">
                                                 <img src="{{ asset('media/product/'.$product->image) }}" width="80" height="100" alt="">

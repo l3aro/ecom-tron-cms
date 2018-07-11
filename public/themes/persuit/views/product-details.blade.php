@@ -1,6 +1,8 @@
 @sections('header')
         
 @sections('categories-banner', ['banner'=>$banner??'default', 'title'=>$title??''])
+
+{{csrf_field()}}
         
         <!--================Product Details Area =================-->
         <section class="product_details_area">
@@ -38,17 +40,17 @@
                                 <a href="#">5 Reviews</a>
                                 <a href="#">Add your review</a>
                             </div>
-                            <h6>Available In <span>Stock</span></h6>
+                            <!-- <h6>Available In <span>Stock</span></h6> -->
                             <h4>
                             @if ($product->discount>0)
-                            <del style="font-size:20px">${{round($product->price,2)}}</del>&nbsp;
-                            ${{round($product->price-($product->price*$product->discount/100),2)}}
+                            <del style="font-size:20px">{{number_format($product->price)}} VNĐ</del>&nbsp;
+                            {{number_format($product->price-($product->price*$product->discount/100))}} VNĐ
                             @else
-                            ${{round($product->price,2)}}
+                            {{number_format($product->price)}} VNĐ
                             @endif
                             </h4>
                             <p>{!! $product->des !!}</p>
-                            <div class="p_color">
+                            {{--<div class="p_color">
                                 <h4 class="p_d_title">size <span>*</span></h4>
                                 <select class="selectpicker">
                                 @if ($product->size)
@@ -60,14 +62,15 @@
                                     @endforeach
                                 @endif
                                 </select>
-                            </div>
+                            </div>--}}
                             <div class="quantity">
+                                <h4 class="p_d_title">số lượng <span>*</span></h4>
                                 <div class="custom">
-                                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="icon_minus-06"></i></button>
-                                    <input type="text" name="qty" id="sst" maxlength="12" value="01" title="Quantity:" class="input-text qty">
+                                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 1 ) result.value--;return false;" class="reduced items-count" type="button"><i class="icon_minus-06"></i></button>
+                                    <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
                                     <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;" class="increase items-count" type="button"><i class="icon_plus"></i></button>
                                 </div>
-                                <a class="add_cart_btn" href="#">add to cart</a>
+                                <a class="add_cart_btn" product-id="{{$product->id}}" product-name="{{$product->name}}" product-price="{{$product->price}}" href="#">thêm vào giỏ</a>
                             </div>
                             <div class="shareing_icon">
                                 <h5>share :</h5>
@@ -132,7 +135,7 @@
                                 </div>
                                 <div class="l_p_text">
                                    <ul>
-                                        <li class="p_icon"><a href="/product/{{$product->slug}}"><i class="icon_piechart"></i></a></li>
+                                        <li class="p_icon"><a href="/san-pham/{{$product->slug}}"><i class="icon_piechart"></i></a></li>
                                         <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
                                         @if (Auth::check())
                                         <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
@@ -159,3 +162,27 @@
         <!--================End Related Product Area =================-->
         
 @sections('footer')
+
+<script>
+$(document).ready(function(){
+    $(".add_cart_btn").click(function(e) {
+        e.preventDefault();
+        var postData = {
+            _token: $('input[name="_token"').val(),
+            id : $(this).attr('product-id'),
+            name : $(this).attr('product-name'),
+            price : $(this).attr('product-price'),
+            qty : 1,
+            size : null,
+        };
+        $.ajax({
+            url: '{{ route("frontend.order.add") }}',
+            data: postData,
+            method: "POST",
+            success: function(data) {
+                window.location.reload();
+            }
+        })
+    });
+});
+</script>

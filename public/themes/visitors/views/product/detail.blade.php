@@ -47,7 +47,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="focusedInput">Price</label>
-                                <input class="form-control" name="price" type="number" min="0" step=".01" required value="{{ isset($product)?$product->price:'' }}">
+                                <input class="form-control" name="price" type="number" min="0" step="1" required value="{{ isset($product)?$product->price:'' }}">
                                 <small class="form-text text-muted">Price of the product</small>
                             </div>
                             <div class="form-group">

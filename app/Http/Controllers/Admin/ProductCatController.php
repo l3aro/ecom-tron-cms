@@ -195,7 +195,7 @@ class ProductCatController extends Controller
             }    
         }
         if ($not_delete == '')
-            die('1');
+            die('done');
         else
             die($not_delete);
     }

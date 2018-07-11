@@ -78,7 +78,7 @@ class MenuController extends Controller
         }
         $dataView['menu'] = $menu;
         $dataView['cat'] = $cat;
-        $dataView['menu_options'] = $this->getSubMenuCategories(0);
+        $dataView['menu_options'] = $this->getSubMenuCategories(0, $cat, $menu->id);
         $dataView['article_cat_options'] = $this->getSubArticleCategories(0);
         $dataView['product_cat_options'] = $this->getSubProductCategories(0);
     	return Theme::uses('visitors')->scope('menu.detail', $dataView)->setTitle('Option Detail')->render();
@@ -107,15 +107,15 @@ class MenuController extends Controller
                 $slug = Category::find($id)->slug;
                 return '/'.$slug;
             case '5':
-                return '/products';
+                return '/danh-muc-san-pham';
             case '6':
                 $id = (int)$request->product_id;
                 $slug = Article::find($id)->slug;
-                return '/product//'.$slug;
+                return '/san-pham//'.$slug;
             case '7':
-                return '/new-in';
+                return '/hang-moi-ve';
             case '8':
-                return '/promo';      
+                return '/khuyen-mai';      
             default:
                 return $request->link;  
         }
@@ -125,13 +125,17 @@ class MenuController extends Controller
      * Get list sub category of certain menu
      * 
      * @param int id of category where we search its sub
+     * @param int id cat menu
      * @param int id of current menu should be ignored
      * @return Collection the list sub
      * @return null
      */
-    private function getSubMenuCategories($parent_id, $process_id=null) {
+    private function getSubMenuCategories($parent_id, $cat_id=null, $process_id=null) {
         $condition = [];
         $condition[] = ['parent', $parent_id];
+        if ($cat_id !== null) {
+            $condition[] = ['cat', $cat_id];
+        }
         if ($process_id !== null) {
             $condition[] = ['id', '<>', $process_id];
         }

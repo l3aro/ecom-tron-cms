@@ -20,7 +20,7 @@ class OrderController extends Controller
      */
     public function show() {
         $dataView = [];
-        $title = 'Cart';
+        $title = 'Giỏ hàng';
         // $userId = Auth::id();
         $images = [];
 
@@ -174,7 +174,7 @@ class OrderController extends Controller
     public function checkout(Request $request) {
         $dataView = [];
 
-        $title = 'Checkout';
+        $title = 'Kiểm tra';
         $dataView['title'] = $title;
         return Theme::scope('checkout', $dataView)->setTitle($title)->render();
     }

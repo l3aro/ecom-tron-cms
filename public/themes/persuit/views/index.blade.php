@@ -4,7 +4,7 @@
         <div class="offcanvas_fixed_menu">
             <a class="logo_offcanvas" href="#"><img src="@asset('img/logo-white.png')" alt=""></a>
             <div class="input-group search_form">
-                <input type="text" class="form-control" placeholder="Search" aria-label="Search" name="keyword">
+                <input type="text" class="form-control" placeholder="Tìm kiếm" aria-label="Search" name="keyword">
                 <span class="input-group-btn">
                     <button class="btn btn-secondary" type="button"><i class="icon-magnifier icons"></i></button>
                 </span>
@@ -46,14 +46,14 @@
         <div class="best_summer_banner">
             <img class="img-fluid" src="@asset('img/banner/summer-banner.jpg')" alt="">
             <div class="summer_text">
-                <h3>Best Summer Collection </h3>
-                <p>There is no one who loves to be bread, who looks after it and wants to have it, simply because it is pain.</p>
-                <a class="add_cart_btn" href="#">shop now</a>
+                <h3>Sữa rửa mặt </h3>
+                <p>Làn da mịn màng - Căng tràn sức sống</p>
+                <a class="add_cart_btn" href="#">Tìm hiểu ngay</a>
             </div>
         </div>
         <div class="latest_product_3steps">
             <div class="s_m_title">
-                <h2>Our Latest Product</h2>
+                <h2>Sản phẩm mới nhất</h2>
             </div>
             <div class="l_product_slider owl-carousel">
                 @if ($products)
@@ -70,9 +70,9 @@
                         </div>
                         <div class="l_p_text">
                             <ul>
-                                <li class="p_icon"><a href="/product/{{$product->slug}}"><i class="icon_piechart"></i></a></li>
+                                <li class="p_icon"><a href="/san-pham/{{$product->slug}}"><i class="icon_piechart"></i></a></li>
                                 <li>
-                                    <a class="add_cart_btn" product-id="{{$product->id}}" product-name="{{$product->name}}" product-price="{{$product->price}}" href="{{ route('frontend.order.add') }}">Add To Cart</a>
+                                    <a class="add_cart_btn" product-id="{{$product->id}}" product-name="{{$product->name}}" product-price="{{$product->price}}" href="{{ route('frontend.order.add') }}">Thêm vào giỏ</a>
                                 </li>
                                 @if (Auth::check())
                                 <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
@@ -104,8 +104,10 @@
                     <div class="f_add_item white_add">
                         <div class="f_add_img"><img class="img-fluid" src="@asset('img/feature-add/f-add-8.jpg')" alt=""></div>
                         <div class="f_add_hover">
-                            <h4>Best Summer <br>Collection</h4>
-                            <a class="add_btn" href="#">Shop Now <i class="arrow_right"></i></a>
+                            <h4>SON MÔI</h4>
+                            <h6>Vũ khí bí mật cho sự rạng rỡ</h6>
+                            <br>
+                            <a class="add_btn" href="#">Xem ngay <i class="arrow_right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -113,8 +115,10 @@
                     <div class="f_add_item white_add">
                         <div class="f_add_img"><img class="img-fluid" src="@asset('img/feature-add/f-add-9.jpg')" alt=""></div>
                         <div class="f_add_hover">
-                            <h4>Best Summer <br>Collection</h4>
-                            <a class="add_btn" href="#">Shop Now <i class="arrow_right"></i></a>
+                            <h4>LỚP NỀN</h4>
+                            <h6>Má ửng hồng xinh</h6>
+                            <br>
+                            <a class="add_btn" href="#">Xem ngay <i class="arrow_right"></i></a>
                         </div>
                     </div>
                 </div>

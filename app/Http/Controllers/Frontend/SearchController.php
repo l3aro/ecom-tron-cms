@@ -27,7 +27,7 @@ class SearchController extends Controller
             $left_menu = Menu::where([['cat', $left_menu_id->id],['parent', 0]])->orderBy('order', 'asc')->get();
         }
 
-        $title = 'Search';
+        $title = 'Tìm kiếm';
         $featured_product = Product::where('highlight',1)->inRandomOrder()->limit(2)->get();
 
         $dataView['title'] = $title;

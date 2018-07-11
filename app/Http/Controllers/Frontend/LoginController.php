@@ -9,6 +9,6 @@ use Theme;
 class LoginController extends Controller
 {
     public function show() {
-        return Theme::uses()->scope('login')->setTitle('Login')->render();
+        return Theme::uses()->scope('login')->setTitle('Đăng nhập')->render();
     }
 }

@@ -26,7 +26,7 @@ Route::group([
      * Contact routes
      */
     Route::group([
-        'prefix' => 'contact'
+        'prefix' => 'lien-he'
     ], function() {
         Route::get('/', [
             'as' => 'frontend.contact.show',
@@ -50,13 +50,13 @@ Route::group([
      * Order routes
      */
     Route::group([
-        'prefix' => 'cart'
+        'prefix' => 'gio-hang'
     ], function() {
         Route::get('/', [
             'as' => 'frontend.order.show',
             'uses' => 'OrderController@show'
         ]);
-        Route::post('add', [
+        Route::post('them', [
             'as' => 'frontend.order.add',
             'uses' => 'OrderController@add'
         ]);
@@ -72,7 +72,7 @@ Route::group([
             'as' => 'frontend.order.update',
             'uses' => 'OrderController@update'
         ]);
-        Route::get('checkout', [
+        Route::get('kiem-tra', [
             'as' => 'frontend.order.checkout',
             'uses' => 'OrderController@checkout'
         ]);
@@ -86,7 +86,7 @@ Route::group([
      * Search routes
      */
     Route::group([
-        'prefix' => 'search'
+        'prefix' => 'tim-kiem'
     ], function() {
         Route::get('{keyword?}', [
             'as' => 'frontend.search.show',
@@ -101,7 +101,7 @@ Route::group([
         'prefix' => '{category}'
     ], function($category) {
         $segment = Request::segment(1);
-        if ($segment == 'new-in'||$segment == 'promo') {
+        if ($segment == 'hang-moi-ve'||$segment == 'khuyen-mai') {
             Route::get('/', [
                 'as' => 'frontend.productcat.show',
                 'uses' => 'ProductCatController@show'
@@ -113,7 +113,7 @@ Route::group([
                 'uses' => 'ArticleCatController@show'
             ]);
         }
-        else if ($segment == 'products') {
+        else if ($segment == 'danh-muc-san-pham') {
             Route::get('/', [
                 'as' => 'frontend.productcat.show',
                 'uses' => 'ProductCatController@show'
@@ -142,7 +142,7 @@ Route::group([
      * Product routes
      */
     Route::group([
-        'prefix' => 'product'
+        'prefix' => 'san-pham'
     ], function() {
         Route::get('{item}', [
             'as' => 'frontend.product.show',

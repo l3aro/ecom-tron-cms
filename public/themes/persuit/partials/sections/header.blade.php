@@ -5,8 +5,8 @@
             <div class="carousel_top_h_inner">
                 <div class="float-md-right">
                     <div class="top_header_middle">
-                        <a href="#"><i class="fa fa-phone"></i> Call Us: <span>+84 987 654 321</span></a>
-                        <a href="#"><i class="fa fa-envelope"></i> Email: <span>support@yourdomain.com</span></a>
+                        <a href="#"><i class="fa fa-phone"></i> Hotline: <span>+84 987 654 321</span></a>
+                        <a href="#"><i class="fa fa-envelope"></i> Email: <span>support@persuit.com</span></a>
                     </div>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                     @if (!$option->sub)
                         <li class="nav-item"><a class="nav-link" href="{{$option->link}}">{{$option->name}}</a></li>
                     @else
-                        <li class="nav-item dropdown submenu active">
+                        <li class="nav-item dropdown submenu">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{$option->name}} <i class="fa fa-angle-down" aria-hidden="true"></i>
                             </a>
