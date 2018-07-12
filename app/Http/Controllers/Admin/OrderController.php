@@ -77,6 +77,14 @@ class OrderController extends Controller
      * @param \Request
      */
     public function changefield(Request $request) {
+        if ($request->field === 'success') {
+            $order_items = OrderDetail::where('order_id',$request->id)->get();
+            foreach ($order_items as $item) {
+                $product = Product::find($item->product_id);
+                $product->amount = $product->amount -  $item->quantity;
+                $product->save();
+            }
+        }
         $order = Order::find($request->id);
         $order->status = $request->field;
         $order->save();

@@ -29,7 +29,7 @@
                     <div class="col-lg-7">
                         <div class="product_details_text">
                             <h3>{{$product->name}}</h3>
-                            <ul class="p_rating">
+                            <!-- <ul class="p_rating">
                                 <li><a href="#"><i class="fa fa-star"></i></a></li>
                                 <li><a href="#"><i class="fa fa-star"></i></a></li>
                                 <li><a href="#"><i class="fa fa-star"></i></a></li>
@@ -39,7 +39,7 @@
                             <div class="add_review">
                                 <a href="#">5 Reviews</a>
                                 <a href="#">Add your review</a>
-                            </div>
+                            </div> -->
                             <!-- <h6>Available In <span>Stock</span></h6> -->
                             <h4>
                             @if ($product->discount>0)
@@ -94,8 +94,8 @@
             <div class="container">
                 <nav class="tab_menu">
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Additional Information</a>
-                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Reviews (1)</a>
+                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Thông tin thêm</a>
+                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Bình luận</a>
                     </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
@@ -122,7 +122,7 @@
         <section class="related_product_area">
             <div class="container">
                 <div class="related_product_inner">
-                    <h2 class="single_c_title">Related Product</h2>
+                    <h2 class="single_c_title">Sản phẩm liên quan</h2>
                     <div class="row">
                     @foreach ($related_product as $product)
                         <div class="col-lg-3 col-sm-6">
@@ -136,7 +136,7 @@
                                 <div class="l_p_text">
                                    <ul>
                                         <li class="p_icon"><a href="/san-pham/{{$product->slug}}"><i class="icon_piechart"></i></a></li>
-                                        <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
+                                        <li><a class="add_cart_btn" href="#">Thêm vào giỏ</a></li>
                                         @if (Auth::check())
                                         <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
                                         @endif

@@ -73,9 +73,9 @@
                                 <small class="form-text text-muted">Select the category of this product</small>
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="focusedInput">Size</label>
-                                <input id="tags_1" type="text" class="form-control tags" name="size" value="{{ $product->size ?? '' }}" />
-                                <small class="form-text text-muted">Available size of product, split by "<b style="color:black">,</b>"</small>
+                                <label class="control-label" for="focusedInput">Amount</label>
+                                <input type="number" min="1" step="1" class="form-control" name="amount" value="{{ $product->amount ?? '' }}" />
+                                <small class="form-text text-muted">Available amount of product</small>
                             </div>
                             <div class="form-group">
                                     <label class="control-label" for="focusedInput">Optimize URLs</label>

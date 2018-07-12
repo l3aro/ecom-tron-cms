@@ -133,7 +133,7 @@
                         <div class="col-lg-4 col-md-4 col-6">
                             <aside class="f_widget f_about_widget">
                                 <img src="@asset('img/logo.png')" alt="">
-                                <p>Persuit is a Premium PSD Template. Best choice for your online store. Let purchase it to enjoy now</p>
+                                <p>Chất lượng cho tất cả</p>
                                 <h6>Social:</h6>
                                 <ul>
                                     <li><a href="#"><i class="social_facebook"></i></a></li>
@@ -147,54 +147,51 @@
                         <div class="col-lg-2 col-md-4 col-6">
                             <aside class="f_widget link_widget f_info_widget">
                                 <div class="f_w_title">
-                                    <h3>Information</h3>
+                                    <h3>Hỗ trợ</h3>
                                 </div>
                                 <ul>
-                                    <li><a href="#">About us</a></li>
-                                    <li><a href="#">Delivery information</a></li>
-                                    <li><a href="#">Terms & Conditions</a></li>
-                                    <li><a href="#">Help Center</a></li>
-                                    <li><a href="#">Returns & Refunds</a></li>
+                                    <li><a href="#">HOTLINE: 1900 1009</a></li>
+                                    <li><a href="/cam-nang/huong-dan-dat-hang">Hướng dẫn đặt hàng</a></li>
+                                    <li><a href="/lien-he">Liên hệ</a></li>
                                 </ul>
                             </aside>
                         </div>
                         <div class="col-lg-2 col-md-4 col-6">
                             <aside class="f_widget link_widget f_service_widget">
                                 <div class="f_w_title">
-                                    <h3>Customer Service</h3>
+                                    <h3>Thông tin</h3>
                                 </div>
                                 <ul>
-                                    <li><a href="#">My account</a></li>
-                                    <li><a href="#">Ordr History</a></li>
-                                    <li><a href="#">Wish List</a></li>
-                                    <li><a href="#">Newsletter</a></li>
-                                    <li><a href="#">Contact Us</a></li>
+                                    <li><a href="/cam-nang/ve-chung-toi">Về chúng tôi</a></li>
+                                    <li><a href="/cam-nang/phi-van-chuyen">Phí vận chuyển</a></li>
+                                    <li><a href="/cam-nang/quy-trinh-giao-hang">Quy trình giao hàng</a></li>
+                                    <li><a href="/cam-nang/dieu-khoan-su-dung">Điều khoản sử dụng</a></li>
+                                    <li><a href="/cam-nang/chinh-sach-doi-tra">Chính sách đổi trả</a></li>
                                 </ul>
                             </aside>
                         </div>
                         <div class="col-lg-2 col-md-4 col-6">
                             <aside class="f_widget link_widget f_extra_widget">
                                 <div class="f_w_title">
-                                    <h3>Extras</h3>
+                                    <h3>Tính năng</h3>
                                 </div>
                                 <ul>
-                                    <li><a href="#">Brands</a></li>
-                                    <li><a href="#">Gift Vouchers</a></li>
-                                    <li><a href="#">Affiliates</a></li>
-                                    <li><a href="#">Specials</a></li>
+                                    <li><a href="#">Nhãn hiệu</a></li>
+                                    <li><a href="#">Quà giảm giá</a></li>
+                                    <li><a href="#">Đại lý</a></li>
                                 </ul>
                             </aside>
                         </div>
                         <div class="col-lg-2 col-md-4 col-6">
                             <aside class="f_widget link_widget f_account_widget">
                                 <div class="f_w_title">
-                                    <h3>My Account</h3>
+                                    <h3>Hợp tác &amp; liên kết</h3>
                                 </div>
                                 <ul>
-                                    <li><a href="#">My account</a></li>
-                                    <li><a href="#">Ordr History</a></li>
-                                    <li><a href="#">Wish List</a></li>
-                                    <li><a href="#">Newsletter</a></li>
+                                    <li><a href="#">www.facebook.com</a></li>
+                                    <li><a href="#">www.youtube.com</a></li>
+                                    <li><a href="#">www.google.com</a></li>
+                                    <li><a href="#">www.twitter.com</a></li>
                                 </ul>
                             </aside>
                         </div>

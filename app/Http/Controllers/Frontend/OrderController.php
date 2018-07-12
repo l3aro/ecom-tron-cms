@@ -64,12 +64,11 @@ class OrderController extends Controller
     {
         // $userId = Auth::id(); // get this from session or wherever it came from
         $id = $request->id;
+        $product = Product::find($id);
         $name = $request->name;
-        $price = $request->price;
+        $price = $product->price - $product->price*$product->discount/100;
         $qty = $request->qty;
-        $customAttributes = [
-            'size' => $request->size
-        ];
+        $customAttributes = [];
         // if ($userId)
         //     \Cart::session($userId)->add($id, $name, $price, $qty, $customAttributes);
         // else
@@ -153,6 +152,16 @@ class OrderController extends Controller
         //     ),200,[]);
         // }
         // else {
+
+            $product_qty = Product::find($request->id)->amount;
+            $order_qty = Cart::get($request->id)->quantity;
+            if ($request->qty == '1' && $product_qty === $order_qty) {
+                return response(array(
+                    'success' => false,
+                    'data' => 'out_of_stock',
+                    'message' => "item {$request->id} out of quantity"
+                ),200,[]);
+            }
             
             \Cart::update($request->id, array(
                 'quantity' => $request->qty,

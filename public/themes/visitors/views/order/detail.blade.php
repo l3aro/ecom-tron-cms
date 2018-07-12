@@ -53,13 +53,13 @@
                         <div class="col-lg-6">
                         <div class="form-group">
                             <label class="control-label">Status</label><br>
-                            <input type="radio" id="statusChoice1" class="changestatus" name="status" value="unhandle" {{$order->status==='unhandle'?'checked':''}}>
+                            <input type="radio" id="statusChoice1" class="changestatus" name="status" value="unhandle" {{$order->status==='unhandle'?'checked':''}} {{$order->status==='success'||$order->status==='error'?'disabled':''}} >
                             <small>&nbsp;Unhandle</small><br>
-                            <input type="radio" id="statusChoice2" class="changestatus" name="status" value="proceed" {{$order->status==='proceed'?'checked':''}}>
+                            <input type="radio" id="statusChoice2" class="changestatus" name="status" value="proceed" {{$order->status==='proceed'?'checked':''}} {{$order->status==='success'||$order->status==='error'?'disabled':''}} >
                             <small>&nbsp;Proceeding</small><br>
-                            <input type="radio" id="statusChoice3" class="changestatus" name="status" value="success" {{$order->status==='success'?'checked':''}}>
+                            <input type="radio" id="statusChoice3" class="changestatus" name="status" value="success" {{$order->status==='success'?'checked':''}} {{$order->status==='error'?'disabled':''}} >
                             <small>&nbsp;Success</small><br>
-                            <input type="radio" id="statusChoice4" class="changestatus" name="status" value="error" {{$order->status==='error'?'checked':''}}>
+                            <input type="radio" id="statusChoice4" class="changestatus" name="status" value="error" {{$order->status==='error'?'checked':''}} {{$order->status==='success'?'disabled':''}} >
                             <small>&nbsp;Error</small><br>
                         </div>
                         </div>
@@ -106,7 +106,7 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
-                                        <td><b>{{number_format($sum)}} VNĐ</b></td>
+                                        <td><b>{{number_format($sum + $sum*125/1000)}} VNĐ</b></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -125,7 +125,7 @@
     $(document).ready(function(){
         $('#menu-order').addClass('active');
 
-        $('.changestatus').click(function(){
+        $('#statusChoice1').click(function(){
 			var obj = $(this);
 			var id = {{$order->id}};
 			var field = $(this).val();
@@ -137,5 +137,63 @@
                 }
             });
         });
+
+        $('#statusChoice2').click(function(){
+			var obj = $(this);
+			var id = {{$order->id}};
+			var field = $(this).val();
+			$.ajax({
+                url: '/admin/order/changefield?id=' + id + '&field=' + field,
+                method: "GET",
+                success: function(data) {
+                    alert('Order status changed.')
+                }
+            });
+        });
+
+        $('#statusChoice3').click(function(){
+            var cnfrm = confirm('Are you sure?');
+            if(cnfrm != true) {
+                return false;
+            }
+            else {
+                var obj = $(this);
+			var id = {{$order->id}};
+			var field = $(this).val();
+			$.ajax({
+                url: '/admin/order/changefield?id=' + id + '&field=' + field,
+                method: "GET",
+                success: function(data) {
+                    $('#statusChoice1').attr("disabled", "true");
+                    $('#statusChoice2').attr("disabled", "true");
+                    $('#statusChoice4').attr("disabled", "true");
+                    alert('Order status changed.');
+                }
+            });
+            }
+        });
+
+        $('#statusChoice4').click(function(){
+            var cnfrm = confirm('Are you sure?');
+            if(cnfrm != true) {
+                return false;
+            }
+            else {
+                var obj = $(this);
+                var id = {{$order->id}};
+                var field = $(this).val();
+                $.ajax({
+                    url: '/admin/order/changefield?id=' + id + '&field=' + field,
+                    method: "GET",
+                    success: function(data) {
+                        $('#statusChoice1').attr("disabled", "true");
+                        $('#statusChoice2').attr("disabled", "true");
+                        $('#statusChoice3').attr("disabled", "true");
+                        alert('Order status changed.');
+                    }
+                });
+            }
+        });
+
     });
 </script>

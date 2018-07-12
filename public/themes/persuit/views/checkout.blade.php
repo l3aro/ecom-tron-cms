@@ -138,7 +138,7 @@ $(document).ready(function(){
             data: $('#form').serialize(),
             success: function(res) {
                 if(res.success == true) {
-                    alert('Order placed');
+                    alert('Đặt hàng thành công!');
                     window.location.href = '/';
                 }
             }

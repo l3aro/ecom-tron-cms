@@ -164,9 +164,6 @@ function decQuantity(id, price) {
 function incQuantity(id, price) {
     var quantity = document.getElementById('sst'+id); 
     var sst = quantity.value; 
-    if( !isNaN( sst )) 
-        quantity.value++;
-    $("#total"+id).text((price*quantity.value).formatMoney(0)+' VNĐ');
     var postData = {
             _token: $('input[name="_token"').val(),
             id : id,
@@ -177,7 +174,15 @@ function incQuantity(id, price) {
         data: postData,
         method: 'POST',
         success: function(data) {
-            $("#cart_details_area").load(" #cart_totals_area");
+            if (data.data == 'out_of_stock') {
+                alert('Đã đạt số lượng tối đa có thể mua!');
+            }
+            else {
+                if( !isNaN( sst )) 
+                    quantity.value++;
+                $("#total"+id).text((price*quantity.value).formatMoney(0)+' VNĐ');
+                $("#cart_details_area").load(" #cart_totals_area");
+            }
         }
     });
     return false;

@@ -24,6 +24,6 @@ class ProductController extends Controller
         $dataView['title'] = $title;
         $dataView['product_image'] = $product_image;        
         $dataView['related_product'] = $related_product;
-        return Theme::uses()->scope('product-details', $dataView)->setTitle('Product Detail')->render();
+        return Theme::uses()->scope('product-details', $dataView)->setTitle($title)->render();
     }
 }

@@ -150,6 +150,18 @@ Route::group([
         ]);
     });
 
+    /**
+     * Article routes
+     */
+    Route::group([
+        'prefix' => 'cam-nang'
+    ], function() {
+        Route::get('{item}', [
+            'as' => 'frontend.article.show',
+            'uses' => 'ArticleController@show'
+        ]);
+    });
+
     
     
     // if ( $type == 'user' ) {

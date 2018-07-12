@@ -24,8 +24,8 @@
                         </div>
                         <ul>
                             <li><a href="#">HOTLINE: 1900 1009</a></li>
-                            <li><a href="#">Hướng dẫn đặt hàng</a></li>
-                            <li><a href="#">Liên hệ</a></li>
+                            <li><a href="/cam-nang/huong-dan-dat-hang">Hướng dẫn đặt hàng</a></li>
+                            <li><a href="/lien-he">Liên hệ</a></li>
                         </ul>
                     </aside>
                 </div>
@@ -35,11 +35,11 @@
                             <h3>Thông tin</h3>
                         </div>
                         <ul>
-                            <li><a href="#">Về chúng tôi</a></li>
-                            <li><a href="#">Phí vận chuyển</a></li>
-                            <li><a href="#">Quy trình giao hàng</a></li>
-                            <li><a href="#">Điều khoản sử dụng</a></li>
-                            <li><a href="#">Chính sách đổi trả</a></li>
+                            <li><a href="/cam-nang/ve-chung-toi">Về chúng tôi</a></li>
+                            <li><a href="/cam-nang/phi-van-chuyen">Phí vận chuyển</a></li>
+                            <li><a href="/cam-nang/quy-trinh-giao-hang">Quy trình giao hàng</a></li>
+                            <li><a href="/cam-nang/dieu-khoan-su-dung">Điều khoản sử dụng</a></li>
+                            <li><a href="/cam-nang/chinh-sach-doi-tra">Chính sách đổi trả</a></li>
                         </ul>
                     </aside>
                 </div>

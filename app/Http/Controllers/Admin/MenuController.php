@@ -101,7 +101,7 @@ class MenuController extends Controller
             case '3':
                 $id = (int)$request->article_id;
                 $slug = Article::find($id)->slug;
-                return '/article//'.$slug;
+                return '/cam-nang//'.$slug;
             case '4':
                 $id = (int)$request->product_cat;
                 $slug = Category::find($id)->slug;
