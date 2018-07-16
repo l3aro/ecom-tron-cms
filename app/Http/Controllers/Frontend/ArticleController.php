@@ -14,7 +14,7 @@ class ArticleController extends Controller
         
         $article = Article::where('slug',$item)->first();
         $title = $article->name;
-        $banner = $article->article_cat()->first()->image;
+        $banner = $article->article_cat()->first()->image ?? '';
         // $related_article = Product::where('id','<>',$article->id)->where('cat', $article->article_cat()->first()->id)->limit(4)->get();
 
         $dataView['article'] = $article;

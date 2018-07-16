@@ -5,7 +5,7 @@
         <div class="col-lg-4 col-sm-6">
             <div class="l_product_item">
                 <div class="l_p_img">
-                    <img src="{{ asset('media/product/'.$product->image) }}" alt="">
+                    <a href="/san-pham/{{$product->slug}}"><img src="{{ asset('media/product/'.$product->image) }}" alt=""></a>
                     @if ($product->new == 1)
                     <h5 class="new">New</h5>
                     @endif
@@ -35,7 +35,7 @@
     @endforeach
 
     </div>
-    <nav aria-label="Page navigation example" class="">
+    <nav aria-label="Page navigation example" class="pagination_area">
         <!-- <ul class="pagination">
         <li class="page-item"><a class="page-link" href="#">1</a></li>
         <li class="page-item"><a class="page-link" href="#">2</a></li>

@@ -1,6 +1,6 @@
 @sections('header')
         
-@sections('categories-banner', ['banner'=>$banner??'default', 'title'=>$title??''])
+@sections('categories-banner', ['banner'=>$banner??'default', 'title'=>$title??'', 'type'=>'product'])
 
 {{csrf_field()}}
         
@@ -172,7 +172,7 @@ $(document).ready(function(){
             id : $(this).attr('product-id'),
             name : $(this).attr('product-name'),
             price : $(this).attr('product-price'),
-            qty : 1,
+            qty : $('input[name="qty"').val(),
             size : null,
         };
         $.ajax({

@@ -1,6 +1,6 @@
 @sections('header')
         
-@sections('categories-banner', ['banner'=>$banner??'default', 'title'=>$title??''])
+@sections('categories-banner', ['banner'=>$banner??'default', 'title'=>$title??'', 'type'=>'product-cat'])
 
 {{ csrf_field() }}
         

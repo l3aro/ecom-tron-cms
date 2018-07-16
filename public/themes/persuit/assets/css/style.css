@@ -6426,8 +6426,24 @@ i:before {
     transition: all 400ms linear 0s;
 }
 
-.pagination_area .pagination li:first-child a {
+.pagination_area .pagination li span {
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    color: #333333;
+    border-radius: 0px !important;
+    padding: 10px 15px;
+    border: none;
+    -webkit-transition: all 400ms linear 0s;
+    -o-transition: all 400ms linear 0s;
+    transition: all 400ms linear 0s;
+}
+
+.pagination_area .page-item.active .page-link {
     border: 1px solid #000002;
+    background-color: #fff;
+    color: #000;
+    font-weight: 700;
 }
 
 .pagination_area .pagination li.next a {
@@ -7185,4 +7201,8 @@ i:before {
     display: inline-block;
     font-size: 24px;
     line-height: 44px;
+}
+
+.page-item.active .page-link {
+
 }

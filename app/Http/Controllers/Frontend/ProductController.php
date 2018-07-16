@@ -15,7 +15,7 @@ class ProductController extends Controller
         
         $product = Product::where('slug',$item)->first();
         $title = $product->name;
-        $banner = $product->product_cat()->first()->image;
+        $banner = $product->image;
         $product_image = ProductImage::where('product_id', $product->id)->get();
         $related_product = Product::where('id','<>',$product->id)->where('cat', $product->product_cat()->first()->id)->limit(4)->get();
 

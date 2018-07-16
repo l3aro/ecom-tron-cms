@@ -4,7 +4,7 @@
         $location = Theme::asset()->absUrl('img/banner/categories-banner.jpg');
     }
     else {
-        $location = '/media/product-cat/'.$banner;
+        $location = '/media/'.$type.'/'.$banner;
     }
 ?>
 <section class="categories_banner_area" style="background-image: url({{$location}});">
